@@ -1,0 +1,6 @@
+[submodule "lib/InAppSettingsKit"]
+	path = lib/InAppSettingsKit
+	url = https://github.com/futuretap/InAppSettingsKit.git
+[submodule "lib/MBProgressHUD"]
+	path = lib/MBProgressHUD
+	url = https://github.com/jdg/MBProgressHUD.git
