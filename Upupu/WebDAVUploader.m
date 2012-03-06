@@ -52,15 +52,27 @@
     
     _waitingOnAuthentication = YES;
     
-    NSString *baseURL = nil;
+    NSMutableString *baseURL = nil;
+    
+    // validate server path
     NSString *settingURL = [Settings webDAVURL];
     
     if( [settingURL characterAtIndex:([settingURL length] -1)] != '/' ) {
-        baseURL = [NSString stringWithFormat:@"%@/", settingURL];
+        baseURL = [NSMutableString stringWithFormat:@"%@/", settingURL];
     } else {
-        baseURL = settingURL;
+        baseURL = [NSMutableString stringWithString:settingURL];
     }
-        
+    
+    // validate http scheme
+    NSRange httpRange = [baseURL rangeOfString:@"http://"];
+    NSRange httpsRange = [baseURL rangeOfString:@"https://"];
+    
+    if( httpRange.location == NSNotFound && 
+        httpsRange.location == NSNotFound ) {
+        _success = NO;
+        return; // TODO error message
+    }
+    
     // fetch directory
     [[FMWebDAVRequest requestToURL:NSStringToURL(baseURL)
                           delegate:self
