@@ -11,7 +11,6 @@
 	<key>CFBundleIconFiles</key>
 	<array>
 		<string>icon.png</string>
-		<string>icon@2.png</string>
 		<string>icon@2x.png</string>
 	</array>
 	<key>CFBundleIcons</key>
@@ -21,7 +20,6 @@
 			<key>CFBundleIconFiles</key>
 			<array>
 				<string>icon.png</string>
-				<string>icon@2.png</string>
 				<string>icon@2x.png</string>
 			</array>
 			<key>UIPrerenderedIcon</key>
@@ -29,7 +27,7 @@
 		</dict>
 	</dict>
 	<key>CFBundleIdentifier</key>
-	<string>jp.xcoo.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>com.xcoo.upupu</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -59,9 +57,9 @@
 	<true/>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
-	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleBlackOpaque</string>
 	<key>UIStatusBarHidden</key>
 	<true/>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleBlackOpaque</string>
 </dict>
 </plist>
