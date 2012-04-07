@@ -127,6 +127,8 @@
             break;
     }
     
+    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+    
     NSData *imageData = UIImageJPEGRepresentation(image, quality);
     
     NSString *filename = [_nameField text];
