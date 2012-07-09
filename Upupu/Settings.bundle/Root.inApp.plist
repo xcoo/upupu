@@ -74,6 +74,14 @@
 		</dict>
 		<dict>
 			<key>Type</key>
+			<string>IASKButtonSpecifier</string>
+			<key>Title</key>
+			<string>Connect to Dropbox</string>
+			<key>Key</key>
+			<string>dropbox_link_pref</string>
+		</dict>
+		<dict>
+			<key>Type</key>
 			<string>PSTitleValueSpecifier</string>
 			<key>Title</key>
 			<string>Account</string>
@@ -84,11 +92,13 @@
 		</dict>
 		<dict>
 			<key>Type</key>
-			<string>IASKButtonSpecifier</string>
+			<string>PSTextFieldSpecifier</string>
 			<key>Title</key>
-			<string>Connect to Dropbox</string>
+			<string>Location</string>
 			<key>Key</key>
-			<string>dropbox_link_pref</string>
+			<string>dropbox_location_pref</string>
+			<key>DefaultValue</key>
+			<string>Photos/Upupu</string>
 		</dict>
 		<dict>
 			<key>Type</key>

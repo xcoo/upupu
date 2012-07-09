@@ -115,7 +115,7 @@ static DropboxUploader *instance = nil;
     NSDate *now = [NSDate date];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyyMMdd"];
-    dbSaveDirectory = [NSString stringWithFormat:@"%@/%@", kDBSaveDirectory, [formatter stringFromDate:now]];
+    dbSaveDirectory = [NSString stringWithFormat:@"%@/%@", [Settings dropboxLocation], [formatter stringFromDate:now]];
 
     if (!filename || [filename isEqualToString:@""]) {
         [formatter setDateFormat:@"yyyyMMdd_HHmmss"];

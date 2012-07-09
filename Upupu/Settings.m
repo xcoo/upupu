@@ -58,6 +58,12 @@
     [defaults setObject:account forKey:@"dropbox_account_pref"];
 }
 
++ (NSString *)dropboxLocation
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults stringForKey:@"dropbox_location_pref"];
+}
+
 + (int)photoQuality
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

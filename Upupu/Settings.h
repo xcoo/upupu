@@ -21,6 +21,7 @@
 + (void)setDropboxEnabled:(BOOL)enabled;
 + (NSString *)dropboxAccount;
 + (void)dropboxAccount:(NSString *)account;
++ (NSString *)dropboxLocation;
 
 // Photo
 + (int)photoQuality;

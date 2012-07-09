@@ -24,5 +24,3 @@
 // Dropbox
 #define kDBAppKey        @"YOUR_DROPBOX_APP_KEY"
 #define kDBAppSecret     @"YOUR_DROPBOX_APP_SECRET"
-
-#define kDBSaveDirectory @"UPLOADING_DIRECTORY_IN_YOUR_DROPBOX"
