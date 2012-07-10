@@ -87,8 +87,6 @@
 			<string>Account</string>
 			<key>Key</key>
 			<string>dropbox_account_pref</string>
-			<key>DefaultValue</key>
-			<string></string>
 		</dict>
 		<dict>
 			<key>Type</key>
@@ -98,7 +96,9 @@
 			<key>Key</key>
 			<string>dropbox_location_pref</string>
 			<key>DefaultValue</key>
-			<string>Photos/Upupu</string>
+			<string>/Photos/Upupu</string>
+			<key>KeyboardType</key>
+			<string>Alphabet</string>
 		</dict>
 		<dict>
 			<key>Type</key>
