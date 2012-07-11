@@ -44,6 +44,7 @@ static const double ACCELEROMETER_THRESHOLD = 0.85;
 @synthesize cameraButton = _cameraButton, clipsButton = _clipsButton;
 @synthesize switchButton = _switchButton, torchButton = _torchButton;
 @synthesize toolBar = _toolBar;
+@synthesize isSourcePhotoLibrary = _isSourcePhotoLibrary;
 
 #pragma mark - Rotate -
 
@@ -352,6 +353,8 @@ static const double ACCELEROMETER_THRESHOLD = 0.85;
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage *originalImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+ 
+    _isSourcePhotoLibrary = YES;
     
     [self afterTaken:originalImage];
     
@@ -381,6 +384,8 @@ static const double ACCELEROMETER_THRESHOLD = 0.85;
         [keyPath isEqualToString:@"isCaptured"] ) {
         
         UIImage *originalImage = [[CameraHelper sharedInstance] capturedImage];
+        
+        _isSourcePhotoLibrary = NO;
         
         [self afterTaken:originalImage];
     }

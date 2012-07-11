@@ -41,6 +41,7 @@
 @synthesize retakeButton = _retakeButton, uploadButton = _uploadButton, settingButton = _settingButton;
 @synthesize image = _image;
 @synthesize delegate = _delegate;
+@synthesize savePhotoAlbum = _savePhotoAlbum;
 
 #pragma mark - Class Method -
 
@@ -127,7 +128,8 @@
             break;
     }
     
-    UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+    if (_savePhotoAlbum)
+        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
     
     NSData *imageData = UIImageJPEGRepresentation(image, quality);
     

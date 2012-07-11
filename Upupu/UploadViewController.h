@@ -19,5 +19,6 @@
 
 @property (nonatomic, retain) UIImage *image;
 @property (nonatomic, assign) id<UploadViewControllerDelegate> delegate;
+@property (nonatomic) BOOL savePhotoAlbum;
 
 @end

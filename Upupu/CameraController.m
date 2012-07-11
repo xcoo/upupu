@@ -77,6 +77,9 @@
     controller.image = image;
     controller.delegate = self;
     
+    CameraViewController *cameraViewController = (CameraViewController *)viewController;
+    controller.savePhotoAlbum = !cameraViewController.isSourcePhotoLibrary;
+    
     [self pushViewController:controller animated:YES];
     
     [controller release];

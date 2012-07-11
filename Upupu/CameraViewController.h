@@ -16,5 +16,6 @@
 @interface CameraViewController : UIViewController
 
 @property (nonatomic, assign) id<CameraViewControllerDelegate> delegate;
+@property (nonatomic) BOOL isSourcePhotoLibrary;
 
 @end
