@@ -451,7 +451,7 @@ static NSMutableArray *FMWebDAVRequestTestResponses = nil;
         NSUInteger  stringLength = [displayString length];
         if (stringLength > MAX_DISPLAY_LENGTH) {
             
-            displayString = [NSString stringWithFormat:@"Showing first %d of %lu characters: %@", 
+            displayString = [NSString stringWithFormat:@"Showing first %d of %u characters: %@", 
                              MAX_DISPLAY_LENGTH, stringLength, 
                              [displayString substringWithRange:NSMakeRange( 0, MAX_DISPLAY_LENGTH )]];
         }
@@ -462,7 +462,7 @@ static NSMutableArray *FMWebDAVRequestTestResponses = nil;
         NSUInteger dataLength = [displayData length];
         if (dataLength > MAX_DISPLAY_LENGTH) {
             
-            displayString = [NSString stringWithFormat:@"Showing first %d of %lu bytes: %@",
+            displayString = [NSString stringWithFormat:@"Showing first %d of %u bytes: %@",
                              MAX_DISPLAY_LENGTH, dataLength, 
                              [displayData subdataWithRange:NSMakeRange( 0, MAX_DISPLAY_LENGTH )]];
         }
