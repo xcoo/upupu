@@ -62,7 +62,7 @@ static DropboxUploader *instance = nil;
 
 #pragma mark - Actions -
 
-- (BOOL) handleURL:(NSURL *)url
+- (BOOL)handleURL:(NSURL *)url
 {
     if ([[DBSession sharedSession] handleOpenURL:url]) {
 		if ([[DBSession sharedSession] isLinked]) {
@@ -90,9 +90,9 @@ static DropboxUploader *instance = nil;
     return [[DBSession sharedSession] isLinked];
 }
 
-- (void)link
+- (void)linkFromController:(UIViewController *)controller
 {
-    [[DBSession sharedSession] link];
+    [[DBSession sharedSession] linkFromController:controller];
 }
 
 - (void)makeRestClient

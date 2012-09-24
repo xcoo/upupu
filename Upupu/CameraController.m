@@ -122,7 +122,7 @@
 - (void)settingsViewController:(IASKAppSettingsViewController *)sender buttonTappedForKey:(NSString *)key 
 {
 	if ([key isEqualToString:@"dropbox_link_pref"]) {
-        [[DropboxUploader sharedInstance] link];
+        [[DropboxUploader sharedInstance] linkFromController:sender];
     }
     
     [sender dismissModalViewControllerAnimated:YES];

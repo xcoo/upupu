@@ -14,7 +14,7 @@
 
 + (id) sharedInstance;
 
-- (void) link;
+- (void) linkFromController:(UIViewController *)controller;
 - (BOOL) isLinked;
 
 - (void) uploadWithName:(NSString *)filename imageData:(NSData *)imageData;
