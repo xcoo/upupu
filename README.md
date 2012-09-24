@@ -1,6 +1,39 @@
 #About
 
-simple camera application that backup pictures on WebDAV server
+Simple camera application that backups pictures on WebDAV server.
+
+#Usage
+
+##1. Download source code
+
+    $ git clone https://github.com/xcoo/upupu.git
+    
+or download from [here](https://github.com/xcoo/upupu/zipball/master) and extract it.
+
+Open Upupu.xcodeproj with Xcode 4.
+    
+##2. Use Dropbox
+
+You have to register Dropbox App keys if you want to use Dropbox.
+Go to [Dropbox Developers page](https://www.dropbox.com/developers/apps) and click "Create an app."
+Write your app information and specify "Full Dropbox" in Access level section.
+
+Next, you need to change source code.
+
+Modify Upupu-prefix.pch.
+
+    // Dropbox
+    #define kDBAppKey    @"YOUR_DROPBOX_APP_KEY"
+    #define kDBAppSecret @"YOUR_DROPBOX_APP_SECRET"
+
+Click Upupu -> info -> URL Types on Xcode and modify URL Scheme.
+
+    URL Schemes: db-YOUR_DROPBOX_APP_KEY
+
+##3. Run
+
+Run Upupu on iPhone or iPhone simulator.
+Let's Upupu!
 
 #License
 
