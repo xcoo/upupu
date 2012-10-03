@@ -302,14 +302,9 @@ static const double ACCELEROMETER_THRESHOLD = 0.85;
     if( [CameraHelper support] ) {
         [[CameraHelper sharedInstance] startRunning];
 
-        CGRect rect;
-        float version = [[[UIDevice currentDevice] systemVersion] floatValue];
-        if (version < 6.0f){
-            rect = CGRectMake(0, 0, 320, 436);
-        } else {
-            rect = CGRectMake(0, 0, 320, 526);
-        }
-
+        CGRect rect = CGRectMake(0, 0,
+                                 self.view.frame.size.width,
+                                 self.view.frame.size.height - _toolBar.frame.size.height);
         UIView *preview = [[CameraHelper sharedInstance] previewViewWithBounds:rect];
         [_previewView addSubview:preview];
 
