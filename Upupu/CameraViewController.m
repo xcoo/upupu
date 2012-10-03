@@ -301,8 +301,16 @@ static const double ACCELEROMETER_THRESHOLD = 0.85;
 {
     if( [CameraHelper support] ) {
         [[CameraHelper sharedInstance] startRunning];
-        
-        UIView *preview = [[CameraHelper sharedInstance] previewViewWithBounds:CGRectMake(0, 0, 320, 436)];
+
+        CGRect rect;
+        float version = [[[UIDevice currentDevice] systemVersion] floatValue];
+        if (version < 6.0f){
+            rect = CGRectMake(0, 0, 320, 436);
+        } else {
+            rect = CGRectMake(0, 0, 320, 526);
+        }
+
+        UIView *preview = [[CameraHelper sharedInstance] previewViewWithBounds:rect];
         [_previewView addSubview:preview];
 
     } else {
@@ -317,6 +325,8 @@ static const double ACCELEROMETER_THRESHOLD = 0.85;
     frame.origin.y -= 20;
     frame.size.height += 20;
     self.view.frame = frame;
+
+    _shutterLayer.frame = _overlayView.frame;
     
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
     
