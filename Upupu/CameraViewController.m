@@ -299,12 +299,16 @@ static const double ACCELEROMETER_THRESHOLD = 0.85;
 
 -(void) viewWillAppear:(BOOL)animated
 {
-    if( [CameraHelper support] ) {
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+    self.view.frame = self.view.bounds;
+    _overlayView.frame = self.view.frame;
+    _shutterLayer.frame = _overlayView.frame;
+   
+    if ( [CameraHelper support] ) {
         [[CameraHelper sharedInstance] startRunning];
 
-        CGRect rect = CGRectMake(0, 0,
-                                 self.view.frame.size.width,
-                                 self.view.frame.size.height - _toolBar.frame.size.height);
+        CGRect rect = [[UIScreen mainScreen] applicationFrame];
+        rect.size.height -= _toolBar.frame.size.height;
         UIView *preview = [[CameraHelper sharedInstance] previewViewWithBounds:rect];
         [_previewView addSubview:preview];
 
@@ -315,15 +319,6 @@ static const double ACCELEROMETER_THRESHOLD = 0.85;
     UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapPreview:)];  
     [_overlayView addGestureRecognizer:tapGesture];  
     [tapGesture release];
-    
-    CGRect frame = self.view.frame;
-    frame.origin.y -= 20;
-    frame.size.height += 20;
-    self.view.frame = frame;
-
-    _shutterLayer.frame = _overlayView.frame;
-    
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
     
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceOrientationDidChange) name:UIDeviceOrientationDidChangeNotification object:nil];
