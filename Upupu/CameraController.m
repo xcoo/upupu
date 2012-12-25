@@ -99,7 +99,7 @@
 
 - (void) uploadViewControllerDidSetup:(UIViewController *)controller
 {
-    IASKAppSettingsViewController *settingsController = [[IASKAppSettingsViewController alloc] initWithNibName:@"IASKAppSettingsView" bundle:nil];
+    IASKAppSettingsViewController *settingsController = [[IASKAppSettingsViewController alloc] init];
     settingsController.delegate = self;
     settingsController.showCreditsFooter = NO;
     

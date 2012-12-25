@@ -13,7 +13,6 @@
 #import "DropboxUploader.h"
 
 #import "Settings.h"
-#import "IASKAppSettingsViewController.h"
 
 #import "ImageUtil.h"
 #import "HUDUtil.h"
