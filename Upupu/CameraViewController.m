@@ -200,7 +200,7 @@ static const double ACCELEROMETER_THRESHOLD = 0.85;
     [[CameraHelper sharedInstance] stopRunning];
     
     if( _delegate != nil && [_delegate respondsToSelector:@selector(cameraViewController:didFinishedWithImage:)] ) {
-        [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+        [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
         [_delegate cameraViewController:self didFinishedWithImage:image];
     }
 }
