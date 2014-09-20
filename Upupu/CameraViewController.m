@@ -13,8 +13,8 @@
 #import "CameraHelper.h"
 #import "AlertUtil.h"
 
-static const int MAX_RESOLUTION = 640;
-static const double ACCELEROMETER_THRESHOLD = 0.85;
+//static const int MAX_RESOLUTION = 640;
+//static const double ACCELEROMETER_THRESHOLD = 0.85;
 
 @interface CameraViewController() <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIAccelerometerDelegate> {
     UIInterfaceOrientation _orientation;
