@@ -1,0 +1,16 @@
+PODS:
+  - Dropbox-iOS-SDK (1.3.13)
+  - InAppSettingsKit (2.4.4)
+  - MBProgressHUD (0.9.1)
+
+DEPENDENCIES:
+  - Dropbox-iOS-SDK (~> 1.3.13)
+  - InAppSettingsKit (~> 2.4.4)
+  - MBProgressHUD (~> 0.9.1)
+
+SPEC CHECKSUMS:
+  Dropbox-iOS-SDK: 367160c05e279e7fa3205f3233d1873b7a986ee6
+  InAppSettingsKit: e78aee9fc41b44bcc5c70d7abd79cff730a0a0d3
+  MBProgressHUD: f3747dcbd45a9e855a6b0674550651e0b7ed250c
+
+COCOAPODS: 0.36.0
