@@ -64,13 +64,13 @@
     return [defaults stringForKey:@"dropbox_location_pref"];
 }
 
-+ (int)photoQuality
++ (NSInteger)photoQuality
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     return [defaults integerForKey:@"photo_quality_pref"];
 }
 
-+ (int)photoResolution
++ (NSInteger)photoResolution
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     return [defaults integerForKey:@"photo_resolution_pref"];

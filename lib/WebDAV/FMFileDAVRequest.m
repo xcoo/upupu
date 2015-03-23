@@ -121,7 +121,7 @@
         _endSelector = @selector(requestDidGet:);
     }
     
-    self.responseData = [NSData dataWithContentsOfURL:_url];
+    self.responseData = [NSMutableData dataWithData:[NSData dataWithContentsOfURL:_url]];
     
     self.responseStatusCode = _responseData ? FMWebDAVOKStatusCode : FMWebDAVNotFoundStatusCode;
     
@@ -218,7 +218,7 @@
         _endSelector = @selector(requestDidFetchDirectoryListing:);
     }
     
-    self.responseData = [NSData data]; // it wants to know that something was there.
+    self.responseData = [NSMutableData data]; // it wants to know that something was there.
     
     self.responseStatusCode = 207;
     

@@ -24,7 +24,7 @@
 + (NSString *)dropboxLocation;
 
 // Photo
-+ (int)photoQuality;
-+ (int)photoResolution;
++ (NSInteger)photoQuality;
++ (NSInteger)photoResolution;
 
 @end

@@ -106,7 +106,7 @@
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:settingsController];
     navController.navigationBar.tintColor = [UIColor blackColor];
     navController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    [self presentModalViewController:navController animated:YES];
+    [self presentViewController:navController animated:YES completion:nil];
     
     [navController release];
     [settingsController release];
@@ -116,7 +116,7 @@
 
 - (void)settingsViewControllerDidEnd:(IASKAppSettingsViewController *)sender 
 {
-    [sender dismissModalViewControllerAnimated:YES];
+    [sender dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)settingsViewController:(IASKAppSettingsViewController *)sender buttonTappedForKey:(NSString *)key 
@@ -125,7 +125,7 @@
         [[DropboxUploader sharedInstance] linkFromController:sender];
     }
     
-    [sender dismissModalViewControllerAnimated:YES];
+    [sender dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

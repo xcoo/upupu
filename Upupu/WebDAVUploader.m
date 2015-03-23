@@ -129,7 +129,7 @@
     NSString *username = [Settings webDAVUser];
     NSString *password = [Settings webDAVPassword];
     
-    int prvFailCnt = [challenge previousFailureCount];
+    NSInteger prvFailCnt = [challenge previousFailureCount];
     if (prvFailCnt == 0) {
         NSURLCredential *cred = [NSURLCredential credentialWithUser:username
                                                            password:password

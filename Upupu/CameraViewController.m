@@ -166,7 +166,7 @@
     imagePicker.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     imagePicker.allowsEditing = NO;
     
-    [self presentModalViewController:imagePicker animated:YES];
+    [self presentViewController:imagePicker animated:YES completion:nil];
     
     [imagePicker release];
 }
@@ -368,14 +368,14 @@
     
     [self afterTaken:originalImage];
     
-    [picker dismissModalViewControllerAnimated:YES];
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController*)picker
 {
     [[CameraHelper sharedInstance] startRunning];
     
-    [picker dismissModalViewControllerAnimated:YES];
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Key Value Observation -
