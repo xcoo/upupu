@@ -27,8 +27,6 @@
     [[self window] setRootViewController:controller];
     [controller release];
     
-    [application setStatusBarStyle:UIStatusBarStyleDefault];
-    
     [self.window makeKeyAndVisible];
     
     return YES;
