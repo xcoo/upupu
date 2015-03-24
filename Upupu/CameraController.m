@@ -15,6 +15,10 @@
 #import "DropboxUploader.h"
 
 @interface CameraController() <CameraViewControllerDelegate, UploadViewControllerDelegate, IASKSettingsDelegate>
+
+@property (nonatomic, retain) CameraViewController *cameraViewController;
+@property (nonatomic, retain) UploadViewController *uploadViewController;
+
 @end
 
 @implementation CameraController
@@ -27,14 +31,18 @@
         return nil;
     }
     
-    CameraViewController *controller = [[CameraViewController alloc] initWithNibName:@"CameraViewController" bundle:nil];
-    controller.delegate = self;
+    self.cameraViewController = [[CameraViewController alloc] initWithNibName:@"CameraViewController"
+                                                                       bundle:nil];
+    _cameraViewController.delegate = self;
+    
+    self.uploadViewController = [[UploadViewController alloc] initWithNibName:@"UploadViewController"
+                                                                       bundle:nil];
+    _uploadViewController.delegate = self;
         
     self.navigationBar.barStyle = UIBarStyleBlackOpaque;
     self.navigationBar.hidden = YES;
     
-    [self pushViewController:controller animated:NO];
-    [controller release];
+    [self pushViewController:_cameraViewController animated:NO];
     
     return self;
 }
@@ -56,11 +64,17 @@
 
 - (void)viewDidUnload
 {
+    SAFE_RELEASE(_cameraViewController)
+    SAFE_RELEASE(_uploadViewController)
+    
     [super viewDidUnload];
 }
 
 - (void) dealloc
 {
+    SAFE_RELEASE(_cameraViewController)
+    SAFE_RELEASE(_uploadViewController)
+    
     [super dealloc];
 }
 
@@ -73,27 +87,32 @@
 
 -(void) cameraViewController:(UIViewController *)viewController didFinishedWithImage:(UIImage *)image
 {
-    UploadViewController *controller = [[UploadViewController alloc] initWithNibName:@"UploadViewController" bundle:nil];
-    controller.image = image;
-    controller.delegate = self;
+    _uploadViewController.image = image;
     
     CameraViewController *cameraViewController = (CameraViewController *)viewController;
-    controller.savePhotoAlbum = !cameraViewController.isSourcePhotoLibrary;
+    _uploadViewController.savePhotoAlbum = !cameraViewController.isSourcePhotoLibrary;
     
-    [self pushViewController:controller animated:YES];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
-    [controller release];
+    [self pushViewController:_uploadViewController animated:YES];
 }
 
 #pragma mark - UploadViewControllerDelegate -
 
 - (void) uploadViewControllerDidReturn:(UIViewController *)controller
 {
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    
     [self popViewControllerAnimated:YES];
 }
 
 - (void) uploadViewControllerDidFinished:(UIViewController *)controller
 {
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    
     [self popViewControllerAnimated:YES];
 }
 
@@ -104,9 +123,11 @@
     settingsController.showCreditsFooter = NO;
     
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:settingsController];
-    navController.navigationBar.tintColor = [UIColor blackColor];
     navController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     [self presentViewController:navController animated:YES completion:nil];
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
     
     [navController release];
     [settingsController release];
@@ -116,6 +137,8 @@
 
 - (void)settingsViewControllerDidEnd:(IASKAppSettingsViewController *)sender 
 {
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
     [sender dismissViewControllerAnimated:YES completion:nil];
 }
 

@@ -200,7 +200,6 @@
     [[CameraHelper sharedInstance] stopRunning];
     
     if( _delegate != nil && [_delegate respondsToSelector:@selector(cameraViewController:didFinishedWithImage:)] ) {
-        [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
         [_delegate cameraViewController:self didFinishedWithImage:image];
     }
 }
@@ -366,16 +365,22 @@
  
     _isSourcePhotoLibrary = YES;
     
-    [self afterTaken:originalImage];
-    
-    [picker dismissViewControllerAnimated:YES completion:nil];
+    [picker dismissViewControllerAnimated:YES completion:^{
+        [[UIApplication sharedApplication] setStatusBarHidden:YES
+                                                withAnimation:UIStatusBarAnimationFade];
+        [self afterTaken:originalImage];
+
+    }];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController*)picker
 {
     [[CameraHelper sharedInstance] startRunning];
     
-    [picker dismissViewControllerAnimated:YES completion:nil];
+    [picker dismissViewControllerAnimated:YES completion:^{
+        [[UIApplication sharedApplication] setStatusBarHidden:YES
+                                                withAnimation:UIStatusBarAnimationFade];
+    }];
 }
 
 #pragma mark - Key Value Observation -
