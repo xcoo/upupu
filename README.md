@@ -1,18 +1,27 @@
-#About
+# Upupu
 
 Simple camera application that backups pictures on WebDAV server.
 
-#Usage
+## Prerequisites
 
-##1. Download source code
+- Xcode 6
+- CocoaPods
+
+## Usage
+
+### 1. Download source code
 
     $ git clone https://github.com/xcoo/upupu.git
-    
-or download from [here](https://github.com/xcoo/upupu/zipball/master) and extract it.
 
-Open Upupu.xcodeproj with Xcode 4.
-    
-##2. Use Dropbox
+or download from [here](https://github.com/xcoo/upupu/archive/master.zip) and extract it.
+
+### 2. Install dependencies
+
+    $ pod install
+
+Open **Upupu.xcworkspace** with Xcode.
+
+### 3. Use Dropbox
 
 You have to register Dropbox App keys if you want to use Dropbox.
 Go to [Dropbox Developers page](https://www.dropbox.com/developers/apps) and click "Create an app."
@@ -30,12 +39,12 @@ Click Upupu -> info -> URL Types on Xcode and modify URL Scheme.
 
     URL Schemes: db-YOUR_DROPBOX_APP_KEY
 
-##3. Run
+### 4. Run
 
 Run Upupu on iPhone or iPhone simulator.
 Let's Upupu!
 
-#License
+## License
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
 
@@ -43,7 +52,8 @@ You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2
 
 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
 
-#Credit
+## Credit
+
 This application uses a WebDAV library created by Flying Meat Inc.
 
 Connecting to the Dropbox service in this application is implemented with a framework created by Dropbox Inc.
