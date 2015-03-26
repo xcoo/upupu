@@ -296,31 +296,49 @@
     Logging(@"deallocated");
 }
 
+- (void)setup
+{
+    
+    UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapPreview:)];
+    [_overlayView addGestureRecognizer:tapGesture];
+    [tapGesture release];
+    
+    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceOrientationDidChange) name:UIDeviceOrientationDidChangeNotification object:nil];
+    
+}
+
 -(void) viewWillAppear:(BOOL)animated
 {
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
     self.view.frame = self.view.bounds;
     _overlayView.frame = self.view.frame;
     _shutterLayer.frame = _overlayView.frame;
-   
+
     if ( [CameraHelper support] ) {
-        [[CameraHelper sharedInstance] startRunning];
-
-        CGRect rect = [[UIScreen mainScreen] applicationFrame];
-        rect.size.height -= _toolBar.frame.size.height;
-        UIView *preview = [[CameraHelper sharedInstance] previewViewWithBounds:rect];
-        [_previewView addSubview:preview];
-
+        _previewView.hidden = YES;
+        for (UIView *view in _previewView.subviews) {
+            [view removeFromSuperview];
+        }
+        
+        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_async(queue, ^{
+            CGRect rect = [[UIScreen mainScreen] applicationFrame];
+            rect.size.height -= _toolBar.frame.size.height;
+            UIView *preview = [[CameraHelper sharedInstance] previewViewWithBounds:rect];
+            [[CameraHelper sharedInstance] startRunning];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_previewView addSubview:preview];
+                _previewView.hidden = NO;
+                [self setup];
+            });
+        });
     } else {
         [AlertUtil showWithTitle:@"Error" andMessage:@"Camera is unavailable"];
+        [self setup];
     }
 
-    UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapPreview:)];  
-    [_overlayView addGestureRecognizer:tapGesture];  
-    [tapGesture release];
-    
-    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceOrientationDidChange) name:UIDeviceOrientationDidChangeNotification object:nil];
 }
 
 -(void) viewWillDisappear:(BOOL)animated
@@ -375,7 +393,7 @@
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController*)picker
 {
-    [[CameraHelper sharedInstance] startRunning];
+//    [[CameraHelper sharedInstance] startRunning];
     
     [picker dismissViewControllerAnimated:YES completion:^{
         [[UIApplication sharedApplication] setStatusBarHidden:YES
