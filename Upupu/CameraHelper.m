@@ -516,7 +516,7 @@ static CameraHelper *instance;
     return self;
 }
 
-- (unsigned)retainCount
+- (NSUInteger)retainCount
 {
     return UINT_MAX;
 }
