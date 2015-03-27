@@ -56,6 +56,7 @@
 
 -(IBAction) retake:(id)sender
 {
+    _nameField.text = @"";
     if( _delegate != nil && [_delegate respondsToSelector:@selector(uploadViewControllerDidReturn:)] ) {
         [_delegate uploadViewControllerDidReturn:self];
     }
@@ -168,6 +169,7 @@
     sleep(1);
 
     // finish
+    _nameField.text = @"";
     if( _delegate != nil && [_delegate respondsToSelector:@selector(uploadViewControllerDidFinished:)] ) {
         [_delegate uploadViewControllerDidFinished:self];
     }
@@ -185,10 +187,17 @@
         _nameField.enabled = NO;
         _uploadButton.enabled = NO;
     } else {
-        _nameField.text = [UploadViewController makeFilename];
         _nameField.enabled = YES;
         _uploadButton.enabled = YES;
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    if (_nameField.text.length == 0) {
+        _nameField.text = [UploadViewController makeFilename];
+    }
+    [super viewWillAppear:animated];
 }
 
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
