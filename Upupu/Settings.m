@@ -76,4 +76,10 @@
     return [defaults integerForKey:@"photo_resolution_pref"];
 }
 
++ (BOOL)photoSaveToAlbum
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults boolForKey:@"photo_save_album_pref"];
+}
+
 @end

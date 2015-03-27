@@ -152,6 +152,16 @@
 		</dict>
 		<dict>
 			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Save to album</string>
+			<key>Key</key>
+			<string>photo_save_album_pref</string>
+			<key>DefaultValue</key>
+			<string>YES</string>
+		</dict>
+		<dict>
+			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
 			<string></string>

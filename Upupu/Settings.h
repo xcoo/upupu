@@ -26,5 +26,6 @@
 // Photo
 + (NSInteger)photoQuality;
 + (NSInteger)photoResolution;
++ (BOOL)photoSaveToAlbum;
 
 @end

@@ -136,7 +136,7 @@
             break;
     }
     
-    if (_savePhotoAlbum)
+    if (_savePhotoAlbum && [Settings photoSaveToAlbum])
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
     
     NSData *imageData = UIImageJPEGRepresentation(image, quality);

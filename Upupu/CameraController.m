@@ -124,10 +124,10 @@
     
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:settingsController];
     navController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    [self presentViewController:navController animated:YES completion:nil];
-    
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
+    [self presentViewController:navController animated:YES completion:^{
+        [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
+    }];
     
     [navController release];
     [settingsController release];
