@@ -89,9 +89,17 @@
 
 - (void) showFailed
 {
-    _hud.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"failure_icon.png"]] autorelease];
+    _hud.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"failure_icon"]] autorelease];
     _hud.mode = MBProgressHUDModeCustomView;
     _hud.labelText = @"Failed";
+    _hud.detailsLabelText = @"";
+}
+
+- (void) showSucceeded
+{
+    _hud.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"success_icon"]] autorelease];
+    _hud.mode = MBProgressHUDModeCustomView;
+    _hud.labelText = @"Succeded";
     _hud.detailsLabelText = @"";
 }
 
@@ -141,7 +149,9 @@
         WebDAVUploader *uploader = [[WebDAVUploader alloc] initWithName:filename imageData:imageData];
         [uploader upload];
         if ( !uploader.success ) {
-            [self showFailed];
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [self showFailed];
+            });
             sleep(1);
             return;
         }
@@ -161,11 +171,9 @@
     }
     
     // all succeeded
-    _hud.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"success_icon.png"]] autorelease];
-    _hud.mode = MBProgressHUDModeCustomView;
-    _hud.labelText = @"Succeded";
-    _hud.detailsLabelText = @"";
-    
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        [self showSucceeded];
+    });
     sleep(1);
 
     // finish

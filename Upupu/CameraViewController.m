@@ -393,8 +393,6 @@
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController*)picker
 {
-//    [[CameraHelper sharedInstance] startRunning];
-    
     [picker dismissViewControllerAnimated:YES completion:^{
         [[UIApplication sharedApplication] setStatusBarHidden:YES
                                                 withAnimation:UIStatusBarAnimationFade];
