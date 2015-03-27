@@ -180,7 +180,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
     _imageView.image = _image;
     
     if (!_image) {
@@ -190,13 +193,11 @@
         _nameField.enabled = YES;
         _uploadButton.enabled = YES;
     }
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
+    
     if (_nameField.text.length == 0) {
         _nameField.text = [UploadViewController makeFilename];
     }
+    
     [super viewWillAppear:animated];
 }
 
