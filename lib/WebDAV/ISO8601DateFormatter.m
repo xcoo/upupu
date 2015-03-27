@@ -162,7 +162,7 @@ static BOOL is_leap_year(unsigned year);
 	} else {
 		//Skip leading whitespace.
 		unsigned i = 0U;
-		for(unsigned len = strlen((const char *)ch); i < len; ++i) {
+		for(unsigned len = (unsigned)strlen((const char *)ch); i < len; ++i) {
 			if (!isspace(ch[i]))
 				break;
 		}
@@ -178,9 +178,9 @@ static BOOL is_leap_year(unsigned year);
 			//There is no date here, only a time. Set the date to now; then we'll parse the time.
 			isValidDate = isdigit(*++ch);
 
-			year = nowComponents.year;
-			month_or_week = nowComponents.month;
-			day = nowComponents.day;
+			year = (unsigned)nowComponents.year;
+			month_or_week = (unsigned)nowComponents.month;
+			day = (unsigned)nowComponents.day;
 		} else {
 			//segment = 0U;
 
@@ -194,12 +194,12 @@ static BOOL is_leap_year(unsigned year);
 				case 0:
 					if (*ch == 'W') {
 						if ((ch[1] == '-') && isdigit(ch[2]) && ((num_leading_hyphens == 1U) || ((num_leading_hyphens == 2U) && !strict))) {
-							year = nowComponents.year;
+							year = (unsigned)nowComponents.year;
 							month_or_week = 1U;
 							ch += 2;
 							goto parseDayAfterWeek;
 						} else if (num_leading_hyphens == 1U) {
-							year = nowComponents.year;
+							year = (unsigned)nowComponents.year;
 							goto parseWeekAndDay;
 						} else
 							isValidDate = NO;
@@ -225,7 +225,7 @@ static BOOL is_leap_year(unsigned year);
 						day = segment % 100U;
 						segment /= 100U;
 						month_or_week = segment % 100U;
-						year  = nowComponents.year;
+						year  = (unsigned)nowComponents.year;
 						year -= (year % 100U);
 						year += segment / 100U;
 					}
@@ -289,7 +289,7 @@ static BOOL is_leap_year(unsigned year);
 						case 2: //MMDD
 							day = segment % 100U;
 							month_or_week = segment / 100U;
-							year = nowComponents.year;
+							year = (unsigned)nowComponents.year;
 
 							break;
 
@@ -304,7 +304,7 @@ static BOOL is_leap_year(unsigned year);
 						if (num_leading_hyphens == 1U) {
 							if (*ch == '-') ++ch;
 							if (*++ch == 'W') {
-								year  = nowComponents.year;
+								year  = (unsigned)nowComponents.year;
 								year -= (year % 10U);
 								year += segment;
 								goto parseWeekAndDay;
@@ -319,7 +319,7 @@ static BOOL is_leap_year(unsigned year);
 						case 0:
 							if (*ch == '-') {
 								//Implicit century
-								year  = nowComponents.year;
+								year  = (unsigned)nowComponents.year;
 								year -= (year % 100U);
 								year += segment;
 
@@ -360,7 +360,7 @@ static BOOL is_leap_year(unsigned year);
 									}
 								}
 							} else if (*ch == 'W') {
-								year  = nowComponents.year;
+								year  = (unsigned)nowComponents.year;
 								year -= (year % 100U);
 								year += segment;
 
@@ -388,7 +388,7 @@ static BOOL is_leap_year(unsigned year);
 
 						case 1:; //-YY; -YY-MM (implicit century)
 							NSLog(@"(%@) found %u digits and one hyphen, so this is either -YY or -YY-MM; segment (year) is %u", string, num_digits, segment);
-							unsigned current_year = nowComponents.year;
+							unsigned current_year = (unsigned)nowComponents.year;
 							unsigned century = (current_year % 100U);
 							year = segment + (current_year - century);
 							if (num_digits == 1U) //implied decade
@@ -404,7 +404,7 @@ static BOOL is_leap_year(unsigned year);
 							break;
 
 						case 2: //--MM; --MM-DD
-							year = nowComponents.year;
+							year = (unsigned)nowComponents.year;
 							month_or_week = segment;
 							if (*ch == '-') {
 								++ch;
@@ -413,8 +413,8 @@ static BOOL is_leap_year(unsigned year);
 							break;
 
 						case 3: //---DD
-							year = nowComponents.year;
-							month_or_week = nowComponents.month;
+							year = (unsigned)nowComponents.year;
+							month_or_week = (unsigned)nowComponents.month;
 							day = segment;
 							break;
 
@@ -441,7 +441,7 @@ static BOOL is_leap_year(unsigned year);
 						isValidDate = NO;
 					else {
 						day = segment;
-						year = nowComponents.year;
+						year = (unsigned)nowComponents.year;
 						dateSpecification = dateOnly;
 						if (strict && (day > (365U + is_leap_year(year))))
 							isValidDate = NO;
@@ -625,7 +625,7 @@ static BOOL is_leap_year(unsigned year);
 		case ISO8601DateFormatOrdinal:
 			return [self stringFromDate:date formatString:ISO_ORDINAL_DATE_FORMAT timeZone:timeZone];
 		default:
-			[NSException raise:NSInternalInconsistencyException format:@"self.format was %d, not calendar (%d), week (%d), or ordinal (%d)", self.format, ISO8601DateFormatCalendar, ISO8601DateFormatWeek, ISO8601DateFormatOrdinal];
+			[NSException raise:NSInternalInconsistencyException format:@"self.format was %lu, not calendar (%d), week (%d), or ordinal (%d)", (unsigned long)self.format, ISO8601DateFormatCalendar, ISO8601DateFormatWeek, ISO8601DateFormatOrdinal];
 			return nil;
 	}
 }
@@ -647,7 +647,7 @@ static BOOL is_leap_year(unsigned year);
 	[formatter release];
 
 	if (includeTime) {
-		int offset = [timeZone secondsFromGMT];
+		int offset = (int)[timeZone secondsFromGMT];
 		offset /= 60;  //bring down to minutes
 		if (offset == 0)
 			str = [str stringByAppendingString:ISO_TIMEZONE_UTC_FORMAT];
@@ -690,11 +690,11 @@ static BOOL is_leap_year(unsigned year);
 		october, november, december
 	};
 
-	int year = components.year;
+	int year = (int)components.year;
 	int week = 0;
 	//The old unparser added 6 to [calendarDate dayOfWeek], which was zero-based; components.weekday is one-based, so we now add only 5.
 	int dayOfWeek = (components.weekday + 5) % 7;
-	int dayOfYear = ordinalComponents.day;
+	int dayOfYear = (int)ordinalComponents.day;
 
 	int prevYear = year - 1;
 

@@ -158,7 +158,7 @@ static NSMutableArray *FMWebDAVRequestTestResponses = nil;
         NSURL *responseURL = [testDict objectForKey:FMWebDAVRequestTestPayloadURL];
         
         if (![self responseData] && responseURL) {
-            [self setResponseData:[NSData dataWithContentsOfURL:responseURL]];
+            [self setResponseData:[NSMutableData dataWithContentsOfURL:responseURL]];
         }
         
         [FMWebDAVRequestTestResponses removeObjectAtIndex:0];
@@ -269,7 +269,7 @@ static NSMutableArray *FMWebDAVRequestTestResponses = nil;
     [req setValue:@"application/octet-stream" forHTTPHeaderField:@"Content-Type"];
     
     // this actually speeds things up for some reason.
-    [req setValue:[NSString stringWithFormat:@"%d", [data length]] forHTTPHeaderField:@"Content-Length"];
+    [req setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[data length]] forHTTPHeaderField:@"Content-Length"];
     
     [req setHTTPBody:data];
     
@@ -398,7 +398,7 @@ static NSMutableArray *FMWebDAVRequestTestResponses = nil;
         [req setValue:@"infinity" forHTTPHeaderField:@"Depth"];
     }
     else {
-        [req setValue:[NSString stringWithFormat:@"%d", depth] forHTTPHeaderField:@"Depth"];
+        [req setValue:[NSString stringWithFormat:@"%lu", (unsigned long)depth] forHTTPHeaderField:@"Depth"];
     }
     
     [req setValue:@"application/xml" forHTTPHeaderField:@"Content-Type"];
@@ -451,8 +451,8 @@ static NSMutableArray *FMWebDAVRequestTestResponses = nil;
         NSUInteger  stringLength = [displayString length];
         if (stringLength > MAX_DISPLAY_LENGTH) {
             
-            displayString = [NSString stringWithFormat:@"Showing first %d of %u characters: %@", 
-                             MAX_DISPLAY_LENGTH, stringLength, 
+            displayString = [NSString stringWithFormat:@"Showing first %lu of %lu characters: %@", 
+                             (unsigned long)MAX_DISPLAY_LENGTH, (unsigned long)stringLength,
                              [displayString substringWithRange:NSMakeRange( 0, MAX_DISPLAY_LENGTH )]];
         }
     }
@@ -462,8 +462,8 @@ static NSMutableArray *FMWebDAVRequestTestResponses = nil;
         NSUInteger dataLength = [displayData length];
         if (dataLength > MAX_DISPLAY_LENGTH) {
             
-            displayString = [NSString stringWithFormat:@"Showing first %d of %u bytes: %@",
-                             MAX_DISPLAY_LENGTH, dataLength, 
+            displayString = [NSString stringWithFormat:@"Showing first %lu of %lu bytes: %@",
+                             (unsigned long)MAX_DISPLAY_LENGTH, (unsigned long)dataLength, 
                              [displayData subdataWithRange:NSMakeRange( 0, MAX_DISPLAY_LENGTH )]];
         }
         else {
@@ -897,7 +897,7 @@ static NSMutableArray *FMWebDAVRequestTestResponses = nil;
                 
                 if (d) {
                     
-                    int colIdx = [elementName rangeOfString:@":"].location;
+                    NSUInteger colIdx = [elementName rangeOfString:@":"].location;
                     
                     [_xmlBucket setObject:d forKey:[elementName substringFromIndex:colIdx + 1]];
                 }
