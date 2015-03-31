@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1601F9D7147F9A1000E3A13C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1601F9BE147F9A1000E3A13C /* InfoPlist.strings */; };
 		1601F9DD147F9A1000E3A13C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1601F9CA147F9A1000E3A13C /* main.m */; };
 		1601F9DF147F9A1000E3A13C /* UploadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1601F9CE147F9A1000E3A13C /* UploadViewController.m */; };
 		1601F9E2147F9A1000E3A13C /* WebDAVUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1601F9D2147F9A1000E3A13C /* WebDAVUploader.m */; };
@@ -69,7 +68,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1601F9BF147F9A1000E3A13C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1601F9CA147F9A1000E3A13C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1601F9CD147F9A1000E3A13C /* UploadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadViewController.h; sourceTree = "<group>"; };
 		1601F9CE147F9A1000E3A13C /* UploadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadViewController.m; sourceTree = "<group>"; };
@@ -251,7 +249,6 @@
 			isa = PBXGroup;
 			children = (
 				8F624F0A14CDF05700CBBD6A /* Settings.bundle */,
-				1601F9BE147F9A1000E3A13C /* InfoPlist.strings */,
 				1601F9D3147F9A1000E3A13C /* Upupu-Info.plist */,
 				1601F9D4147F9A1000E3A13C /* Upupu-Prefix.pch */,
 			);
@@ -370,18 +367,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0610;
-				TargetAttributes = {
-					3D891521147CC6380012580A = {
-						DevelopmentTeam = AWWLP9H3FJ;
-					};
-				};
 			};
 			buildConfigurationList = 3D89151C147CC6380012580A /* Build configuration list for PBXProject "Upupu" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				English,
 			);
 			mainGroup = 3D891517147CC6380012580A;
@@ -399,7 +390,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1601F9D7147F9A1000E3A13C /* InfoPlist.strings in Resources */,
 				16A96FEA1484F8B500BD25E3 /* MainWindow.xib in Resources */,
 				16A96FFF14850AEB00BD25E3 /* UploadViewController.xib in Resources */,
 				160C2925148645870013E277 /* icon.png in Resources */,
@@ -495,17 +485,6 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXVariantGroup section */
-		1601F9BE147F9A1000E3A13C /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1601F9BF147F9A1000E3A13C /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		3D89153B147CC6380012580A /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -530,8 +509,8 @@
 		3D89153C147CC6380012580A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Xcoo, Inc.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Xcoo, Inc.";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
