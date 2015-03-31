@@ -25,12 +25,9 @@
 		163A15B6150101AA0058FBB2 /* camera_icon_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 163A15B4150101AA0058FBB2 /* camera_icon_back@2x.png */; };
 		163A15B9150102020058FBB2 /* camera_icon_check.png in Resources */ = {isa = PBXBuildFile; fileRef = 163A15B7150102020058FBB2 /* camera_icon_check.png */; };
 		163A15BA150102020058FBB2 /* camera_icon_check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 163A15B8150102020058FBB2 /* camera_icon_check@2x.png */; };
-		1659AA7E14FD1CBD009BC00E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 1659AA7C14FD1CBD009BC00E /* Default.png */; };
-		1659AA7F14FD1CBD009BC00E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1659AA7D14FD1CBD009BC00E /* Default@2x.png */; };
 		166778AF150218AB00A37A8D /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 166778AE150218AB00A37A8D /* CoreMedia.framework */; };
 		16A96FEA1484F8B500BD25E3 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16A96FE81484F8B500BD25E3 /* MainWindow.xib */; };
 		16A96FFF14850AEB00BD25E3 /* UploadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16A96FFE14850AEB00BD25E3 /* UploadViewController.xib */; };
-		16B2ACBC14FC892F003BD61C /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 16B2ACBB14FC892F003BD61C /* icon@2x.png */; };
 		16CBC00515023B6500498B72 /* failure_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 16CBC00115023B6500498B72 /* failure_icon.png */; };
 		16CBC00615023B6500498B72 /* failure_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 16CBC00215023B6500498B72 /* failure_icon@2x.png */; };
 		16CBC00715023B6500498B72 /* success_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 16CBC00315023B6500498B72 /* success_icon.png */; };
@@ -60,7 +57,7 @@
 		8F624F0914CDA45700CBBD6A /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F624F0814CDA45700CBBD6A /* MessageUI.framework */; };
 		8F624F0B14CDF05700CBBD6A /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8F624F0A14CDF05700CBBD6A /* Settings.bundle */; };
 		8F624F0E14CDFC5200CBBD6A /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F624F0D14CDFC5200CBBD6A /* Settings.m */; };
-		8F952E97161018ED0013A1C7 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8F952E96161018ED0013A1C7 /* Default-568h@2x.png */; };
+		8F8D8A2F1ACA750D00B8EF07 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F8D8A2E1ACA750D00B8EF07 /* Images.xcassets */; };
 		8F9EC21A14CE06B0000BDCE1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F9EC21914CE06B0000BDCE1 /* Security.framework */; };
 		8FA7173B14D1523700129A84 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FA7173A14D1523700129A84 /* QuartzCore.framework */; };
 		8FA7174014D15D4400129A84 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FA7173F14D15D4400129A84 /* AssetsLibrary.framework */; };
@@ -96,12 +93,9 @@
 		163A15BB150109D60058FBB2 /* ImageUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageUtil.h; sourceTree = "<group>"; };
 		163A15BC150109D60058FBB2 /* ImageUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageUtil.m; sourceTree = "<group>"; };
 		164041CE14863ADF00900BAE /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = SOURCE_ROOT; };
-		1659AA7C14FD1CBD009BC00E /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		1659AA7D14FD1CBD009BC00E /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		166778AE150218AB00A37A8D /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		16A96FE81484F8B500BD25E3 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		16A96FFE14850AEB00BD25E3 /* UploadViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UploadViewController.xib; sourceTree = "<group>"; };
-		16B2ACBB14FC892F003BD61C /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = SOURCE_ROOT; };
 		16CBC00115023B6500498B72 /* failure_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = failure_icon.png; sourceTree = "<group>"; };
 		16CBC00215023B6500498B72 /* failure_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "failure_icon@2x.png"; sourceTree = "<group>"; };
 		16CBC00315023B6500498B72 /* success_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = success_icon.png; sourceTree = "<group>"; };
@@ -140,7 +134,7 @@
 		8F624F0A14CDF05700CBBD6A /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		8F624F0C14CDFC5200CBBD6A /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
 		8F624F0D14CDFC5200CBBD6A /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
-		8F952E96161018ED0013A1C7 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		8F8D8A2E1ACA750D00B8EF07 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8F9EC21914CE06B0000BDCE1 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		8FA7173A14D1523700129A84 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8FA7173F14D15D4400129A84 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
@@ -192,6 +186,7 @@
 				8F624F0C14CDFC5200CBBD6A /* Settings.h */,
 				8F624F0D14CDFC5200CBBD6A /* Settings.m */,
 				16A96FE71484F8B500BD25E3 /* xib */,
+				8F8D8A2E1ACA750D00B8EF07 /* Images.xcassets */,
 				16A96FE51484F86200BD25E3 /* Supporting Files */,
 			);
 			path = Upupu;
@@ -213,11 +208,7 @@
 		169F28BF1486389400149DB5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				8F952E96161018ED0013A1C7 /* Default-568h@2x.png */,
-				1659AA7C14FD1CBD009BC00E /* Default.png */,
-				1659AA7D14FD1CBD009BC00E /* Default@2x.png */,
 				164041CE14863ADF00900BAE /* icon.png */,
-				16B2ACBB14FC892F003BD61C /* icon@2x.png */,
 				163A15B3150101AA0058FBB2 /* camera_icon_back.png */,
 				163A15B4150101AA0058FBB2 /* camera_icon_back@2x.png */,
 				163A15AB150100340058FBB2 /* camera_icon_circle.png */,
@@ -391,12 +382,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				16A96FEA1484F8B500BD25E3 /* MainWindow.xib in Resources */,
+				8F8D8A2F1ACA750D00B8EF07 /* Images.xcassets in Resources */,
 				16A96FFF14850AEB00BD25E3 /* UploadViewController.xib in Resources */,
 				160C2925148645870013E277 /* icon.png in Resources */,
 				8F624F0B14CDF05700CBBD6A /* Settings.bundle in Resources */,
-				16B2ACBC14FC892F003BD61C /* icon@2x.png in Resources */,
-				1659AA7E14FD1CBD009BC00E /* Default.png in Resources */,
-				1659AA7F14FD1CBD009BC00E /* Default@2x.png in Resources */,
 				16CE723F14FE2AA1005A37F6 /* camera_focus.png in Resources */,
 				16CE724014FE2AA1005A37F6 /* camera_focus@2x.png in Resources */,
 				16CE724514FE2AA1005A37F6 /* camera_icon_light_off.png in Resources */,
@@ -420,7 +409,6 @@
 				16CBC00615023B6500498B72 /* failure_icon@2x.png in Resources */,
 				16CBC00715023B6500498B72 /* success_icon.png in Resources */,
 				16CBC00815023B6500498B72 /* success_icon@2x.png in Resources */,
-				8F952E97161018ED0013A1C7 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -528,6 +516,8 @@
 			baseConfigurationReference = 5F492B2C95ADC7CBA6DBF663 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
@@ -554,6 +544,8 @@
 			baseConfigurationReference = 47D6927B90701FC72A3CAA25 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
