@@ -142,9 +142,10 @@
     [sender dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)settingsViewController:(IASKAppSettingsViewController *)sender buttonTappedForKey:(NSString *)key 
+- (void)settingsViewController:(IASKAppSettingsViewController *)sender
+      buttonTappedForSpecifier:(IASKSpecifier *)specifier
 {
-	if ([key isEqualToString:@"dropbox_link_pref"]) {
+    if ([specifier.key isEqualToString:@"dropbox_link_pref"]) {
         [[DropboxUploader sharedInstance] linkFromController:sender];
     }
     
