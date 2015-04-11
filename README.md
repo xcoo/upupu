@@ -2,6 +2,8 @@
 
 Simple camera application that backups pictures on WebDAV server.
 
+![Upupu Screenshots](https://raw.githubusercontent.com/xcoo/upupu/master/Screenshots/screenshots.jpg)
+
 ## Prerequisites
 
 - Xcode 6
