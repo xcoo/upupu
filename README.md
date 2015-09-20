@@ -6,7 +6,7 @@ Simple camera application that backups pictures on WebDAV server.
 
 ## Prerequisites
 
-- Xcode 6
+- Xcode 7
 - CocoaPods
 
 ## Usage
