@@ -102,17 +102,21 @@
 
 - (void) uploadViewControllerDidReturn:(UIViewController *)controller
 {
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
-    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
+        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    });
+
     [self popViewControllerAnimated:YES];
 }
 
 - (void) uploadViewControllerDidFinished:(UIViewController *)controller
 {
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
-    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
+        [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    });
+
     [self popViewControllerAnimated:YES];
 }
 
