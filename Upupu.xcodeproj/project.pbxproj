@@ -44,7 +44,6 @@
 		16CE726014FE2E64005A37F6 /* FMFileDAVRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CE725B14FE2E64005A37F6 /* FMFileDAVRequest.m */; };
 		16CE726114FE2E64005A37F6 /* FMWebDAVRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CE725D14FE2E64005A37F6 /* FMWebDAVRequest.m */; };
 		16CE726214FE2E64005A37F6 /* ISO8601DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CE725F14FE2E64005A37F6 /* ISO8601DateFormatter.m */; };
-		16CE726314FE2E8E005A37F6 /* CameraController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CE725414FE2B3B005A37F6 /* CameraController.m */; };
 		16CE726414FE2E8E005A37F6 /* CameraHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CE725614FE2B3C005A37F6 /* CameraHelper.m */; };
 		16CE726514FE2E8E005A37F6 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CE725814FE2B3C005A37F6 /* CameraViewController.m */; };
 		16FDB496150228A200CE7B2F /* ImageUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 163A15BC150109D60058FBB2 /* ImageUtil.m */; };
@@ -60,6 +59,7 @@
 		8FA7174014D15D4400129A84 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FA7173F14D15D4400129A84 /* AssetsLibrary.framework */; };
 		8FF045A814CEE57E002C14DE /* DropboxUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF045A714CEE57E002C14DE /* DropboxUploader.m */; };
 		8FF74BBE1D7424D300437DE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF74BBD1D7424D300437DE6 /* AppDelegate.swift */; };
+		8FFE1B2A1D743A8E00CCEE67 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFE1B291D743A8E00CCEE67 /* CameraController.swift */; };
 		92166B305DC129988F494945 /* Pods_Upupu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5170943620AA2A048445EAD /* Pods_Upupu.framework */; };
 /* End PBXBuildFile section */
 
@@ -108,8 +108,6 @@
 		16CE723D14FE2AA1005A37F6 /* camera_icon_switch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_icon_switch.png; sourceTree = "<group>"; };
 		16CE723E14FE2AA1005A37F6 /* camera_icon_switch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera_icon_switch@2x.png"; sourceTree = "<group>"; };
 		16CE725114FE2B29005A37F6 /* CameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraViewController.xib; sourceTree = "<group>"; };
-		16CE725314FE2B3B005A37F6 /* CameraController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraController.h; sourceTree = "<group>"; };
-		16CE725414FE2B3B005A37F6 /* CameraController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraController.m; sourceTree = "<group>"; };
 		16CE725514FE2B3C005A37F6 /* CameraHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraHelper.h; sourceTree = "<group>"; };
 		16CE725614FE2B3C005A37F6 /* CameraHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraHelper.m; sourceTree = "<group>"; };
 		16CE725714FE2B3C005A37F6 /* CameraViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
@@ -136,6 +134,7 @@
 		8FF045A714CEE57E002C14DE /* DropboxUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropboxUploader.m; sourceTree = "<group>"; };
 		8FF74BBC1D7424D200437DE6 /* Upupu-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Upupu-Bridging-Header.h"; sourceTree = "<group>"; };
 		8FF74BBD1D7424D300437DE6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		8FFE1B291D743A8E00CCEE67 /* CameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraController.swift; path = Controllers/CameraController.swift; sourceTree = "<group>"; };
 		9BC233EFF7644B8ED95AFA21 /* Pods-Upupu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Upupu.release.xcconfig"; path = "Pods/Target Support Files/Pods-Upupu/Pods-Upupu.release.xcconfig"; sourceTree = "<group>"; };
 		C5170943620AA2A048445EAD /* Pods_Upupu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Upupu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF96F57E596DBC9AB9ED33DD /* Pods-Upupu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Upupu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Upupu/Pods-Upupu.debug.xcconfig"; sourceTree = "<group>"; };
@@ -168,12 +167,11 @@
 			children = (
 				8FF74BBC1D7424D200437DE6 /* Upupu-Bridging-Header.h */,
 				8FF74BBD1D7424D300437DE6 /* AppDelegate.swift */,
+				8FFE1B281D743A5800CCEE67 /* Controllers */,
 				8FF045C314D062FC002C14DE /* Uploader */,
 				163A159D1500F1040058FBB2 /* Utility */,
 				16CE725514FE2B3C005A37F6 /* CameraHelper.h */,
 				16CE725614FE2B3C005A37F6 /* CameraHelper.m */,
-				16CE725314FE2B3B005A37F6 /* CameraController.h */,
-				16CE725414FE2B3B005A37F6 /* CameraController.m */,
 				16CE725714FE2B3C005A37F6 /* CameraViewController.h */,
 				16CE725814FE2B3C005A37F6 /* CameraViewController.m */,
 				1601F9CD147F9A1000E3A13C /* UploadViewController.h */,
@@ -324,6 +322,14 @@
 				8FF045A714CEE57E002C14DE /* DropboxUploader.m */,
 			);
 			name = Uploader;
+			sourceTree = "<group>";
+		};
+		8FFE1B281D743A5800CCEE67 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				8FFE1B291D743A8E00CCEE67 /* CameraController.swift */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -483,7 +489,6 @@
 				16FDB496150228A200CE7B2F /* ImageUtil.m in Sources */,
 				163A15A61500F2610058FBB2 /* AlertUtil.m in Sources */,
 				163A15A71500F2610058FBB2 /* HUDUtil.m in Sources */,
-				16CE726314FE2E8E005A37F6 /* CameraController.m in Sources */,
 				16CE726414FE2E8E005A37F6 /* CameraHelper.m in Sources */,
 				16CE726514FE2E8E005A37F6 /* CameraViewController.m in Sources */,
 				1601F9DF147F9A1000E3A13C /* UploadViewController.m in Sources */,
@@ -494,6 +499,7 @@
 				16CE726114FE2E64005A37F6 /* FMWebDAVRequest.m in Sources */,
 				16CE726214FE2E64005A37F6 /* ISO8601DateFormatter.m in Sources */,
 				8FF74BBE1D7424D300437DE6 /* AppDelegate.swift in Sources */,
+				8FFE1B2A1D743A8E00CCEE67 /* CameraController.swift in Sources */,
 				163A15AA1500FAB20058FBB2 /* BlackToolBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
