@@ -7,10 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1601F9DD147F9A1000E3A13C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1601F9CA147F9A1000E3A13C /* main.m */; };
 		1601F9DF147F9A1000E3A13C /* UploadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1601F9CE147F9A1000E3A13C /* UploadViewController.m */; };
 		1601F9E2147F9A1000E3A13C /* WebDAVUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1601F9D2147F9A1000E3A13C /* WebDAVUploader.m */; };
-		1601F9E4147F9A1000E3A13C /* UpupuAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1601F9D6147F9A1000E3A13C /* UpupuAppDelegate.m */; };
 		160C2925148645870013E277 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 164041CE14863ADF00900BAE /* icon.png */; };
 		163A159F1500F1EA0058FBB2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163A159E1500F1EA0058FBB2 /* AVFoundation.framework */; };
 		163A15A51500F2540058FBB2 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163A15A41500F2540058FBB2 /* ImageIO.framework */; };
@@ -61,19 +59,17 @@
 		8FA7173B14D1523700129A84 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FA7173A14D1523700129A84 /* QuartzCore.framework */; };
 		8FA7174014D15D4400129A84 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FA7173F14D15D4400129A84 /* AssetsLibrary.framework */; };
 		8FF045A814CEE57E002C14DE /* DropboxUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF045A714CEE57E002C14DE /* DropboxUploader.m */; };
+		8FF74BBE1D7424D300437DE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF74BBD1D7424D300437DE6 /* AppDelegate.swift */; };
 		92166B305DC129988F494945 /* Pods_Upupu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5170943620AA2A048445EAD /* Pods_Upupu.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1601F9CA147F9A1000E3A13C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1601F9CD147F9A1000E3A13C /* UploadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadViewController.h; sourceTree = "<group>"; };
 		1601F9CE147F9A1000E3A13C /* UploadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadViewController.m; sourceTree = "<group>"; };
 		1601F9D1147F9A1000E3A13C /* WebDAVUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebDAVUploader.h; sourceTree = "<group>"; };
 		1601F9D2147F9A1000E3A13C /* WebDAVUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebDAVUploader.m; sourceTree = "<group>"; };
 		1601F9D3147F9A1000E3A13C /* Upupu-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Upupu-Info.plist"; sourceTree = "<group>"; };
 		1601F9D4147F9A1000E3A13C /* Upupu-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Upupu-Prefix.pch"; sourceTree = "<group>"; };
-		1601F9D5147F9A1000E3A13C /* UpupuAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpupuAppDelegate.h; sourceTree = "<group>"; };
-		1601F9D6147F9A1000E3A13C /* UpupuAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpupuAppDelegate.m; sourceTree = "<group>"; };
 		163A15991500F0E80058FBB2 /* AlertUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlertUtil.h; sourceTree = "<group>"; };
 		163A159A1500F0E80058FBB2 /* AlertUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlertUtil.m; sourceTree = "<group>"; };
 		163A159B1500F0E80058FBB2 /* HUDUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HUDUtil.h; sourceTree = "<group>"; };
@@ -138,6 +134,8 @@
 		8FA7173F14D15D4400129A84 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		8FF045A614CEE57E002C14DE /* DropboxUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropboxUploader.h; sourceTree = "<group>"; };
 		8FF045A714CEE57E002C14DE /* DropboxUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropboxUploader.m; sourceTree = "<group>"; };
+		8FF74BBC1D7424D200437DE6 /* Upupu-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Upupu-Bridging-Header.h"; sourceTree = "<group>"; };
+		8FF74BBD1D7424D300437DE6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9BC233EFF7644B8ED95AFA21 /* Pods-Upupu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Upupu.release.xcconfig"; path = "Pods/Target Support Files/Pods-Upupu/Pods-Upupu.release.xcconfig"; sourceTree = "<group>"; };
 		C5170943620AA2A048445EAD /* Pods_Upupu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Upupu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF96F57E596DBC9AB9ED33DD /* Pods-Upupu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Upupu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Upupu/Pods-Upupu.debug.xcconfig"; sourceTree = "<group>"; };
@@ -168,9 +166,8 @@
 		1601F9BD147F9A1000E3A13C /* Upupu */ = {
 			isa = PBXGroup;
 			children = (
-				1601F9CA147F9A1000E3A13C /* main.m */,
-				1601F9D5147F9A1000E3A13C /* UpupuAppDelegate.h */,
-				1601F9D6147F9A1000E3A13C /* UpupuAppDelegate.m */,
+				8FF74BBC1D7424D200437DE6 /* Upupu-Bridging-Header.h */,
+				8FF74BBD1D7424D300437DE6 /* AppDelegate.swift */,
 				8FF045C314D062FC002C14DE /* Uploader */,
 				163A159D1500F1040058FBB2 /* Utility */,
 				16CE725514FE2B3C005A37F6 /* CameraHelper.h */,
@@ -358,6 +355,7 @@
 		3D891519147CC6380012580A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0700;
 			};
 			buildConfigurationList = 3D89151C147CC6380012580A /* Build configuration list for PBXProject "Upupu" */;
@@ -474,15 +472,14 @@
 				16CE726314FE2E8E005A37F6 /* CameraController.m in Sources */,
 				16CE726414FE2E8E005A37F6 /* CameraHelper.m in Sources */,
 				16CE726514FE2E8E005A37F6 /* CameraViewController.m in Sources */,
-				1601F9DD147F9A1000E3A13C /* main.m in Sources */,
 				1601F9DF147F9A1000E3A13C /* UploadViewController.m in Sources */,
 				1601F9E2147F9A1000E3A13C /* WebDAVUploader.m in Sources */,
-				1601F9E4147F9A1000E3A13C /* UpupuAppDelegate.m in Sources */,
 				8F624F0E14CDFC5200CBBD6A /* Settings.m in Sources */,
 				8FF045A814CEE57E002C14DE /* DropboxUploader.m in Sources */,
 				16CE726014FE2E64005A37F6 /* FMFileDAVRequest.m in Sources */,
 				16CE726114FE2E64005A37F6 /* FMWebDAVRequest.m in Sources */,
 				16CE726214FE2E64005A37F6 /* ISO8601DateFormatter.m in Sources */,
+				8FF74BBE1D7424D300437DE6 /* AppDelegate.swift in Sources */,
 				163A15AA1500FAB20058FBB2 /* BlackToolBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -535,6 +532,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
@@ -550,10 +548,13 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Upupu/Upupu-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.xcoo.upupu-dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Upupu/Upupu-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -565,6 +566,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
@@ -579,9 +581,11 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Upupu/Upupu-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.xcoo.upupu-dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Upupu/Upupu-Bridging-Header.h";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};

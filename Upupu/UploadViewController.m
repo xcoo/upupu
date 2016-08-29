@@ -7,7 +7,6 @@
 //
 
 #import "UploadViewController.h"
-#import "UpupuAppDelegate.h"
 
 #import "WebDAVUploader.h"
 #import "DropboxUploader.h"
