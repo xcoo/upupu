@@ -339,6 +339,7 @@
 				3D891520147CC6380012580A /* Resources */,
 				DCC8EC27C80A2A2808295338 /* [CP] Embed Pods Frameworks */,
 				27688647D7886A81F9E8F55A /* [CP] Copy Pods Resources */,
+				8FFE1B271D7435FC00CCEE67 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -428,6 +429,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Upupu/Pods-Upupu-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		8FFE1B271D7435FC00CCEE67 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
 		A23B99C3AEF230A7C0989473 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
