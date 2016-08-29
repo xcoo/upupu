@@ -28,7 +28,7 @@
 			<key>CFBundleURLIconFile</key>
 			<string>icon</string>
 			<key>CFBundleURLName</key>
-			<string>com.xcoo.upupu</string>
+			<string>com.xcoo.upupu-dev</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>db-YOUR_DROPBOX_APP_KEY</string>
