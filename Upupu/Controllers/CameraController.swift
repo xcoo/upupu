@@ -63,7 +63,7 @@ UploadViewControllerDelegate, IASKSettingsDelegate {
         uploadViewController.image = image
 
         if let cameraViewController = viewController as? CameraViewController {
-            uploadViewController.savePhotoAlbum = !cameraViewController.isSourcePhotoLibrary
+            uploadViewController.shouldSavePhotoAlbum = !cameraViewController.isSourcePhotoLibrary
 
             let application = UIApplication.sharedApplication()
             application.setStatusBarHidden(false, withAnimation: .Slide)
@@ -75,7 +75,7 @@ UploadViewControllerDelegate, IASKSettingsDelegate {
 
     // MARK: - UploadViewControllerDelegate
 
-    func uploadViewControllerDidReturn(viewController: UIViewController) {
+    func uploadViewControllerDidReturn(uploadViewController: UploadViewController) {
         dispatch_async(dispatch_get_main_queue()) {
             let application = UIApplication.sharedApplication()
             application.setStatusBarHidden(true, withAnimation: .Slide)
@@ -85,7 +85,7 @@ UploadViewControllerDelegate, IASKSettingsDelegate {
         popViewControllerAnimated(true)
     }
 
-    func uploadViewControllerDidFinished(viewController: UIViewController) {
+    func uploadViewControllerDidFinished(uploadViewController: UploadViewController) {
         dispatch_async(dispatch_get_main_queue()) {
             let application = UIApplication.sharedApplication()
             application.setStatusBarHidden(true, withAnimation: .Slide)
@@ -95,7 +95,7 @@ UploadViewControllerDelegate, IASKSettingsDelegate {
         popViewControllerAnimated(true)
     }
 
-    func uploadViewControllerDidSetup(viewController: UIViewController) {
+    func uploadViewControllerDidSetup(uploadViewController: UploadViewController) {
         let settingsViewController = IASKAppSettingsViewController()
         settingsViewController.delegate = self
         settingsViewController.showCreditsFooter = false
