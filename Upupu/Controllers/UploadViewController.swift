@@ -160,7 +160,7 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
                 // Dropbox
                 if Settings.isDropboxEnabled() {
                     hud?.detailsLabelText = "Dropbox"
-                    let uploader = DropboxUploader.sharedInstance()
+                    let uploader = DropboxUploader.sharedInstance
                     uploader.uploadWithName(filename, imageData: imageData)
                     if !uploader.success {
                         dispatch_sync(dispatch_get_main_queue(), {[weak self] in

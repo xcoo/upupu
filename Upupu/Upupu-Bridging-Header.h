@@ -5,8 +5,8 @@
 #import "AlertUtil.h"
 #import "HUDUtil.h"
 #import "ImageUtil.h"
-#import "DropboxUploader.h"
 #import "Settings.h"
 #import "CameraViewController.h"
 #import "WebDAVUploader.h"
-#import "DropboxUploader.h"
+
+#import <DropboxSDK/DropboxSDK.h>

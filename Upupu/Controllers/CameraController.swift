@@ -122,7 +122,7 @@ UploadViewControllerDelegate, IASKSettingsDelegate {
     func settingsViewController(sender: IASKAppSettingsViewController,
                                 buttonTappedForSpecifier specifier: IASKSpecifier) {
         if specifier.key() == "dropbox_link_pref" {
-            DropboxUploader.sharedInstance().linkFromController(sender)
+            DropboxUploader.sharedInstance.linkFromController(sender)
         }
 
         sender.dismissViewControllerAnimated(true, completion: nil)

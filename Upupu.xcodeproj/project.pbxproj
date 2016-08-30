@@ -49,14 +49,15 @@
 		3D891527147CC6380012580A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D891526147CC6380012580A /* UIKit.framework */; };
 		3D891529147CC6380012580A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D891528147CC6380012580A /* Foundation.framework */; };
 		3D89152B147CC6380012580A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D89152A147CC6380012580A /* CoreGraphics.framework */; };
+		8F57987C1D758608004ED144 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F57987B1D758608004ED144 /* Constants.swift */; };
 		8F624F0914CDA45700CBBD6A /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F624F0814CDA45700CBBD6A /* MessageUI.framework */; };
 		8F624F0B14CDF05700CBBD6A /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8F624F0A14CDF05700CBBD6A /* Settings.bundle */; };
 		8F624F0E14CDFC5200CBBD6A /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F624F0D14CDFC5200CBBD6A /* Settings.m */; };
 		8F8D8A2F1ACA750D00B8EF07 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F8D8A2E1ACA750D00B8EF07 /* Images.xcassets */; };
 		8F9EC21A14CE06B0000BDCE1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F9EC21914CE06B0000BDCE1 /* Security.framework */; };
+		8FA55E101D75528600ECB21E /* DropboxUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA55E0F1D75528600ECB21E /* DropboxUploader.swift */; };
 		8FA7173B14D1523700129A84 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FA7173A14D1523700129A84 /* QuartzCore.framework */; };
 		8FA7174014D15D4400129A84 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FA7173F14D15D4400129A84 /* AssetsLibrary.framework */; };
-		8FF045A814CEE57E002C14DE /* DropboxUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FF045A714CEE57E002C14DE /* DropboxUploader.m */; };
 		8FF74BBE1D7424D300437DE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF74BBD1D7424D300437DE6 /* AppDelegate.swift */; };
 		8FFD7F881D744E9700517B38 /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFD7F871D744E9700517B38 /* UploadViewController.swift */; };
 		8FFE1B2A1D743A8E00CCEE67 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFE1B291D743A8E00CCEE67 /* CameraController.swift */; };
@@ -120,16 +121,16 @@
 		3D891526147CC6380012580A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3D891528147CC6380012580A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3D89152A147CC6380012580A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		8F57987B1D758608004ED144 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8F624F0814CDA45700CBBD6A /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		8F624F0A14CDF05700CBBD6A /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		8F624F0C14CDFC5200CBBD6A /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
 		8F624F0D14CDFC5200CBBD6A /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
 		8F8D8A2E1ACA750D00B8EF07 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8F9EC21914CE06B0000BDCE1 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		8FA55E0F1D75528600ECB21E /* DropboxUploader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropboxUploader.swift; path = Uploaders/DropboxUploader.swift; sourceTree = "<group>"; };
 		8FA7173A14D1523700129A84 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8FA7173F14D15D4400129A84 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
-		8FF045A614CEE57E002C14DE /* DropboxUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropboxUploader.h; sourceTree = "<group>"; };
-		8FF045A714CEE57E002C14DE /* DropboxUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropboxUploader.m; sourceTree = "<group>"; };
 		8FF74BBC1D7424D200437DE6 /* Upupu-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Upupu-Bridging-Header.h"; sourceTree = "<group>"; };
 		8FF74BBD1D7424D300437DE6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8FFD7F871D744E9700517B38 /* UploadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UploadViewController.swift; path = Controllers/UploadViewController.swift; sourceTree = "<group>"; };
@@ -166,7 +167,9 @@
 			children = (
 				8FF74BBC1D7424D200437DE6 /* Upupu-Bridging-Header.h */,
 				8FF74BBD1D7424D300437DE6 /* AppDelegate.swift */,
+				8F57987B1D758608004ED144 /* Constants.swift */,
 				8FFE1B281D743A5800CCEE67 /* Controllers */,
+				8FA55E0E1D75525700ECB21E /* Uploaders */,
 				8FF045C314D062FC002C14DE /* Uploader */,
 				163A159D1500F1040058FBB2 /* Utility */,
 				16CE725514FE2B3C005A37F6 /* CameraHelper.h */,
@@ -310,13 +313,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		8FA55E0E1D75525700ECB21E /* Uploaders */ = {
+			isa = PBXGroup;
+			children = (
+				8FA55E0F1D75528600ECB21E /* DropboxUploader.swift */,
+			);
+			name = Uploaders;
+			sourceTree = "<group>";
+		};
 		8FF045C314D062FC002C14DE /* Uploader */ = {
 			isa = PBXGroup;
 			children = (
 				1601F9D1147F9A1000E3A13C /* WebDAVUploader.h */,
 				1601F9D2147F9A1000E3A13C /* WebDAVUploader.m */,
-				8FF045A614CEE57E002C14DE /* DropboxUploader.h */,
-				8FF045A714CEE57E002C14DE /* DropboxUploader.m */,
 			);
 			name = Uploader;
 			sourceTree = "<group>";
@@ -485,15 +494,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				16FDB496150228A200CE7B2F /* ImageUtil.m in Sources */,
+				8F57987C1D758608004ED144 /* Constants.swift in Sources */,
 				163A15A61500F2610058FBB2 /* AlertUtil.m in Sources */,
 				163A15A71500F2610058FBB2 /* HUDUtil.m in Sources */,
 				16CE726414FE2E8E005A37F6 /* CameraHelper.m in Sources */,
 				16CE726514FE2E8E005A37F6 /* CameraViewController.m in Sources */,
 				1601F9E2147F9A1000E3A13C /* WebDAVUploader.m in Sources */,
 				8F624F0E14CDFC5200CBBD6A /* Settings.m in Sources */,
-				8FF045A814CEE57E002C14DE /* DropboxUploader.m in Sources */,
 				8FFD7F881D744E9700517B38 /* UploadViewController.swift in Sources */,
 				16CE726014FE2E64005A37F6 /* FMFileDAVRequest.m in Sources */,
+				8FA55E101D75528600ECB21E /* DropboxUploader.swift in Sources */,
 				16CE726114FE2E64005A37F6 /* FMWebDAVRequest.m in Sources */,
 				16CE726214FE2E64005A37F6 /* ISO8601DateFormatter.m in Sources */,
 				8FF74BBE1D7424D300437DE6 /* AppDelegate.swift in Sources */,

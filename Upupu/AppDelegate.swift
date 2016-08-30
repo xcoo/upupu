@@ -56,7 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
-        return DropboxUploader.sharedInstance().handleURL(url)
+        return DropboxUploader.sharedInstance.handleURL(url)
     }
 
     func setupDefaults() {
