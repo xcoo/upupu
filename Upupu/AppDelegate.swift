@@ -60,8 +60,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func setupDefaults() {
-        let settingsPath = NSBundle.mainBundle().bundlePath.stringByAppendingString("Settings.bundle")
-        let plistPath = settingsPath.stringByAppendingString("Root.inApp.plist")
+        let settingsPath = NSBundle.mainBundle().bundlePath.stringByAppendingPathComponent("Settings.bundle")
+        let plistPath = settingsPath.stringByAppendingPathComponent("Root.inApp.plist")
 
         if let settingsDictionary = NSDictionary(contentsOfFile: plistPath),
             let preferencesArray = settingsDictionary.objectForKey("PreferenceSpecifiers") as? NSArray {
