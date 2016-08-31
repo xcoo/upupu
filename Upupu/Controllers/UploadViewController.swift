@@ -124,9 +124,12 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
     func launchUpload() {
         var image: UIImage?
         switch Settings.photoResolution {
-        case 0: image = self.image
-        case 1: image = ImageUtil.scaleImage(self.image, withSize: CGSizeMake(1600, 2000))
-        case 2: image = ImageUtil.scaleImage(self.image, withSize: CGSizeMake(800, 600))
+        case 0:
+            image = self.image
+        case 1:
+            image = self.image?.scaledImage(CGSize.init(width: 1600, height: 1200))
+        case 2:
+            image = self.image?.scaledImage(CGSize.init(width: 800, height: 600))
         default: break
         }
 

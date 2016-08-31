@@ -41,7 +41,6 @@
 		16CE726114FE2E64005A37F6 /* FMWebDAVRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CE725D14FE2E64005A37F6 /* FMWebDAVRequest.m */; };
 		16CE726214FE2E64005A37F6 /* ISO8601DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CE725F14FE2E64005A37F6 /* ISO8601DateFormatter.m */; };
 		16CE726414FE2E8E005A37F6 /* CameraHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CE725614FE2B3C005A37F6 /* CameraHelper.m */; };
-		16FDB496150228A200CE7B2F /* ImageUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 163A15BC150109D60058FBB2 /* ImageUtil.m */; };
 		3D891527147CC6380012580A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D891526147CC6380012580A /* UIKit.framework */; };
 		3D891529147CC6380012580A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D891528147CC6380012580A /* Foundation.framework */; };
 		3D89152B147CC6380012580A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D89152A147CC6380012580A /* CoreGraphics.framework */; };
@@ -59,6 +58,7 @@
 		8FA7174014D15D4400129A84 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FA7173F14D15D4400129A84 /* AssetsLibrary.framework */; };
 		8FBDBA381D76CE5D004DB68A /* UIAlertController+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBDBA371D76CE5D004DB68A /* UIAlertController+Utils.swift */; };
 		8FBDBA3A1D76D42F004DB68A /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBDBA391D76D42F004DB68A /* Settings.swift */; };
+		8FBDBA3D1D76E158004DB68A /* UIImage+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBDBA3C1D76E158004DB68A /* UIImage+Utils.swift */; };
 		8FF74BBE1D7424D300437DE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF74BBD1D7424D300437DE6 /* AppDelegate.swift */; };
 		8FFD7F881D744E9700517B38 /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFD7F871D744E9700517B38 /* UploadViewController.swift */; };
 		8FFE1B2A1D743A8E00CCEE67 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFE1B291D743A8E00CCEE67 /* CameraController.swift */; };
@@ -80,8 +80,6 @@
 		163A15B4150101AA0058FBB2 /* camera_icon_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera_icon_back@2x.png"; sourceTree = "<group>"; };
 		163A15B7150102020058FBB2 /* camera_icon_check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_icon_check.png; sourceTree = "<group>"; };
 		163A15B8150102020058FBB2 /* camera_icon_check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera_icon_check@2x.png"; sourceTree = "<group>"; };
-		163A15BB150109D60058FBB2 /* ImageUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageUtil.h; sourceTree = "<group>"; };
-		163A15BC150109D60058FBB2 /* ImageUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageUtil.m; sourceTree = "<group>"; };
 		164041CE14863ADF00900BAE /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = SOURCE_ROOT; };
 		166778AE150218AB00A37A8D /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		16A96FE81484F8B500BD25E3 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
@@ -128,6 +126,7 @@
 		8FA7173F14D15D4400129A84 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		8FBDBA371D76CE5D004DB68A /* UIAlertController+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIAlertController+Utils.swift"; path = "Commons/UIAlertController+Utils.swift"; sourceTree = "<group>"; };
 		8FBDBA391D76D42F004DB68A /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Settings.swift; path = Commons/Settings.swift; sourceTree = "<group>"; };
+		8FBDBA3C1D76E158004DB68A /* UIImage+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIImage+Utils.swift"; path = "Commons/UIImage+Utils.swift"; sourceTree = "<group>"; };
 		8FF74BBC1D7424D200437DE6 /* Upupu-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Upupu-Bridging-Header.h"; sourceTree = "<group>"; };
 		8FF74BBD1D7424D300437DE6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8FFD7F871D744E9700517B38 /* UploadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UploadViewController.swift; path = Controllers/UploadViewController.swift; sourceTree = "<group>"; };
@@ -183,8 +182,6 @@
 			children = (
 				163A159B1500F0E80058FBB2 /* HUDUtil.h */,
 				163A159C1500F0E80058FBB2 /* HUDUtil.m */,
-				163A15BB150109D60058FBB2 /* ImageUtil.h */,
-				163A15BC150109D60058FBB2 /* ImageUtil.m */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -317,6 +314,7 @@
 				8FBDBA391D76D42F004DB68A /* Settings.swift */,
 				8F57987E1D7594A0004ED144 /* String+NSString.swift */,
 				8FBDBA371D76CE5D004DB68A /* UIAlertController+Utils.swift */,
+				8FBDBA3C1D76E158004DB68A /* UIImage+Utils.swift */,
 			);
 			name = Commons;
 			sourceTree = "<group>";
@@ -494,7 +492,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				16FDB496150228A200CE7B2F /* ImageUtil.m in Sources */,
 				8F57987C1D758608004ED144 /* Constants.swift in Sources */,
 				163A15A71500F2610058FBB2 /* HUDUtil.m in Sources */,
 				8FBDBA381D76CE5D004DB68A /* UIAlertController+Utils.swift in Sources */,
@@ -505,6 +502,7 @@
 				8FFD7F881D744E9700517B38 /* UploadViewController.swift in Sources */,
 				16CE726014FE2E64005A37F6 /* FMFileDAVRequest.m in Sources */,
 				8F0ADA161D76964A00C58D0B /* BlackToolBar.swift in Sources */,
+				8FBDBA3D1D76E158004DB68A /* UIImage+Utils.swift in Sources */,
 				8FA55E101D75528600ECB21E /* DropboxUploader.swift in Sources */,
 				16CE726114FE2E64005A37F6 /* FMWebDAVRequest.m in Sources */,
 				16CE726214FE2E64005A37F6 /* ISO8601DateFormatter.m in Sources */,
