@@ -10,7 +10,6 @@
 		160C2925148645870013E277 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 164041CE14863ADF00900BAE /* icon.png */; };
 		163A159F1500F1EA0058FBB2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163A159E1500F1EA0058FBB2 /* AVFoundation.framework */; };
 		163A15A51500F2540058FBB2 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163A15A41500F2540058FBB2 /* ImageIO.framework */; };
-		163A15A61500F2610058FBB2 /* AlertUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 163A159A1500F0E80058FBB2 /* AlertUtil.m */; };
 		163A15A71500F2610058FBB2 /* HUDUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 163A159C1500F0E80058FBB2 /* HUDUtil.m */; };
 		163A15AD150100340058FBB2 /* camera_icon_circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 163A15AB150100340058FBB2 /* camera_icon_circle.png */; };
 		163A15AE150100340058FBB2 /* camera_icon_circle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 163A15AC150100340058FBB2 /* camera_icon_circle@2x.png */; };
@@ -59,6 +58,7 @@
 		8FA55E101D75528600ECB21E /* DropboxUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA55E0F1D75528600ECB21E /* DropboxUploader.swift */; };
 		8FA7173B14D1523700129A84 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FA7173A14D1523700129A84 /* QuartzCore.framework */; };
 		8FA7174014D15D4400129A84 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FA7173F14D15D4400129A84 /* AssetsLibrary.framework */; };
+		8FBDBA381D76CE5D004DB68A /* UIAlertController+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBDBA371D76CE5D004DB68A /* UIAlertController+Utils.swift */; };
 		8FF74BBE1D7424D300437DE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF74BBD1D7424D300437DE6 /* AppDelegate.swift */; };
 		8FFD7F881D744E9700517B38 /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFD7F871D744E9700517B38 /* UploadViewController.swift */; };
 		8FFE1B2A1D743A8E00CCEE67 /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFE1B291D743A8E00CCEE67 /* CameraController.swift */; };
@@ -68,8 +68,6 @@
 /* Begin PBXFileReference section */
 		1601F9D3147F9A1000E3A13C /* Upupu-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Upupu-Info.plist"; sourceTree = "<group>"; };
 		1601F9D4147F9A1000E3A13C /* Upupu-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Upupu-Prefix.pch"; sourceTree = "<group>"; };
-		163A15991500F0E80058FBB2 /* AlertUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlertUtil.h; sourceTree = "<group>"; };
-		163A159A1500F0E80058FBB2 /* AlertUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlertUtil.m; sourceTree = "<group>"; };
 		163A159B1500F0E80058FBB2 /* HUDUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HUDUtil.h; sourceTree = "<group>"; };
 		163A159C1500F0E80058FBB2 /* HUDUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HUDUtil.m; sourceTree = "<group>"; };
 		163A159E1500F1EA0058FBB2 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -130,6 +128,7 @@
 		8FA55E0F1D75528600ECB21E /* DropboxUploader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropboxUploader.swift; path = Uploaders/DropboxUploader.swift; sourceTree = "<group>"; };
 		8FA7173A14D1523700129A84 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8FA7173F14D15D4400129A84 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		8FBDBA371D76CE5D004DB68A /* UIAlertController+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIAlertController+Utils.swift"; path = "Commons/UIAlertController+Utils.swift"; sourceTree = "<group>"; };
 		8FF74BBC1D7424D200437DE6 /* Upupu-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Upupu-Bridging-Header.h"; sourceTree = "<group>"; };
 		8FF74BBD1D7424D300437DE6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8FFD7F871D744E9700517B38 /* UploadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UploadViewController.swift; path = Controllers/UploadViewController.swift; sourceTree = "<group>"; };
@@ -185,8 +184,6 @@
 		163A159D1500F1040058FBB2 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				163A15991500F0E80058FBB2 /* AlertUtil.h */,
-				163A159A1500F0E80058FBB2 /* AlertUtil.m */,
 				163A159B1500F0E80058FBB2 /* HUDUtil.h */,
 				163A159C1500F0E80058FBB2 /* HUDUtil.m */,
 				163A15BB150109D60058FBB2 /* ImageUtil.h */,
@@ -321,6 +318,7 @@
 			children = (
 				8F57987B1D758608004ED144 /* Constants.swift */,
 				8F57987E1D7594A0004ED144 /* String+NSString.swift */,
+				8FBDBA371D76CE5D004DB68A /* UIAlertController+Utils.swift */,
 			);
 			name = Commons;
 			sourceTree = "<group>";
@@ -500,8 +498,8 @@
 			files = (
 				16FDB496150228A200CE7B2F /* ImageUtil.m in Sources */,
 				8F57987C1D758608004ED144 /* Constants.swift in Sources */,
-				163A15A61500F2610058FBB2 /* AlertUtil.m in Sources */,
 				163A15A71500F2610058FBB2 /* HUDUtil.m in Sources */,
+				8FBDBA381D76CE5D004DB68A /* UIAlertController+Utils.swift in Sources */,
 				16CE726414FE2E8E005A37F6 /* CameraHelper.m in Sources */,
 				8F5798811D759859004ED144 /* WebDAVUploader.swift in Sources */,
 				8F624F0E14CDFC5200CBBD6A /* Settings.m in Sources */,

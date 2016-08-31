@@ -95,7 +95,8 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
                 }
             }
         } else {
-            AlertUtil.showWithTitle("Error", andMessage: "Camera is unavailable")
+            UIAlertController.showSimpleAlertIn(navigationController, title: "Error",
+                                                message: "Camera is unavailable")
             setup()
         }
     }
@@ -138,7 +139,7 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
 
         CameraHelper.sharedInstance().addObserver(self,
                                                   forKeyPath: CAMERA_HELPER_CAPTURE_REQUEST_KEY,
-                                                  options: .New, context: nil) 
+                                                  options: .New, context: nil)
         presentViewController(imagePicker, animated: true, completion: nil)
     }
 

@@ -79,13 +79,15 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
 
     @IBAction private func uploadButtonTapped(sender: UIBarItem) {
         if !Settings.isWebDAVEnabled() && !Settings.isDropboxEnabled() {
-            AlertUtil.showWithTitle("Error", andMessage: "Setup server configuration before uploading")
+            UIAlertController.showSimpleAlertIn(navigationController, title: "Error",
+                                            message: "Setup server configuration before uploading")
             return
         }
 
         if Settings.isWebDAVEnabled() &&
             (Settings.webDAVURL() == nil || Settings.webDAVURL().isEmpty) {
-            AlertUtil.showWithTitle("Error", andMessage: "Invalid WebDAV server URL")
+            UIAlertController.showSimpleAlertIn(navigationController, title: "Error",
+                                                message: "Invalid WebDAV server URL")
             return
         }
 
