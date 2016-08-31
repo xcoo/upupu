@@ -36,7 +36,10 @@ class WebDAVUploader: NSObject {
         let baseURL: String
 
         // Validate server path
-        let settingsURL = Settings.webDAVURL()
+        guard let settingsURL = Settings.webDAVURL else {
+            success = false
+            return
+        }
         if settingsURL[settingsURL.endIndex.advancedBy(-1)] != "/" {
             baseURL = settingsURL + "/"
         } else {
@@ -97,8 +100,12 @@ class WebDAVUploader: NSObject {
 
     override func request(request: FMWebDAVRequest!,
                           didReceiveAuthenticationChallenge challenge: NSURLAuthenticationChallenge!) {
-        let username = Settings.webDAVUser()
-        let password = Settings.webDAVPassword()
+        guard let username = Settings.webDAVUser,
+            password = Settings.webDAVPassword else {
+                success = false
+                waitingOnAuthentication = false
+                return
+        }
 
         if challenge.previousFailureCount == 0 {
             let cred = NSURLCredential(user: username, password: password, persistence: .ForSession)

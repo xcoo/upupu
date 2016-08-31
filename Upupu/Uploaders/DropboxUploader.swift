@@ -30,7 +30,7 @@ class DropboxUploader: NSObject, DBSessionDelegate, DBRestClientDelegate {
         if dbSession.handleOpenURL(url) {
             if dbSession.isLinked() {
                 loadAccount()
-                Settings.setDropboxEnabled(true)
+                Settings.dropboxEnabled = true
             }
             return true
         }
@@ -68,7 +68,7 @@ class DropboxUploader: NSObject, DBSessionDelegate, DBRestClientDelegate {
         let now = NSDate()
         let formatter = NSDateFormatter()
         formatter.dateFormat = "yyyyMMdd"
-        let dbSaveDirectory = "\(Settings.dropboxLocation())/\(formatter.stringFromDate(now))"
+        let dbSaveDirectory = "\(Settings.dropboxLocation)/\(formatter.stringFromDate(now))"
 
         let dbFilename: String
         if filename == nil || filename.isEmpty {
@@ -137,6 +137,6 @@ class DropboxUploader: NSObject, DBSessionDelegate, DBRestClientDelegate {
     }
 
     @objc func restClient(client: DBRestClient!, loadedAccountInfo info: DBAccountInfo!) {
-        Settings.dropboxAccount(info.displayName)
+        Settings.dropboxAccount = info.displayName
     }
 }

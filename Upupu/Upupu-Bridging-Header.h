@@ -4,7 +4,6 @@
 
 #import "HUDUtil.h"
 #import "ImageUtil.h"
-#import "Settings.h"
 #import "CameraHelper.h"
 #import "FMWebDAVRequest.h"
 

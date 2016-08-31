@@ -78,14 +78,14 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
     }
 
     @IBAction private func uploadButtonTapped(sender: UIBarItem) {
-        if !Settings.isWebDAVEnabled() && !Settings.isDropboxEnabled() {
+        if !Settings.webDAVEnabled && !Settings.dropboxEnabled {
             UIAlertController.showSimpleAlertIn(navigationController, title: "Error",
                                             message: "Setup server configuration before uploading")
             return
         }
 
-        if Settings.isWebDAVEnabled() &&
-            (Settings.webDAVURL() == nil || Settings.webDAVURL().isEmpty) {
+        if Settings.webDAVEnabled &&
+            (Settings.webDAVURL == nil || Settings.webDAVURL!.isEmpty) {
             UIAlertController.showSimpleAlertIn(navigationController, title: "Error",
                                                 message: "Invalid WebDAV server URL")
             return
@@ -123,7 +123,7 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
 
     func launchUpload() {
         var image: UIImage?
-        switch Settings.photoResolution() {
+        switch Settings.photoResolution {
         case 0: image = self.image
         case 1: image = ImageUtil.scaleImage(self.image, withSize: CGSizeMake(1600, 2000))
         case 2: image = ImageUtil.scaleImage(self.image, withSize: CGSizeMake(800, 600))
@@ -131,7 +131,7 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
         }
 
         var quality = 1.0
-        switch Settings.photoQuality() {
+        switch Settings.photoQuality {
         case 0: quality = 1.0 // High
         case 1: quality = 0.6 // Medium
         case 2: quality = 0.2 // Low
@@ -139,14 +139,14 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
         }
 
         if let image = image {
-            if shouldSavePhotoAlbum && Settings.photoSaveToAlbum() {
+            if shouldSavePhotoAlbum && Settings.shouldSavePhoto {
                 UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
             }
 
             if let imageData = UIImageJPEGRepresentation(image, CGFloat(quality)),
                 filename = nameField.text {
                 // WebDAV
-                if Settings.isWebDAVEnabled() {
+                if Settings.webDAVEnabled {
                     hud?.detailsLabelText = "WebDAV"
                     let uploader = WebDAVUploader(name: filename, imageData: imageData)
                     uploader.upload()
@@ -160,7 +160,7 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
                 }
 
                 // Dropbox
-                if Settings.isDropboxEnabled() {
+                if Settings.dropboxEnabled {
                     hud?.detailsLabelText = "Dropbox"
                     let uploader = DropboxUploader.sharedInstance
                     uploader.uploadWithName(filename, imageData: imageData)
