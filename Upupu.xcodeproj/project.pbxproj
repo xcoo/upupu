@@ -42,12 +42,12 @@
 		16CE726114FE2E64005A37F6 /* FMWebDAVRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CE725D14FE2E64005A37F6 /* FMWebDAVRequest.m */; };
 		16CE726214FE2E64005A37F6 /* ISO8601DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CE725F14FE2E64005A37F6 /* ISO8601DateFormatter.m */; };
 		16CE726414FE2E8E005A37F6 /* CameraHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CE725614FE2B3C005A37F6 /* CameraHelper.m */; };
-		16CE726514FE2E8E005A37F6 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CE725814FE2B3C005A37F6 /* CameraViewController.m */; };
 		16FDB496150228A200CE7B2F /* ImageUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 163A15BC150109D60058FBB2 /* ImageUtil.m */; };
 		3D891527147CC6380012580A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D891526147CC6380012580A /* UIKit.framework */; };
 		3D891529147CC6380012580A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D891528147CC6380012580A /* Foundation.framework */; };
 		3D89152B147CC6380012580A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D89152A147CC6380012580A /* CoreGraphics.framework */; };
 		8F0ADA161D76964A00C58D0B /* BlackToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F0ADA151D76964A00C58D0B /* BlackToolBar.swift */; };
+		8F0ADA181D76A36400C58D0B /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F0ADA171D76A36400C58D0B /* CameraViewController.swift */; };
 		8F57987C1D758608004ED144 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F57987B1D758608004ED144 /* Constants.swift */; };
 		8F57987F1D7594A0004ED144 /* String+NSString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F57987E1D7594A0004ED144 /* String+NSString.swift */; };
 		8F5798811D759859004ED144 /* WebDAVUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5798801D759859004ED144 /* WebDAVUploader.swift */; };
@@ -106,8 +106,6 @@
 		16CE725114FE2B29005A37F6 /* CameraViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraViewController.xib; sourceTree = "<group>"; };
 		16CE725514FE2B3C005A37F6 /* CameraHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraHelper.h; sourceTree = "<group>"; };
 		16CE725614FE2B3C005A37F6 /* CameraHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraHelper.m; sourceTree = "<group>"; };
-		16CE725714FE2B3C005A37F6 /* CameraViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
-		16CE725814FE2B3C005A37F6 /* CameraViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
 		16CE725A14FE2E64005A37F6 /* FMFileDAVRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMFileDAVRequest.h; sourceTree = "<group>"; };
 		16CE725B14FE2E64005A37F6 /* FMFileDAVRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMFileDAVRequest.m; sourceTree = "<group>"; };
 		16CE725C14FE2E64005A37F6 /* FMWebDAVRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMWebDAVRequest.h; sourceTree = "<group>"; };
@@ -119,6 +117,7 @@
 		3D891528147CC6380012580A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3D89152A147CC6380012580A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		8F0ADA151D76964A00C58D0B /* BlackToolBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlackToolBar.swift; path = Views/BlackToolBar.swift; sourceTree = "<group>"; };
+		8F0ADA171D76A36400C58D0B /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraViewController.swift; path = Controllers/CameraViewController.swift; sourceTree = "<group>"; };
 		8F57987B1D758608004ED144 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Commons/Constants.swift; sourceTree = "<group>"; };
 		8F57987E1D7594A0004ED144 /* String+NSString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+NSString.swift"; path = "Commons/String+NSString.swift"; sourceTree = "<group>"; };
 		8F5798801D759859004ED144 /* WebDAVUploader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebDAVUploader.swift; path = Uploaders/WebDAVUploader.swift; sourceTree = "<group>"; };
@@ -174,8 +173,6 @@
 				8F0ADA141D76961A00C58D0B /* Views */,
 				16CE725514FE2B3C005A37F6 /* CameraHelper.h */,
 				16CE725614FE2B3C005A37F6 /* CameraHelper.m */,
-				16CE725714FE2B3C005A37F6 /* CameraViewController.h */,
-				16CE725814FE2B3C005A37F6 /* CameraViewController.m */,
 				8F624F0C14CDFC5200CBBD6A /* Settings.h */,
 				8F624F0D14CDFC5200CBBD6A /* Settings.m */,
 				16A96FE71484F8B500BD25E3 /* xib */,
@@ -341,6 +338,7 @@
 			isa = PBXGroup;
 			children = (
 				8FFE1B291D743A8E00CCEE67 /* CameraController.swift */,
+				8F0ADA171D76A36400C58D0B /* CameraViewController.swift */,
 				8FFD7F871D744E9700517B38 /* UploadViewController.swift */,
 			);
 			name = Controllers;
@@ -505,7 +503,6 @@
 				163A15A61500F2610058FBB2 /* AlertUtil.m in Sources */,
 				163A15A71500F2610058FBB2 /* HUDUtil.m in Sources */,
 				16CE726414FE2E8E005A37F6 /* CameraHelper.m in Sources */,
-				16CE726514FE2E8E005A37F6 /* CameraViewController.m in Sources */,
 				8F5798811D759859004ED144 /* WebDAVUploader.swift in Sources */,
 				8F624F0E14CDFC5200CBBD6A /* Settings.m in Sources */,
 				8F57987F1D7594A0004ED144 /* String+NSString.swift in Sources */,
@@ -517,6 +514,7 @@
 				16CE726214FE2E64005A37F6 /* ISO8601DateFormatter.m in Sources */,
 				8FF74BBE1D7424D300437DE6 /* AppDelegate.swift in Sources */,
 				8FFE1B2A1D743A8E00CCEE67 /* CameraController.swift in Sources */,
+				8F0ADA181D76A36400C58D0B /* CameraViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

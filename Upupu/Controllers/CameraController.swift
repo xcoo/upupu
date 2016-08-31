@@ -58,19 +58,16 @@ UploadViewControllerDelegate, IASKSettingsDelegate {
 
     // MARK: - CameraViewControllerDelegate
 
-    func cameraViewController(viewController: UIViewController,
-                              didFinishedWithImage image: UIImage) {
+    func cameraViewController(cameraViewController: CameraViewController,
+                              didFinishedWithImage image: UIImage?) {
         uploadViewController.image = image
+        uploadViewController.shouldSavePhotoAlbum = !cameraViewController.isSourcePhotoLibrary
 
-        if let cameraViewController = viewController as? CameraViewController {
-            uploadViewController.shouldSavePhotoAlbum = !cameraViewController.isSourcePhotoLibrary
+        let application = UIApplication.sharedApplication()
+        application.setStatusBarHidden(false, withAnimation: .Slide)
+        application.statusBarStyle = .LightContent
 
-            let application = UIApplication.sharedApplication()
-            application.setStatusBarHidden(false, withAnimation: .Slide)
-            application.statusBarStyle = .LightContent
-
-            pushViewController(uploadViewController, animated: true)
-        }
+        pushViewController(uploadViewController, animated: true)
     }
 
     // MARK: - UploadViewControllerDelegate
