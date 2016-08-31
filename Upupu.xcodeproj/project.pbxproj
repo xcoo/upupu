@@ -12,7 +12,6 @@
 		163A15A51500F2540058FBB2 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163A15A41500F2540058FBB2 /* ImageIO.framework */; };
 		163A15A61500F2610058FBB2 /* AlertUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 163A159A1500F0E80058FBB2 /* AlertUtil.m */; };
 		163A15A71500F2610058FBB2 /* HUDUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 163A159C1500F0E80058FBB2 /* HUDUtil.m */; };
-		163A15AA1500FAB20058FBB2 /* BlackToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 163A15A91500FAB20058FBB2 /* BlackToolBar.m */; };
 		163A15AD150100340058FBB2 /* camera_icon_circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 163A15AB150100340058FBB2 /* camera_icon_circle.png */; };
 		163A15AE150100340058FBB2 /* camera_icon_circle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 163A15AC150100340058FBB2 /* camera_icon_circle@2x.png */; };
 		163A15B1150101570058FBB2 /* camera_icon_setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 163A15AF150101570058FBB2 /* camera_icon_setting.png */; };
@@ -48,6 +47,7 @@
 		3D891527147CC6380012580A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D891526147CC6380012580A /* UIKit.framework */; };
 		3D891529147CC6380012580A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D891528147CC6380012580A /* Foundation.framework */; };
 		3D89152B147CC6380012580A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D89152A147CC6380012580A /* CoreGraphics.framework */; };
+		8F0ADA161D76964A00C58D0B /* BlackToolBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F0ADA151D76964A00C58D0B /* BlackToolBar.swift */; };
 		8F57987C1D758608004ED144 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F57987B1D758608004ED144 /* Constants.swift */; };
 		8F57987F1D7594A0004ED144 /* String+NSString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F57987E1D7594A0004ED144 /* String+NSString.swift */; };
 		8F5798811D759859004ED144 /* WebDAVUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5798801D759859004ED144 /* WebDAVUploader.swift */; };
@@ -74,8 +74,6 @@
 		163A159C1500F0E80058FBB2 /* HUDUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HUDUtil.m; sourceTree = "<group>"; };
 		163A159E1500F1EA0058FBB2 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		163A15A41500F2540058FBB2 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
-		163A15A81500FAB20058FBB2 /* BlackToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlackToolBar.h; sourceTree = "<group>"; };
-		163A15A91500FAB20058FBB2 /* BlackToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlackToolBar.m; sourceTree = "<group>"; };
 		163A15AB150100340058FBB2 /* camera_icon_circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_icon_circle.png; sourceTree = "<group>"; };
 		163A15AC150100340058FBB2 /* camera_icon_circle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera_icon_circle@2x.png"; sourceTree = "<group>"; };
 		163A15AF150101570058FBB2 /* camera_icon_setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_icon_setting.png; sourceTree = "<group>"; };
@@ -120,6 +118,7 @@
 		3D891526147CC6380012580A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3D891528147CC6380012580A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3D89152A147CC6380012580A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		8F0ADA151D76964A00C58D0B /* BlackToolBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlackToolBar.swift; path = Views/BlackToolBar.swift; sourceTree = "<group>"; };
 		8F57987B1D758608004ED144 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Commons/Constants.swift; sourceTree = "<group>"; };
 		8F57987E1D7594A0004ED144 /* String+NSString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+NSString.swift"; path = "Commons/String+NSString.swift"; sourceTree = "<group>"; };
 		8F5798801D759859004ED144 /* WebDAVUploader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebDAVUploader.swift; path = Uploaders/WebDAVUploader.swift; sourceTree = "<group>"; };
@@ -172,12 +171,11 @@
 				8FFE1B281D743A5800CCEE67 /* Controllers */,
 				8FA55E0E1D75525700ECB21E /* Uploaders */,
 				163A159D1500F1040058FBB2 /* Utility */,
+				8F0ADA141D76961A00C58D0B /* Views */,
 				16CE725514FE2B3C005A37F6 /* CameraHelper.h */,
 				16CE725614FE2B3C005A37F6 /* CameraHelper.m */,
 				16CE725714FE2B3C005A37F6 /* CameraViewController.h */,
 				16CE725814FE2B3C005A37F6 /* CameraViewController.m */,
-				163A15A81500FAB20058FBB2 /* BlackToolBar.h */,
-				163A15A91500FAB20058FBB2 /* BlackToolBar.m */,
 				8F624F0C14CDFC5200CBBD6A /* Settings.h */,
 				8F624F0D14CDFC5200CBBD6A /* Settings.m */,
 				16A96FE71484F8B500BD25E3 /* xib */,
@@ -311,6 +309,14 @@
 				C5170943620AA2A048445EAD /* Pods_Upupu.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8F0ADA141D76961A00C58D0B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8F0ADA151D76964A00C58D0B /* BlackToolBar.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		8F57987D1D7593FD004ED144 /* Commons */ = {
@@ -505,12 +511,12 @@
 				8F57987F1D7594A0004ED144 /* String+NSString.swift in Sources */,
 				8FFD7F881D744E9700517B38 /* UploadViewController.swift in Sources */,
 				16CE726014FE2E64005A37F6 /* FMFileDAVRequest.m in Sources */,
+				8F0ADA161D76964A00C58D0B /* BlackToolBar.swift in Sources */,
 				8FA55E101D75528600ECB21E /* DropboxUploader.swift in Sources */,
 				16CE726114FE2E64005A37F6 /* FMWebDAVRequest.m in Sources */,
 				16CE726214FE2E64005A37F6 /* ISO8601DateFormatter.m in Sources */,
 				8FF74BBE1D7424D300437DE6 /* AppDelegate.swift in Sources */,
 				8FFE1B2A1D743A8E00CCEE67 /* CameraController.swift in Sources */,
-				163A15AA1500FAB20058FBB2 /* BlackToolBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
