@@ -7,6 +7,6 @@
 #import "ImageUtil.h"
 #import "Settings.h"
 #import "CameraViewController.h"
-#import "WebDAVUploader.h"
+#import "FMWebDAVRequest.h"
 
 #import <DropboxSDK/DropboxSDK.h>

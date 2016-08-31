@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1601F9E2147F9A1000E3A13C /* WebDAVUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1601F9D2147F9A1000E3A13C /* WebDAVUploader.m */; };
 		160C2925148645870013E277 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 164041CE14863ADF00900BAE /* icon.png */; };
 		163A159F1500F1EA0058FBB2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163A159E1500F1EA0058FBB2 /* AVFoundation.framework */; };
 		163A15A51500F2540058FBB2 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163A15A41500F2540058FBB2 /* ImageIO.framework */; };
@@ -51,6 +50,7 @@
 		3D89152B147CC6380012580A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D89152A147CC6380012580A /* CoreGraphics.framework */; };
 		8F57987C1D758608004ED144 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F57987B1D758608004ED144 /* Constants.swift */; };
 		8F57987F1D7594A0004ED144 /* String+NSString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F57987E1D7594A0004ED144 /* String+NSString.swift */; };
+		8F5798811D759859004ED144 /* WebDAVUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F5798801D759859004ED144 /* WebDAVUploader.swift */; };
 		8F624F0914CDA45700CBBD6A /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F624F0814CDA45700CBBD6A /* MessageUI.framework */; };
 		8F624F0B14CDF05700CBBD6A /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8F624F0A14CDF05700CBBD6A /* Settings.bundle */; };
 		8F624F0E14CDFC5200CBBD6A /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F624F0D14CDFC5200CBBD6A /* Settings.m */; };
@@ -66,8 +66,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1601F9D1147F9A1000E3A13C /* WebDAVUploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebDAVUploader.h; sourceTree = "<group>"; };
-		1601F9D2147F9A1000E3A13C /* WebDAVUploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebDAVUploader.m; sourceTree = "<group>"; };
 		1601F9D3147F9A1000E3A13C /* Upupu-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Upupu-Info.plist"; sourceTree = "<group>"; };
 		1601F9D4147F9A1000E3A13C /* Upupu-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Upupu-Prefix.pch"; sourceTree = "<group>"; };
 		163A15991500F0E80058FBB2 /* AlertUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlertUtil.h; sourceTree = "<group>"; };
@@ -124,6 +122,7 @@
 		3D89152A147CC6380012580A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		8F57987B1D758608004ED144 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Commons/Constants.swift; sourceTree = "<group>"; };
 		8F57987E1D7594A0004ED144 /* String+NSString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+NSString.swift"; path = "Commons/String+NSString.swift"; sourceTree = "<group>"; };
+		8F5798801D759859004ED144 /* WebDAVUploader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebDAVUploader.swift; path = Uploaders/WebDAVUploader.swift; sourceTree = "<group>"; };
 		8F624F0814CDA45700CBBD6A /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		8F624F0A14CDF05700CBBD6A /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		8F624F0C14CDFC5200CBBD6A /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
@@ -172,7 +171,6 @@
 				8F57987D1D7593FD004ED144 /* Commons */,
 				8FFE1B281D743A5800CCEE67 /* Controllers */,
 				8FA55E0E1D75525700ECB21E /* Uploaders */,
-				8FF045C314D062FC002C14DE /* Uploader */,
 				163A159D1500F1040058FBB2 /* Utility */,
 				16CE725514FE2B3C005A37F6 /* CameraHelper.h */,
 				16CE725614FE2B3C005A37F6 /* CameraHelper.m */,
@@ -328,17 +326,9 @@
 			isa = PBXGroup;
 			children = (
 				8FA55E0F1D75528600ECB21E /* DropboxUploader.swift */,
+				8F5798801D759859004ED144 /* WebDAVUploader.swift */,
 			);
 			name = Uploaders;
-			sourceTree = "<group>";
-		};
-		8FF045C314D062FC002C14DE /* Uploader */ = {
-			isa = PBXGroup;
-			children = (
-				1601F9D1147F9A1000E3A13C /* WebDAVUploader.h */,
-				1601F9D2147F9A1000E3A13C /* WebDAVUploader.m */,
-			);
-			name = Uploader;
 			sourceTree = "<group>";
 		};
 		8FFE1B281D743A5800CCEE67 /* Controllers */ = {
@@ -510,7 +500,7 @@
 				163A15A71500F2610058FBB2 /* HUDUtil.m in Sources */,
 				16CE726414FE2E8E005A37F6 /* CameraHelper.m in Sources */,
 				16CE726514FE2E8E005A37F6 /* CameraViewController.m in Sources */,
-				1601F9E2147F9A1000E3A13C /* WebDAVUploader.m in Sources */,
+				8F5798811D759859004ED144 /* WebDAVUploader.swift in Sources */,
 				8F624F0E14CDFC5200CBBD6A /* Settings.m in Sources */,
 				8F57987F1D7594A0004ED144 /* String+NSString.swift in Sources */,
 				8FFD7F881D744E9700517B38 /* UploadViewController.swift in Sources */,
