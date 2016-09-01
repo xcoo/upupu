@@ -91,10 +91,13 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
             return
         }
 
-        hud = HUDUtil.showWithText("Uploading",
-                                   forView: navigationController?.view,
-                                   whileExecuting:#selector(launchUpload),
-                                   onTarget: self)
+        hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0)) {[weak self] in
+            self?.launchUpload()
+            dispatch_async(dispatch_get_main_queue()) {[weak self] in
+                self?.hud?.hideAnimated(true)
+            }
+        }
     }
 
     @IBAction private func settingsButtonTapped(sender: UIBarItem) {
@@ -107,8 +110,8 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
         if let hud = hud {
             hud.customView = UIImageView(image: UIImage(named: "failure_icon"))
             hud.mode = .CustomView
-            hud.labelText = "Failed"
-            hud.detailsLabelText = ""
+            hud.label.text = "Failed"
+            hud.detailsLabel.text = ""
         }
     }
 
@@ -116,8 +119,8 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
         if let hud = hud {
             hud.customView = UIImageView(image: UIImage(named: "success_icon"))
             hud.mode = .CustomView
-            hud.labelText = "Succeeded"
-            hud.detailsLabelText = ""
+            hud.label.text = "Succeeded"
+            hud.detailsLabel.text = ""
         }
     }
 
@@ -150,7 +153,7 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
                 filename = nameField.text {
                 // WebDAV
                 if Settings.webDAVEnabled {
-                    hud?.detailsLabelText = "WebDAV"
+                    hud?.detailsLabel.text = "WebDAV"
                     let uploader = WebDAVUploader(name: filename, imageData: imageData)
                     uploader.upload()
                     if !uploader.success {
@@ -164,7 +167,7 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
 
                 // Dropbox
                 if Settings.dropboxEnabled {
-                    hud?.detailsLabelText = "Dropbox"
+                    hud?.detailsLabel.text = "Dropbox"
                     let uploader = DropboxUploader.sharedInstance
                     uploader.uploadWithName(filename, imageData: imageData)
                     if !uploader.success {
@@ -181,8 +184,12 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
                     })
                 sleep(1)
 
-                nameField.text = ""
-                delegate?.uploadViewControllerDidFinished(self)
+                dispatch_async(dispatch_get_main_queue()) {[weak self] in
+                    if let self_ = self {
+                        self_.nameField.text = ""
+                        self_.delegate?.uploadViewControllerDidFinished(self_)
+                    }
+                }
             }
         }
     }
