@@ -44,7 +44,7 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
 
         switchButton.hidden = !CameraHelper.supportFrontCamera()
         torchButton.hidden = !CameraHelper.supportTorch() ||
-            !CameraHelper.sharedInstance().availableTorch()
+            !CameraHelper.sharedInstance.availableTorch()
 
         switchButton.addTarget(self, action: #selector(switchCamera),
                                forControlEvents: .TouchUpInside)
@@ -84,8 +84,8 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
                 if let self_ = self {
                     var rect = UIScreen.mainScreen().applicationFrame
                     rect.size.height -= self_.toolBar.frame.size.height
-                    let preview = CameraHelper.sharedInstance().previewViewWithBounds(rect)
-                    CameraHelper.sharedInstance().startRunning()
+                    let preview = CameraHelper.sharedInstance.previewView(rect)
+                    CameraHelper.sharedInstance.startRunning()
 
                     dispatch_async(dispatch_get_main_queue()) {[weak self] in
                         self?.previewView.addSubview(preview)
@@ -102,7 +102,7 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
     }
 
     override func viewWillDisappear(animated: Bool) {
-        CameraHelper.sharedInstance().stopRunning()
+        CameraHelper.sharedInstance.stopRunning()
 
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
@@ -129,7 +129,7 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
     // MARK: - Action
 
     @IBAction private func clips(sender: UIBarButtonItem) {
-        CameraHelper.sharedInstance().stopRunning()
+        CameraHelper.sharedInstance.stopRunning()
 
         let imagePicker = UIImagePickerController()
         imagePicker.sourceType = .PhotoLibrary
@@ -137,9 +137,9 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
         imagePicker.modalTransitionStyle = .FlipHorizontal
         imagePicker.allowsEditing = false
 
-        CameraHelper.sharedInstance().addObserver(self,
-                                                  forKeyPath: CAMERA_HELPER_CAPTURE_REQUEST_KEY,
-                                                  options: .New, context: nil)
+        CameraHelper.sharedInstance.addObserver(self,
+                                                forKeyPath: CameraHelper.kCameraHelperCaptureRequestKey,
+                                                options: .New, context: nil)
         presentViewController(imagePicker, animated: true, completion: nil)
     }
 
@@ -155,26 +155,26 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
 
         CATransaction.commit()
 
-        CameraHelper.sharedInstance().addObserver(self,
-                                                  forKeyPath: CAMERA_HELPER_CAPTURE_REQUEST_KEY,
-                                                  options: .New,
-                                                  context: nil)
-        CameraHelper.sharedInstance().capture()
+        CameraHelper.sharedInstance.addObserver(self,
+                                                forKeyPath: CameraHelper.kCameraHelperCaptureRequestKey,
+                                                options: .New,
+                                                context: nil)
+        CameraHelper.sharedInstance.capture()
     }
 
     private func afterTaken(image: UIImage) {
-        CameraHelper.sharedInstance().stopRunning()
+        CameraHelper.sharedInstance.stopRunning()
 
         delegate?.cameraViewController(self, didFinishedWithImage: image)
     }
 
     @objc private func switchCamera(sender: UIButton) {
-        CameraHelper.sharedInstance().switchCamera()
-        torchButton.hidden = !CameraHelper.sharedInstance().availableTorch()
+        CameraHelper.sharedInstance.switchCamera()
+        torchButton.hidden = !CameraHelper.sharedInstance.availableTorch()
     }
 
     @objc private func switchTorch(sender: UIButton) {
-        let cameraHelper = CameraHelper.sharedInstance()
+        let cameraHelper = CameraHelper.sharedInstance
         if cameraHelper.torch {
             cameraHelper.torch = false
             torchButton.setImage(UIImage(named: "camera_icon_light_off.png"), forState: .Normal)
@@ -226,7 +226,7 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
         let viewSize = previewView.frame.size
         let focusPoint = CGPoint.init(x: 1 - p.x / viewSize.width, y: p.y / viewSize.height)
 
-        CameraHelper.sharedInstance().focus = focusPoint
+        CameraHelper.sharedInstance.focus = focusPoint
 
         CATransaction.begin()
         CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
@@ -296,10 +296,12 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
             object?.removeObserver(self, forKeyPath: keyPath)
         }
 
-        if object?.dynamicType === CameraHelper.self &&  keyPath == CAMERA_HELPER_CAPTURE_REQUEST_KEY {
-            let origImage = CameraHelper.sharedInstance().capturedImage
-            isSourcePhotoLibrary = false
-            afterTaken(origImage)
+        if object?.dynamicType === CameraHelper.self &&
+            keyPath == CameraHelper.kCameraHelperCaptureRequestKey {
+            if let origImage = CameraHelper.sharedInstance.capturedImage {
+                isSourcePhotoLibrary = false
+                afterTaken(origImage)
+            }
         }
     }
 
