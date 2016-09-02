@@ -9,23 +9,12 @@
 
 import Foundation
 
-class WebDAVUploader: NSObject, Uploadable {
+class WebDAVUploader: Uploader, Uploadable {
 
     private var authSucceeded = false
     private var waitingOnAuthentication = false
 
-    private func directoryName() -> String {
-        let formatter = NSDateFormatter()
-        formatter.dateFormat = "yyyyMMdd"
-        return formatter.stringFromDate(NSDate())
-    }
-
-    func upload(filename: String!, imageData: NSData!, completion: ((error: Any?) -> Void)?) {
-        guard imageData != nil else {
-            completion?(error: "No image data")
-            return
-        }
-
+    func upload(fileStem: String!, imageData: NSData, completion: ((error: Any?) -> Void)?) {
         authSucceeded = true
         waitingOnAuthentication = true
 
@@ -65,8 +54,9 @@ class WebDAVUploader: NSObject, Uploadable {
             return
         }
 
-        let directoryName = self.directoryName()
-        let dirURL = "\(baseURL)\(directoryName)/"
+        let now = NSDate()
+        let dirName = directoryName(now)
+        let dirURL = "\(baseURL)\(dirName)/"
         FMWebDAVRequest.requestToURL(NSURL(string: dirURL),
                                      delegate: self,
                                      endSelector: nil,
@@ -74,17 +64,14 @@ class WebDAVUploader: NSObject, Uploadable {
             .synchronous()
             .createDirectory()
 
-        let dbFilename: String
-        if filename == nil || filename.isEmpty {
-            let now = NSDate()
-            let formatter = NSDateFormatter()
-            formatter.dateFormat = "yyyyMMdd_HHmmss"
-            dbFilename = "\(formatter.stringFromDate(now)).jpg"
+        let filename_: String
+        if fileStem == nil || fileStem.isEmpty {
+            filename_ = filename(now)
         } else {
-            dbFilename = "\(filename).jpg"
+            filename_ = "\(fileStem).jpg"
         }
 
-        let putURL = "\(baseURL)\(directoryName)/\(dbFilename)"
+        let putURL = "\(baseURL)\(dirName)/\(filename_)"
         let data = NSData(data: imageData)
         FMWebDAVRequest.requestToURL(NSURL(string: putURL))
             .synchronous()
@@ -100,17 +87,17 @@ class WebDAVUploader: NSObject, Uploadable {
 
     // MARK: - FMWebDAVRequest delegate (VPRServiceRequestDelegate)
 
-    override func request(request: FMWebDAVRequest!, didFailWithError error: NSError!) {
+    @objc private func request(request: FMWebDAVRequest!, didFailWithError error: NSError!) {
         authSucceeded = false
     }
 
-    override func request(request: FMWebDAVRequest!,
-                          hadStatusCodeErrorWithResponse httpResponse: NSHTTPURLResponse!) {
+    @objc private func request(request: FMWebDAVRequest!,
+                               hadStatusCodeErrorWithResponse httpResponse: NSHTTPURLResponse!) {
         authSucceeded = false
     }
 
-    override func request(request: FMWebDAVRequest!,
-                          didReceiveAuthenticationChallenge challenge: NSURLAuthenticationChallenge!) {
+    @objc private func request(request: FMWebDAVRequest!,
+                               didReceiveAuthenticationChallenge challenge: NSURLAuthenticationChallenge!) {
         guard let username = Settings.webDAVUser,
             password = Settings.webDAVPassword else {
                 authSucceeded = false
@@ -127,7 +114,7 @@ class WebDAVUploader: NSObject, Uploadable {
         }
     }
 
-    func requestDidFetchDirectoryListingAndTestAuthenticationDidFinish(request: FMWebDAVRequest) {
+    @objc private func requestDidFetchDirectoryListingAndTestAuthenticationDidFinish(request: FMWebDAVRequest) {
         authSucceeded = request.error == nil
         waitingOnAuthentication = false
     }

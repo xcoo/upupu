@@ -10,11 +10,9 @@
 import Foundation
 import SwiftyDropbox
 
-class DropboxUploader: Uploadable {
+class DropboxUploader: Uploader, Uploadable {
 
-    static var sharedInstance = DropboxUploader()
-
-    func upload(filename: String!, imageData: NSData!, completion: ((error: Any?) -> Void)?) {
+    func upload(fileStem: String!, imageData: NSData, completion: ((error: Any?) -> Void)?) {
         guard let client = Dropbox.authorizedClient else {
             completion?(error: "Dropbox account is unauthorized")
             return
@@ -26,21 +24,17 @@ class DropboxUploader: Uploadable {
         }
 
         let now = NSDate()
-        let formatter = NSDateFormatter()
-        formatter.dateFormat = "yyyyMMdd"
-        let dbSaveDirectory = "\(dropboxLocation)/\(formatter.stringFromDate(now))"
+        let dirPath = "\(dropboxLocation)/\(directoryName(now))"
 
-        let dbFilename: String
-        if filename == nil || filename.isEmpty {
-            formatter.dateFormat = "yyyyMMdd_HHmmss"
-            dbFilename = "\(formatter.stringFromDate(now)).jpg"
+        let filename_: String
+        if fileStem == nil || fileStem.isEmpty {
+            filename_ = filename(now)
         } else {
-            dbFilename = "\(filename).jpg"
+            filename_ = "\(fileStem).jpg"
         }
 
-        let savePath = dbSaveDirectory.stringByAppendingPathComponent(dbFilename)
+        let savePath = dirPath.stringByAppendingPathComponent(filename_)
 
-        // Upload to Dropbox
         client.files.upload(path: savePath, input: imageData).response { (response, error) in
             if let metadata = response {
                 print("Uploaded file name: \(metadata.name)")

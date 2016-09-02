@@ -32,8 +32,6 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
     var image: UIImage?
     var shouldSavePhotoAlbum = true
 
-    private var hud: MBProgressHUD?
-
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -91,9 +89,9 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
             return
         }
 
-        hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
+        let hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0)) {[weak self] in
-            self?.launchUpload()
+            self?.launchUpload(hud)
         }
     }
 
@@ -103,7 +101,36 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
 
     // MARK: - Picture processing
 
-    private func showFailed() {
+    private func scaleImage(image: UIImage?) -> UIImage? {
+        switch Settings.photoResolution {
+        case 0:
+            return image
+        case 1:
+            return image?.scaledImage(CGSize.init(width: 1600, height: 1200))
+        case 2:
+            return image?.scaledImage(CGSize.init(width: 800, height: 600))
+        default:
+            break
+        }
+        return nil
+    }
+
+    private func imageData(image: UIImage) -> NSData? {
+        let quality: Float
+        switch Settings.photoQuality {
+        case 0:
+            quality = 1.0 // High
+        case 1:
+            quality = 0.6 // Medium
+        case 2:
+            quality = 0.2 // Low
+        default:
+            quality = 1.0
+        }
+        return UIImageJPEGRepresentation(image, CGFloat(quality))
+    }
+
+    private func showFailed(hud: MBProgressHUD?) {
         if let hud = hud {
             hud.customView = UIImageView(image: UIImage(named: "failure_icon"))
             hud.mode = .CustomView
@@ -112,7 +139,7 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
         }
     }
 
-    private func showSucceeded() {
+    private func showSucceeded(hud: MBProgressHUD?) {
         if let hud = hud {
             hud.customView = UIImageView(image: UIImage(named: "success_icon"))
             hud.mode = .CustomView
@@ -121,97 +148,64 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
         }
     }
 
-    func launchUpload() {
-        var image: UIImage?
-        switch Settings.photoResolution {
-        case 0:
-            image = self.image
-        case 1:
-            image = self.image?.scaledImage(CGSize.init(width: 1600, height: 1200))
-        case 2:
-            image = self.image?.scaledImage(CGSize.init(width: 800, height: 600))
-        default: break
+    private func execUpload<T: Uploadable>(uploader: T, filename: String?, imageData: NSData,
+                            hud: MBProgressHUD?) {
+        uploader.upload(filename, imageData: imageData) { (error) in
+            if error == nil {
+                dispatch_async(dispatch_get_main_queue()) {[weak self] in
+                    self?.showSucceeded(hud)
+                }
+
+                let time = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
+                dispatch_after(time, dispatch_get_main_queue()) {[weak self] in
+                    hud?.hideAnimated(true)
+                    self?.nameField.text = ""
+                    if let self_ = self {
+                        self_.delegate?.uploadViewControllerDidFinished(self_)
+                    }
+
+                }
+            } else {
+                dispatch_async(dispatch_get_main_queue()) {[weak self] in
+                    self?.showFailed(hud)
+                }
+
+                let time = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
+                dispatch_after(time, dispatch_get_main_queue()) {
+                    hud?.hideAnimated(true)
+                }
+            }
+        }
+    }
+
+    private func launchUpload(hud: MBProgressHUD?) {
+        guard let image = scaleImage(self.image) else {
+            return
         }
 
-        var quality = 1.0
-        switch Settings.photoQuality {
-        case 0: quality = 1.0 // High
-        case 1: quality = 0.6 // Medium
-        case 2: quality = 0.2 // Low
-        default: break
+        // Save to album
+        if shouldSavePhotoAlbum && Settings.shouldSavePhoto {
+            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
         }
 
-        if let image = image {
-            if shouldSavePhotoAlbum && Settings.shouldSavePhoto {
-                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+        // Upload to ...
+        if let imageData = imageData(image) {
+            let filename = nameField.text
+
+            // WebDAV
+            if Settings.webDAVEnabled {
+                dispatch_sync(dispatch_get_main_queue(), {
+                    hud?.detailsLabel.text = "WebDAV"
+                    })
+                execUpload(WebDAVUploader(), filename: filename, imageData: imageData, hud: hud)
             }
 
-            if let imageData = UIImageJPEGRepresentation(image, CGFloat(quality)),
-                filename = nameField.text {
-                // WebDAV
-                if Settings.webDAVEnabled {
-                    dispatch_sync(dispatch_get_main_queue(), {[weak self] in
-                        self?.hud?.detailsLabel.text = "WebDAV"
-                        })
-
-                    let uploader = WebDAVUploader()
-                    uploader.upload(filename, imageData: imageData, completion: { (error) in
-                        if error == nil {
-                            dispatch_async(dispatch_get_main_queue(), {[weak self] in
-                                self?.showSucceeded()
-                                })
-                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC))),
-                            dispatch_get_main_queue()) {[weak self] in
-                                if let self_ = self {
-                                    self_.hud?.hideAnimated(true)
-                                    self_.nameField.text = ""
-                                    self_.delegate?.uploadViewControllerDidFinished(self_)
-                                }
-                            }
-                        } else {
-                            dispatch_async(dispatch_get_main_queue(), {[weak self] in
-                                self?.showFailed()
-                                })
-                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC))),
-                            dispatch_get_main_queue()) {[weak self] in
-                                self?.hud?.hideAnimated(true)
-                            }
-                        }
+            // Dropbox
+            if Settings.dropboxEnabled {
+                dispatch_sync(dispatch_get_main_queue(), {
+                    hud?.detailsLabel.text = "Dropbox"
                     })
-                }
-
-                // Dropbox
-                if Settings.dropboxEnabled {
-                    dispatch_sync(dispatch_get_main_queue(), {[weak self] in
-                        self?.hud?.detailsLabel.text = "Dropbox"
-                        })
-
-                    let uploader = DropboxUploader.sharedInstance
-                    uploader.upload(filename, imageData: imageData, completion: {[weak self] (error) in
-                        if error == nil {
-                            dispatch_async(dispatch_get_main_queue(), {[weak self] in
-                                self?.showSucceeded()
-                                })
-                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC))),
-                            dispatch_get_main_queue()) {[weak self] in
-                                if let self_ = self {
-                                    self_.hud?.hideAnimated(true)
-                                    self_.nameField.text = ""
-                                    self_.delegate?.uploadViewControllerDidFinished(self_)
-                                }
-                            }
-                        } else {
-                            dispatch_async(dispatch_get_main_queue(), {[weak self] in
-                                self?.showFailed()
-                                })
-                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC))),
-                            dispatch_get_main_queue()) {[weak self] in
-                                self?.hud?.hideAnimated(true)
-                            }
-
-                        }
-                    })
-                }
+                execUpload(DropboxUploader(), filename: filename, imageData: imageData, hud: hud)
             }
         }
     }

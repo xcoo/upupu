@@ -11,6 +11,22 @@ import Foundation
 
 protocol Uploadable {
 
-    func upload(filename: String!, imageData: NSData!, completion: ((error: Any?) -> Void)?)
+    func upload(fileStem: String!, imageData: NSData, completion: ((error: Any?) -> Void)?)
+
+}
+
+class Uploader {
+
+    func directoryName(date: NSDate = NSDate()) -> String {
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "yyyyMMdd"
+        return formatter.stringFromDate(NSDate())
+    }
+
+    func filename(date: NSDate = NSDate()) -> String {
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "yyyyMMdd_HHmmss"
+        return "\(formatter.stringFromDate(date)).jpg"
+    }
 
 }
