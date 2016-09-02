@@ -2,7 +2,7 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'Upupu' do
-  pod 'Dropbox-iOS-SDK', '~> 1.3.13'
+  pod 'SwiftyDropbox', '~>3.2.0'
   pod 'InAppSettingsKit', '~> 2.7'
   pod 'MBProgressHUD', '~> 1.0.0'
 end

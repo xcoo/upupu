@@ -94,9 +94,6 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
         hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0)) {[weak self] in
             self?.launchUpload()
-            dispatch_async(dispatch_get_main_queue()) {[weak self] in
-                self?.hud?.hideAnimated(true)
-            }
         }
     }
 
@@ -153,42 +150,67 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
                 filename = nameField.text {
                 // WebDAV
                 if Settings.webDAVEnabled {
-                    hud?.detailsLabel.text = "WebDAV"
-                    let uploader = WebDAVUploader(name: filename, imageData: imageData)
-                    uploader.upload()
-                    if !uploader.success {
-                        dispatch_sync(dispatch_get_main_queue(), {[weak self] in
-                            self?.showFailed()
-                            })
-                        sleep(1)
-                        return
-                    }
+                    dispatch_sync(dispatch_get_main_queue(), {[weak self] in
+                        self?.hud?.detailsLabel.text = "WebDAV"
+                        })
+
+                    let uploader = WebDAVUploader()
+                    uploader.upload(filename, imageData: imageData, completion: { (error) in
+                        if error == nil {
+                            dispatch_async(dispatch_get_main_queue(), {[weak self] in
+                                self?.showSucceeded()
+                                })
+                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC))),
+                            dispatch_get_main_queue()) {[weak self] in
+                                if let self_ = self {
+                                    self_.hud?.hideAnimated(true)
+                                    self_.nameField.text = ""
+                                    self_.delegate?.uploadViewControllerDidFinished(self_)
+                                }
+                            }
+                        } else {
+                            dispatch_async(dispatch_get_main_queue(), {[weak self] in
+                                self?.showFailed()
+                                })
+                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC))),
+                            dispatch_get_main_queue()) {[weak self] in
+                                self?.hud?.hideAnimated(true)
+                            }
+                        }
+                    })
                 }
 
                 // Dropbox
                 if Settings.dropboxEnabled {
-                    hud?.detailsLabel.text = "Dropbox"
+                    dispatch_sync(dispatch_get_main_queue(), {[weak self] in
+                        self?.hud?.detailsLabel.text = "Dropbox"
+                        })
+
                     let uploader = DropboxUploader.sharedInstance
-                    uploader.uploadWithName(filename, imageData: imageData)
-                    if !uploader.success {
-                        dispatch_sync(dispatch_get_main_queue(), {[weak self] in
-                            self?.showFailed()
-                            })
-                        sleep(1)
-                        return
-                    }
-                }
+                    uploader.upload(filename, imageData: imageData, completion: {[weak self] (error) in
+                        if error == nil {
+                            dispatch_async(dispatch_get_main_queue(), {[weak self] in
+                                self?.showSucceeded()
+                                })
+                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC))),
+                            dispatch_get_main_queue()) {[weak self] in
+                                if let self_ = self {
+                                    self_.hud?.hideAnimated(true)
+                                    self_.nameField.text = ""
+                                    self_.delegate?.uploadViewControllerDidFinished(self_)
+                                }
+                            }
+                        } else {
+                            dispatch_async(dispatch_get_main_queue(), {[weak self] in
+                                self?.showFailed()
+                                })
+                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC))),
+                            dispatch_get_main_queue()) {[weak self] in
+                                self?.hud?.hideAnimated(true)
+                            }
 
-                dispatch_sync(dispatch_get_main_queue(), {[weak self] in
-                    self?.showSucceeded()
+                        }
                     })
-                sleep(1)
-
-                dispatch_async(dispatch_get_main_queue()) {[weak self] in
-                    if let self_ = self {
-                        self_.nameField.text = ""
-                        self_.delegate?.uploadViewControllerDidFinished(self_)
-                    }
                 }
             }
         }

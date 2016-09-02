@@ -10,6 +10,7 @@
 import UIKit
 
 import InAppSettingsKit
+import SwiftyDropbox
 
 class CameraController: UINavigationController, CameraViewControllerDelegate,
 UploadViewControllerDelegate, IASKSettingsDelegate {
@@ -119,10 +120,16 @@ UploadViewControllerDelegate, IASKSettingsDelegate {
     func settingsViewController(sender: IASKAppSettingsViewController,
                                 buttonTappedForSpecifier specifier: IASKSpecifier) {
         if specifier.key() == "dropbox_link_pref" {
-            DropboxUploader.sharedInstance.linkFromController(sender)
+            if Dropbox.authorizedClient == nil {
+                Dropbox.authorizeFromController(self)
+                sender.dismissViewControllerAnimated(true, completion: nil)
+            } else {
+                Dropbox.unlinkClient()
+                Settings.dropboxEnabled = false
+                Settings.dropboxLinkButtonTitle = "Connect to Dropbox"
+                Settings.dropboxAccount = ""
+            }
         }
-
-        sender.dismissViewControllerAnimated(true, completion: nil)
     }
 
 }

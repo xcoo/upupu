@@ -9,6 +9,8 @@
 
 import UIKit
 
+import SwiftyDropbox
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -18,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         setupDefaults()
+        Dropbox.setupWithAppKey(Constants.Dropbox.kDBAppKey)
         self.window!.rootViewController = CameraController()
         return true
     }
@@ -55,11 +58,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // applicationDidEnterBackground:.
     }
 
-    func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
-        return DropboxUploader.sharedInstance.handleURL(url)
+    func application(app: UIApplication, openURL url: NSURL,
+                     options: [String : AnyObject]) -> Bool {
+        if let authResult = Dropbox.handleRedirectURL(url) {
+            switch authResult {
+            case .Success(let token):
+                print("Success! User is logged into Dropbox with token: \(token)")
+                enableDropboxSettings()
+            case .Cancel:
+                print("Authorization flow was manually canceled by user.")
+            case .Error(let error, let description):
+                print("Error \(error): \(description)")
+            }
+        }
+
+        return false
     }
 
-    func setupDefaults() {
+    func application(app: UIApplication, openURL url: NSURL, sourceApplication: String?,
+                     annotation: AnyObject) -> Bool {
+        if let authResult = Dropbox.handleRedirectURL(url) {
+            switch authResult {
+            case .Success(let token):
+                print("Success! User is logged into Dropbox with token: \(token)")
+                enableDropboxSettings()
+            case .Cancel:
+                print("Authorization flow was manually canceled by user.")
+            case .Error(let error, let description):
+                print("Error \(error): \(description)")
+            }
+        }
+
+        return false
+    }
+
+    // MARK: - Settings management
+
+    private func setupDefaults() {
         let settingsPath = NSBundle.mainBundle().bundlePath.stringByAppendingPathComponent("Settings.bundle")
         let plistPath = settingsPath.stringByAppendingPathComponent("Root.inApp.plist")
 
@@ -79,6 +114,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
 
             defaults.synchronize()
+        }
+    }
+
+    private func enableDropboxSettings() {
+        Settings.dropboxEnabled = true
+        Settings.dropboxLinkButtonTitle = "Unlink Dropbox"
+        if let client = Dropbox.authorizedClient {
+            client.users.getCurrentAccount().response({ (response, error) in
+                if let account = response {
+                    Settings.dropboxAccount = account.name.displayName
+                }
+            })
         }
     }
 

@@ -47,6 +47,16 @@ final class Settings {
         }
     }
 
+    static var dropboxLinkButtonTitle: String? {
+        get {
+            return NSUserDefaults.standardUserDefaults().stringForKey("dropbox_link_pref")
+        }
+
+        set(title) {
+            NSUserDefaults.standardUserDefaults().setObject(title, forKey: "dropbox_link_pref")
+        }
+    }
+
     static var dropboxLocation: String? {
         return NSUserDefaults.standardUserDefaults().stringForKey("dropbox_location_pref")
     }

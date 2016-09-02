@@ -7,7 +7,7 @@
 //  See LISENCE for Upupu's licensing information.
 //
 
-import Foundation
+import UIKit
 
 extension UIImage {
 
