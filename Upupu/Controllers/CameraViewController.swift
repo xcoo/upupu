@@ -79,21 +79,15 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
                 view.removeFromSuperview()
             }
 
-            let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
-            dispatch_async(queue) {[weak self] in
-                if let self_ = self {
-                    var rect = UIScreen.mainScreen().applicationFrame
-                    rect.size.height -= self_.toolBar.frame.size.height
-                    let preview = CameraHelper.sharedInstance.previewView(rect)
-                    CameraHelper.sharedInstance.startRunning()
+            var rect = UIScreen.mainScreen().applicationFrame
+            rect.size.height -= toolBar.frame.size.height
+            let preview = CameraHelper.sharedInstance.previewView(rect)
 
-                    dispatch_async(dispatch_get_main_queue()) {[weak self] in
-                        self?.previewView.addSubview(preview)
-                        self?.previewView.hidden = false
-                        self?.setup()
-                    }
-                }
-            }
+            CameraHelper.sharedInstance.startRunning()
+
+            previewView.addSubview(preview)
+            previewView.hidden = false
+            setup()
         } else {
             UIAlertController.showSimpleAlertIn(navigationController, title: "Error",
                                                 message: "Camera is unavailable")
