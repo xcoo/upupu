@@ -95,24 +95,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Settings management
 
     private func setupDefaults() {
-        let settingsPath = NSBundle.mainBundle().bundlePath.stringByAppendingPathComponent("Settings.bundle")
-        let plistPath = settingsPath.stringByAppendingPathComponent("Root.inApp.plist")
+        let plistPath = NSBundle.mainBundle().bundlePath
+            .stringByAppendingPathComponent("Settings.bundle")
+            .stringByAppendingPathComponent("Root.inApp.plist")
 
         if let settingsDictionary = NSDictionary(contentsOfFile: plistPath),
-            let preferencesArray = settingsDictionary.objectForKey("PreferenceSpecifiers") as? NSArray {
+            let preferencesArray = settingsDictionary["PreferenceSpecifiers"] as? NSArray {
             let defaults = NSUserDefaults.standardUserDefaults()
-
             for item in preferencesArray {
-                if let v = item as? NSDictionary,
-                    let key = v.objectForKey("Key") as? String {
-                    let value = defaults.objectForKey(key)
-                    let defaultValue = v.objectForKey("DefaultValue")
-                    if defaultValue != nil && value == nil {
+                if let v = item as? NSDictionary, key = v["Key"] as? String {
+                    if let defaultValue = v["DefaultValue"]
+                        where defaults.objectForKey(key) == nil {
                         defaults.setObject(defaultValue, forKey: key)
+                        print("Set default value \(defaultValue) for \(key)")
                     }
                 }
             }
-
             defaults.synchronize()
         }
     }
