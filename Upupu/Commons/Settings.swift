@@ -9,6 +9,18 @@
 
 import Foundation
 
+enum PhotoQuality {
+    case High
+    case Medium
+    case Low
+}
+
+enum PhotoResolution {
+    case Original
+    case Medium
+    case Small
+}
+
 final class Settings {
 
     static var webDAVEnabled: Bool {
@@ -61,12 +73,30 @@ final class Settings {
         return NSUserDefaults.standardUserDefaults().stringForKey("dropbox_location_pref")
     }
 
-    static var photoQuality: Int {
-        return NSUserDefaults.standardUserDefaults().integerForKey("photo_quality_pref")
+    static var photoQuality: PhotoQuality {
+        switch NSUserDefaults.standardUserDefaults().integerForKey("photo_quality_pref") {
+        case 0:
+            return .High
+        case 1:
+            return .Medium
+        case 2:
+            return .Low
+        default:
+            return .High
+        }
     }
 
-    static var photoResolution: Int {
-        return NSUserDefaults.standardUserDefaults().integerForKey("photo_resolution_pref")
+    static var photoResolution: PhotoResolution {
+        switch NSUserDefaults.standardUserDefaults().integerForKey("photo_resolution_pref") {
+        case 0:
+            return .Original
+        case 1:
+            return .Medium
+        case 2:
+            return .Small
+        default:
+            return .Original
+        }
     }
 
     static var shouldSavePhoto: Bool {

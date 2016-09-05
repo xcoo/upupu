@@ -103,29 +103,24 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
 
     private func scaleImage(image: UIImage?) -> UIImage? {
         switch Settings.photoResolution {
-        case 0:
+        case .Original:
             return image
-        case 1:
+        case .Medium:
             return image?.scaledImage(CGSize.init(width: 1600, height: 1200))
-        case 2:
+        case .Small:
             return image?.scaledImage(CGSize.init(width: 800, height: 600))
-        default:
-            break
         }
-        return nil
     }
 
     private func imageData(image: UIImage) -> NSData? {
         let quality: Float
         switch Settings.photoQuality {
-        case 0:
-            quality = 1.0 // High
-        case 1:
-            quality = 0.6 // Medium
-        case 2:
-            quality = 0.2 // Low
-        default:
+        case .High:
             quality = 1.0
+        case .Medium:
+            quality = 0.6
+        case .Low:
+            quality = 0.2
         }
         return UIImageJPEGRepresentation(image, CGFloat(quality))
     }
