@@ -14,7 +14,6 @@ struct Constants {
     struct Dropbox {
 
         static let kDBAppKey = "YOUR_DROPBOX_APP_KEY"
-        static let kDBAppSecret = "YOUR_DROPBOX_APP_SECRET"
 
     }
 

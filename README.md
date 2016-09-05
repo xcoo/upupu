@@ -31,11 +31,15 @@ Write your app information and specify "Full Dropbox" in Access level section.
 
 Next, you need to change source code.
 
-Modify Upupu-prefix.pch.
+Modify Constants.swift.
 
-    // Dropbox
-    #define kDBAppKey    @"YOUR_DROPBOX_APP_KEY"
-    #define kDBAppSecret @"YOUR_DROPBOX_APP_SECRET"
+```swift
+struct Dropbox {
+
+    static let kDBAppKey = "YOUR_DROPBOX_APP_KEY"
+
+}
+```
 
 Click Upupu -> info -> URL Types on Xcode and modify URL Scheme.
 
