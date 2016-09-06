@@ -41,6 +41,10 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
     }
 
     override func viewWillAppear(animated: Bool) {
+        let application = UIApplication.sharedApplication()
+        application.setStatusBarHidden(false, withAnimation: .Fade)
+        application.setStatusBarStyle(.LightContent, animated: true)
+
         imageView.image = image
 
         nameField.enabled = image != nil

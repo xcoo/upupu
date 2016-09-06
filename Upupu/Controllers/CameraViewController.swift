@@ -130,6 +130,7 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
         imagePicker.modalTransitionStyle = .FlipHorizontal
         imagePicker.allowsEditing = false
 
+        UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Fade)
         presentViewController(imagePicker, animated: true, completion: nil)
     }
 
