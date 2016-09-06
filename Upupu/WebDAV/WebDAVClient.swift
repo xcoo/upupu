@@ -15,11 +15,13 @@ class WebDAVClient {
 
     static func createDirectory(urlString: String) -> WebDAVRequest {
         let alamofireRequest = request("MKCOL", urlString)
+        alamofireRequest.validate()
         return WebDAVRequest(alamofireRequest: alamofireRequest)
     }
 
     static func upload(urlString: String, data: NSData) -> WebDAVRequest {
         let alamofireRequest = Alamofire.upload(.PUT, urlString, data: data)
+        alamofireRequest.validate()
         return WebDAVRequest(alamofireRequest: alamofireRequest)
     }
 

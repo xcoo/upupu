@@ -54,22 +54,24 @@ class WebDAVUploader: Uploader, Uploadable {
         }
         request.response { (response, error) in
             print(response)
-            if let error = error {
+
+            guard error == nil || response?.statusCode == 405 else {
                 print(error)
                 completion?(error: error)
-            } else {
-                let request = WebDAVClient.upload(putURL, data: data)
-                if let user = Settings.webDAVUser, password = Settings.webDAVPassword {
-                    request.authenticate(user: user, password: password)
-                }
-                request.response { (response, error) in
-                    print(response)
-                    if let error = error {
-                        print(error)
-                        completion?(error: error)
-                    } else {
-                        completion?(error: nil)
-                    }
+                return
+            }
+
+            let request = WebDAVClient.upload(putURL, data: data)
+            if let user = Settings.webDAVUser, password = Settings.webDAVPassword {
+                request.authenticate(user: user, password: password)
+            }
+            request.response { (response, error) in
+                print(response)
+                if let error = error {
+                    print(error)
+                    completion?(error: error)
+                } else {
+                    completion?(error: nil)
                 }
             }
         }
