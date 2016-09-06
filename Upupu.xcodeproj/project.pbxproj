@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		160C2925148645870013E277 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 164041CE14863ADF00900BAE /* icon.png */; };
 		163A159F1500F1EA0058FBB2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163A159E1500F1EA0058FBB2 /* AVFoundation.framework */; };
 		163A15A51500F2540058FBB2 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163A15A41500F2540058FBB2 /* ImageIO.framework */; };
 		163A15AD150100340058FBB2 /* camera_icon_circle.png in Resources */ = {isa = PBXBuildFile; fileRef = 163A15AB150100340058FBB2 /* camera_icon_circle.png */; };
@@ -75,7 +74,6 @@
 		163A15B4150101AA0058FBB2 /* camera_icon_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera_icon_back@2x.png"; sourceTree = "<group>"; };
 		163A15B7150102020058FBB2 /* camera_icon_check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_icon_check.png; sourceTree = "<group>"; };
 		163A15B8150102020058FBB2 /* camera_icon_check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera_icon_check@2x.png"; sourceTree = "<group>"; };
-		164041CE14863ADF00900BAE /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = SOURCE_ROOT; };
 		166778AE150218AB00A37A8D /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		16A96FE81484F8B500BD25E3 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		16A96FFE14850AEB00BD25E3 /* UploadViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UploadViewController.xib; sourceTree = "<group>"; };
@@ -166,7 +164,6 @@
 		169F28BF1486389400149DB5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				164041CE14863ADF00900BAE /* icon.png */,
 				163A15B3150101AA0058FBB2 /* camera_icon_back.png */,
 				163A15B4150101AA0058FBB2 /* camera_icon_back@2x.png */,
 				163A15AB150100340058FBB2 /* camera_icon_circle.png */,
@@ -367,7 +364,6 @@
 				16A96FEA1484F8B500BD25E3 /* MainWindow.xib in Resources */,
 				8F8D8A2F1ACA750D00B8EF07 /* Images.xcassets in Resources */,
 				16A96FFF14850AEB00BD25E3 /* UploadViewController.xib in Resources */,
-				160C2925148645870013E277 /* icon.png in Resources */,
 				8F624F0B14CDF05700CBBD6A /* Settings.bundle in Resources */,
 				16CE723F14FE2AA1005A37F6 /* camera_focus.png in Resources */,
 				16CE724014FE2AA1005A37F6 /* camera_focus@2x.png in Resources */,
