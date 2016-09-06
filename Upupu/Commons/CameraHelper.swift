@@ -16,14 +16,29 @@ enum CameraPosition {
     case Back
 }
 
-class CameraHelper: NSObject {
-
-    static let kCameraHelperCaptureRequestKey = "isCaptured"
+class CameraHelper {
 
     static var sharedInstance = CameraHelper()
 
-    private(set) var capturedImage: UIImage?
-    var isCaptured = false
+    static var cameraAvailable: Bool {
+        return UIImagePickerController.isSourceTypeAvailable(.Camera)
+    }
+
+    static var frontCameraAvailable: Bool {
+        if let devices = AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo)
+            as? [AVCaptureDevice] {
+            return !devices.map({ $0.position }).filter({ $0 == .Front }).isEmpty
+        }
+        return false
+    }
+
+    static var torchAvailable: Bool {
+        if let devices = AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo)
+            as? [AVCaptureDevice] {
+            return !devices.filter({ $0.hasTorch }).isEmpty
+        }
+        return false
+    }
 
     var cameraPosition: CameraPosition {
         guard let videoInput = videoInput else {
@@ -44,10 +59,17 @@ class CameraHelper: NSObject {
             guard let device = videoInput?.device else {
                 return
             }
-            if availableTorch() {
+            if torchAvailable {
                 setTorch(enable, withCaptureDevice: device)
             }
         }
+    }
+
+    var torchAvailable: Bool {
+        if let videoInput = videoInput {
+            return videoInput.device.hasTorch
+        }
+        return false
     }
 
     var focus: CGPoint {
@@ -55,7 +77,7 @@ class CameraHelper: NSObject {
             guard let device = videoInput?.device else {
                 return CGPoint.zero
             }
-            if CameraHelper.support() {
+            if CameraHelper.cameraAvailable {
                 return focusWithCaptureDevice(device)
             }
             return CGPoint.zero
@@ -65,7 +87,7 @@ class CameraHelper: NSObject {
             guard let device = videoInput?.device else {
                 return
             }
-            if CameraHelper.support() {
+            if CameraHelper.cameraAvailable {
                 setFocus(newFocus, withCaptureDevice: device)
             }
         }
@@ -75,27 +97,8 @@ class CameraHelper: NSObject {
     private var videoInput: AVCaptureDeviceInput?
     private var captureStillImageOutput: AVCaptureStillImageOutput!
 
-    class func support() -> Bool {
-        return UIImagePickerController.isSourceTypeAvailable(.Camera)
-    }
-
-    class func supportFrontCamera() -> Bool {
-        if let devices = AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo) as? [AVCaptureDevice] {
-            return !devices.map({ $0.position }).filter({ $0 == .Front }).isEmpty
-        }
-        return false
-    }
-
-    class func supportTorch() -> Bool {
-        if let devices = AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo) as? [AVCaptureDevice] {
-            return !devices.filter({ $0.hasTorch }).isEmpty
-        }
-        return false
-    }
-
-    override init () {
-        super.init()
-        if CameraHelper.support() {
+    private init () {
+        if CameraHelper.cameraAvailable {
             self.initialize()
         }
     }
@@ -128,17 +131,14 @@ class CameraHelper: NSObject {
         }
 
         captureStillImageOutput = AVCaptureStillImageOutput()
-        captureStillImageOutput?.outputSettings = [AVVideoCodecKey: AVVideoCodecJPEG]
+        captureStillImageOutput.outputSettings = [AVVideoCodecKey: AVVideoCodecJPEG]
 
         session_.addOutput(captureStillImageOutput)
 
-        isCaptured = true
-
         UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
-        NSNotificationCenter.defaultCenter().addObserver(self,
-                                                         selector: #selector(deviceOrientationDidChange),
-                                                         name: UIDeviceOrientationDidChangeNotification,
-                                                         object: nil)
+        NSNotificationCenter.defaultCenter()
+            .addObserver(self, selector: #selector(deviceOrientationDidChange),
+                         name: UIDeviceOrientationDidChangeNotification, object: nil)
     }
 
     func previewView(bounds: CGRect) -> UIView {
@@ -166,48 +166,27 @@ class CameraHelper: NSObject {
         session?.stopRunning()
     }
 
-    func capture() {
-        guard session != nil && isCaptured else {
-            return
-        }
-
-        isCaptured = false
-        capturedImage = nil
-
-        var videoConnection: AVCaptureConnection?
-        if let connections = captureStillImageOutput.connections as? [AVCaptureConnection] {
-            for con in connections {
-                for p in con.inputPorts {
-                    if p.mediaType == AVMediaTypeVideo {
-                        videoConnection = con
-                        break
-                    }
+    func capture(completion: ((image: UIImage?, error: NSError?) -> Void)?) {
+        captureStillImageOutput.captureStillImageAsynchronouslyFromConnection(
+            captureStillImageOutput.connectionWithMediaType(AVMediaTypeVideo)) {
+                (sampleBuffer, error) in
+                guard let sampleBuffer = sampleBuffer else {
+                    completion?(image: nil, error: error)
+                    return
                 }
-                if videoConnection != nil {
-                    break
+
+                let exifAttachment =
+                    CMGetAttachment(sampleBuffer, kCGImagePropertyExifDictionary, nil)
+                if exifAttachment != nil {
+                    print("Attachment: \(exifAttachment)")
+                } else {
+                    print("No attachment")
                 }
-            }
-        }
 
-        captureStillImageOutput.captureStillImageAsynchronouslyFromConnection(videoConnection) {
-            [weak self] (imageSampleBuffer, error) in
-            guard let imageSampleBuffer = imageSampleBuffer else {
-                return
-            }
-
-            let exifAttachment = CMGetAttachment(imageSampleBuffer, kCGImagePropertyExifDictionary,
-                                                 nil)
-            if exifAttachment != nil {
-                print("Attachment: \(exifAttachment)")
-            } else {
-                print("No attachment")
-            }
-
-            let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageSampleBuffer)
-            let image = UIImage(data: imageData)
-            self?.capturedImage = image
-
-            self?.setValue(true, forKey: CameraHelper.kCameraHelperCaptureRequestKey)
+                let imageData =
+                    AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(sampleBuffer)
+                let image = UIImage(data: imageData)
+                completion?(image: image, error: nil)
         }
     }
 
@@ -216,40 +195,44 @@ class CameraHelper: NSObject {
         return isBackCamera ? CameraPosition.Back : CameraPosition.Front
     }
 
-    private func switchSideWithCaptureDeviceInput(currentVideoInput: AVCaptureDeviceInput,
-                                                  captureSession session: AVCaptureSession) -> AVCaptureDeviceInput? {
-        guard CameraHelper.supportFrontCamera() else {
-            return nil
-        }
+    private func sideSwitchedInput(currentVideoInput: AVCaptureDeviceInput,
+                                   captureSession session: AVCaptureSession)
+        -> AVCaptureDeviceInput? {
+            guard CameraHelper.frontCameraAvailable else {
+                return nil
+            }
 
-        var newVideoInput: AVCaptureDeviceInput?
+            var newVideoInput: AVCaptureDeviceInput?
 
-        let isBackCamera = currentVideoInput.device.position == .Back
+            session.stopRunning()
+            session.removeInput(currentVideoInput)
 
-        session.stopRunning()
-        session.removeInput(currentVideoInput)
-
-        if let devices = AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo) as? [AVCaptureDevice] {
-            for device in devices {
-                if device.hasMediaType(AVMediaTypeVideo) {
-                    if isBackCamera {
-                        if device.position == .Front {
-                            do {
-                                try newVideoInput = AVCaptureDeviceInput(device: device)
-                                break
-                            } catch {}
-                        }
-                    } else {
-                        if device.position == .Back {
-                            do {
-                                try newVideoInput = AVCaptureDeviceInput(device: device)
-                                break
-                            } catch {}
+            if let devices = AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo)
+                as? [AVCaptureDevice] {
+                for device in devices {
+                    if device.hasMediaType(AVMediaTypeVideo) {
+                        if currentVideoInput.device.position == .Back {
+                            if device.position == .Front {
+                                do {
+                                    try newVideoInput = AVCaptureDeviceInput(device: device)
+                                    break
+                                } catch {
+                                    print("Failed to create input")
+                                }
+                            }
+                        } else {
+                            if device.position == .Back {
+                                do {
+                                    try newVideoInput = AVCaptureDeviceInput(device: device)
+                                    break
+                                } catch {
+                                    print("Failed to create input")
+                                }
+                            }
                         }
                     }
                 }
             }
-        }
 
         if newVideoInput != nil {
             session.addInput(newVideoInput)
@@ -303,23 +286,7 @@ class CameraHelper: NSObject {
             return
         }
 
-        self.videoInput = switchSideWithCaptureDeviceInput(videoInput, captureSession: session)
-    }
-
-    func availableTorch() -> Bool {
-        if let videoInput = videoInput {
-            return videoInput.device.hasTorch
-        }
-        return false
-    }
-
-    // MARK: - Key value observation
-
-    override class func automaticallyNotifiesObserversForKey(key: String) -> Bool {
-        if key == CameraHelper.kCameraHelperCaptureRequestKey {
-            return true
-        }
-        return super.automaticallyNotifiesObserversForKey(key)
+        self.videoInput = sideSwitchedInput(videoInput, captureSession: session)
     }
 
     // MARK: - Orientation
@@ -334,7 +301,7 @@ class CameraHelper: NSObject {
         case .Portrait:
             orientation = .Portrait
         case .PortraitUpsideDown:
-            orientation = .PortraitUpsideDown
+            orientation = .Portrait
         case .LandscapeLeft:
             orientation = .LandscapeRight
         case .LandscapeRight:
@@ -345,22 +312,9 @@ class CameraHelper: NSObject {
 
         session.beginConfiguration()
 
-        var videoConnection: AVCaptureConnection?
-        if let connections = captureStillImageOutput.connections as? [AVCaptureConnection] {
-            for con in connections {
-                if let inputPorts = con.inputPorts as? [AVCaptureInputPort] {
-                    for p in inputPorts {
-                        if p.mediaType == AVMediaTypeVideo {
-                            videoConnection = con
-                        }
-                    }
-                }
-            }
-        }
-
-        if let videoConnection = videoConnection {
-            if videoConnection.supportsVideoOrientation {
-                videoConnection.videoOrientation = orientation
+        if let connection = captureStillImageOutput.connectionWithMediaType(AVMediaTypeVideo) {
+            if connection.supportsVideoOrientation {
+                connection.videoOrientation = orientation
             }
         }
 

@@ -42,9 +42,9 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        switchButton.hidden = !CameraHelper.supportFrontCamera()
-        torchButton.hidden = !CameraHelper.supportTorch() ||
-            !CameraHelper.sharedInstance.availableTorch()
+        switchButton.hidden = !CameraHelper.frontCameraAvailable
+        torchButton.hidden = !CameraHelper.torchAvailable ||
+            !CameraHelper.sharedInstance.torchAvailable
 
         switchButton.addTarget(self, action: #selector(switchCamera),
                                forControlEvents: .TouchUpInside)
@@ -73,7 +73,7 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
         overlayView.frame = view.frame
         shutterLayer.frame = overlayView.frame
 
-        if CameraHelper.support() {
+        if CameraHelper.cameraAvailable {
             previewView.hidden = true
             for view in previewView.subviews {
                 view.removeFromSuperview()
@@ -114,10 +114,9 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
         overlayView.addGestureRecognizer(tapGesture)
 
         UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
-        NSNotificationCenter.defaultCenter().addObserver(self,
-                                                         selector: #selector(deviceOrientationDidChange),
-                                                         name: UIDeviceOrientationDidChangeNotification,
-                                                         object: nil)
+        NSNotificationCenter.defaultCenter()
+            .addObserver(self, selector: #selector(deviceOrientationDidChange),
+                         name: UIDeviceOrientationDidChangeNotification, object: nil)
     }
 
     // MARK: - Action
@@ -131,9 +130,6 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
         imagePicker.modalTransitionStyle = .FlipHorizontal
         imagePicker.allowsEditing = false
 
-        CameraHelper.sharedInstance.addObserver(self,
-                                                forKeyPath: CameraHelper.kCameraHelperCaptureRequestKey,
-                                                options: .New, context: nil)
         presentViewController(imagePicker, animated: true, completion: nil)
     }
 
@@ -149,11 +145,30 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
 
         CATransaction.commit()
 
-        CameraHelper.sharedInstance.addObserver(self,
-                                                forKeyPath: CameraHelper.kCameraHelperCaptureRequestKey,
-                                                options: .New,
-                                                context: nil)
-        CameraHelper.sharedInstance.capture()
+        CameraHelper.sharedInstance.capture {[weak self] (image, error) in
+            guard error == nil else {
+                print(error)
+                if let self_ = self {
+                    UIAlertController.showSimpleAlertIn(self_.navigationController,
+                        title: "Error",
+                        message: "Failed to capture image")
+                }
+                return
+            }
+
+            guard let image = image else {
+                print("No image")
+                if let self_ = self {
+                    UIAlertController.showSimpleAlertIn(self_.navigationController,
+                        title: "Error",
+                        message: "Failed to capture image")
+                }
+                return
+            }
+
+            self?.isSourcePhotoLibrary = false
+            self?.afterTaken(image)
+        }
     }
 
     private func afterTaken(image: UIImage) {
@@ -164,7 +179,7 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
 
     @objc private func switchCamera(sender: UIButton) {
         CameraHelper.sharedInstance.switchCamera()
-        torchButton.hidden = !CameraHelper.sharedInstance.availableTorch()
+        torchButton.hidden = !CameraHelper.sharedInstance.torchAvailable
     }
 
     @objc private func switchTorch(sender: UIButton) {
@@ -278,24 +293,6 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         picker.dismissViewControllerAnimated(true) {
             UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Fade)
-        }
-    }
-
-    // MARK: - Key value observation
-
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?,
-                                         change: [String : AnyObject]?,
-                                         context: UnsafeMutablePointer<Void>) {
-        if let keyPath = keyPath {
-            object?.removeObserver(self, forKeyPath: keyPath)
-        }
-
-        if object?.dynamicType === CameraHelper.self &&
-            keyPath == CameraHelper.kCameraHelperCaptureRequestKey {
-            if let origImage = CameraHelper.sharedInstance.capturedImage {
-                isSourcePhotoLibrary = false
-                afterTaken(origImage)
-            }
         }
     }
 
