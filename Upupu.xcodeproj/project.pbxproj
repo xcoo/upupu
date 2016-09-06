@@ -41,7 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1601F9D3147F9A1000E3A13C /* Upupu-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Upupu-Info.plist"; sourceTree = "<group>"; };
+		1601F9D3147F9A1000E3A13C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		163A159E1500F1EA0058FBB2 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		163A15A41500F2540058FBB2 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		166778AE150218AB00A37A8D /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -121,7 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				8F624F0A14CDF05700CBBD6A /* Settings.bundle */,
-				1601F9D3147F9A1000E3A13C /* Upupu-Info.plist */,
+				1601F9D3147F9A1000E3A13C /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -442,7 +442,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				GCC_VERSION = "";
-				INFOPLIST_FILE = "Upupu/Upupu-Info.plist";
+				INFOPLIST_FILE = Upupu/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.xcoo.upupu-dev";
@@ -474,7 +474,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				GCC_VERSION = "";
-				INFOPLIST_FILE = "Upupu/Upupu-Info.plist";
+				INFOPLIST_FILE = Upupu/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.xcoo.upupu-dev";
