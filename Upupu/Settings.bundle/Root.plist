@@ -11,14 +11,14 @@
 			<string>PSGroupSpecifier</string>
 		</dict>
 		<dict>
-			<key>Type</key>
-			<string>PSToggleSwitchSpecifier</string>
-			<key>Title</key>
-			<string>WebDAV</string>
-			<key>Key</key>
-			<string>webdav_enabled_pref</string>
 			<key>DefaultValue</key>
 			<false/>
+			<key>Key</key>
+			<string>webdav_enabled_pref</string>
+			<key>Title</key>
+			<string>WebDAV</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
 		</dict>
 		<dict>
 			<key>AutocapitalizationType</key>
@@ -37,46 +37,46 @@
 			<string>PSTextFieldSpecifier</string>
 		</dict>
 		<dict>
-			<key>Type</key>
-			<string>PSTextFieldSpecifier</string>
+			<key>Key</key>
+			<string>webdav_user_pref</string>
 			<key>KeyboardType</key>
 			<string>Alphabet</string>
 			<key>Title</key>
 			<string>User</string>
-			<key>Key</key>
-			<string>webdav_user_pref</string>
-		</dict>
-		<dict>
 			<key>Type</key>
 			<string>PSTextFieldSpecifier</string>
-			<key>Title</key>
-			<string>Password</string>
-			<key>Key</key>
-			<string>webdav_pass_pref</string>
+		</dict>
+		<dict>
 			<key>IsSecure</key>
 			<true/>
+			<key>Key</key>
+			<string>webdav_pass_pref</string>
+			<key>Title</key>
+			<string>Password</string>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
 		</dict>
 		<dict>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
 			<key>Title</key>
 			<string>Photo</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
 		</dict>
 		<dict>
-			<key>Type</key>
-			<string>PSMultiValueSpecifier</string>
-			<key>Title</key>
-			<string>Quality</string>
-			<key>Key</key>
-			<string>photo_quality_pref</string>
 			<key>DefaultValue</key>
 			<integer>0</integer>
+			<key>Key</key>
+			<string>photo_quality_pref</string>
+			<key>Title</key>
+			<string>Quality</string>
 			<key>Titles</key>
 			<array>
 				<string>High</string>
 				<string>Medium</string>
 				<string>Low</string>
 			</array>
+			<key>Type</key>
+			<string>PSMultiValueSpecifier</string>
 			<key>Values</key>
 			<array>
 				<integer>0</integer>
@@ -85,20 +85,20 @@
 			</array>
 		</dict>
 		<dict>
-			<key>Type</key>
-			<string>PSMultiValueSpecifier</string>
-			<key>Title</key>
-			<string>Resolution</string>
-			<key>Key</key>
-			<string>photo_resolution_pref</string>
 			<key>DefaultValue</key>
 			<integer>0</integer>
+			<key>Key</key>
+			<string>photo_resolution_pref</string>
+			<key>Title</key>
+			<string>Resolution</string>
 			<key>Titles</key>
 			<array>
 				<string>Original</string>
 				<string>1600 x 1200</string>
 				<string>800 x 600</string>
 			</array>
+			<key>Type</key>
+			<string>PSMultiValueSpecifier</string>
 			<key>Values</key>
 			<array>
 				<integer>0</integer>
@@ -107,28 +107,38 @@
 			</array>
 		</dict>
 		<dict>
-			<key>Type</key>
-			<string>PSToggleSwitchSpecifier</string>
-			<key>Title</key>
-			<string>Save to album</string>
-			<key>Key</key>
-			<string>photo_save_album_pref</string>
 			<key>DefaultValue</key>
 			<true/>
+			<key>Key</key>
+			<string>photo_save_album_pref</string>
+			<key>Title</key>
+			<string>Save to album</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
 		</dict>
 		<dict>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
 			<key>Title</key>
 			<string></string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
 		</dict>
 		<dict>
-			<key>Type</key>
-			<string>IASKOpenURLSpecifier</string>
+			<key>DefaultValue</key>
+			<string>1.2.1 (20150925)</string>
+			<key>Key</key>
+			<string>version_pref</string>
 			<key>Title</key>
-			<string>Xcoo, Inc.</string>
+			<string>Version</string>
+			<key>Type</key>
+			<string>PSTitleValueSpecifier</string>
+		</dict>
+		<dict>
 			<key>File</key>
-			<string>http://www.xcoo.jp/</string>
+			<string>Acknowledgements</string>
+			<key>Title</key>
+			<string>Acknowledgements</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
 		</dict>
 	</array>
 	<key>StringsTable</key>

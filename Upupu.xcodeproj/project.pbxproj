@@ -245,6 +245,7 @@
 				DCC8EC27C80A2A2808295338 /* [CP] Embed Pods Frameworks */,
 				27688647D7886A81F9E8F55A /* [CP] Copy Pods Resources */,
 				8FFE1B271D7435FC00CCEE67 /* ShellScript */,
+				8F2064D31D7EBCE20092B180 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -311,6 +312,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Upupu/Pods-Upupu-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		8F2064D31D7EBCE20092B180 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "VERSION=$(/usr/libexec/PlistBuddy -c \"Print CFBundleShortVersionString\" 'Upupu/Info.plist')\nBUILD=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" 'Upupu/Info.plist')\n/usr/libexec/PlistBuddy -c \"Set :PreferenceSpecifiers:10:DefaultValue '$VERSION ($BUILD)'\" 'Upupu/Settings.bundle/Root.plist'";
 		};
 		8FFE1B271D7435FC00CCEE67 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
