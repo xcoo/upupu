@@ -52,7 +52,7 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
                               forControlEvents: .TouchUpInside)
 
         focusLayer = CALayer()
-        let focusImage = UIImage(named: "camera_focus.png")
+        let focusImage = UIImage(named: "Camera/Focus")
         focusLayer.contents = focusImage?.CGImage
         overlayView.layer.addSublayer(focusLayer)
 
@@ -186,10 +186,10 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
         let cameraHelper = CameraHelper.sharedInstance
         if cameraHelper.torch {
             cameraHelper.torch = false
-            torchButton.setImage(UIImage(named: "camera_icon_light_off.png"), forState: .Normal)
+            torchButton.setImage(UIImage(named: "Camera/TorchOff.png"), forState: .Normal)
         } else {
             cameraHelper.torch = true
-            torchButton.setImage(UIImage(named: "camera_icon_light_on.png"), forState: .Normal)
+            torchButton.setImage(UIImage(named: "Camera/TorchOn.png"), forState: .Normal)
         }
     }
 

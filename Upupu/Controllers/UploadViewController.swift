@@ -127,7 +127,7 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
 
     private func showFailed(hud: MBProgressHUD?) {
         if let hud = hud {
-            hud.customView = UIImageView(image: UIImage(named: "failure_icon"))
+            hud.customView = UIImageView(image: UIImage(named: "Upload/Failure"))
             hud.mode = .CustomView
             hud.label.text = "Failed"
             hud.detailsLabel.text = ""
@@ -136,7 +136,7 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
 
     private func showSucceeded(hud: MBProgressHUD?) {
         if let hud = hud {
-            hud.customView = UIImageView(image: UIImage(named: "success_icon"))
+            hud.customView = UIImageView(image: UIImage(named: "Upload/Success"))
             hud.mode = .CustomView
             hud.label.text = "Succeeded"
             hud.detailsLabel.text = ""

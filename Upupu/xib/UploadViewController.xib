@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -58,21 +58,21 @@
                     <rect key="frame" x="0.0" y="436" width="320" height="44"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <items>
-                        <barButtonItem image="camera_icon_back.png" style="plain" id="63">
+                        <barButtonItem image="Camera/Back" style="plain" id="63">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="retakeButtonTapped:" destination="-1" id="k1F-zX-92P"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="67"/>
-                        <barButtonItem image="camera_icon_check.png" style="plain" id="64">
+                        <barButtonItem image="Camera/Check" style="plain" id="64">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="uploadButtonTapped:" destination="-1" id="NoT-cs-I1R"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="68"/>
-                        <barButtonItem image="camera_icon_setting.png" style="plain" id="66">
+                        <barButtonItem image="Upload/Settings" style="plain" id="66">
                             <color key="tintColor" red="0.94117647059999998" green="0.96078431369999995" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="settingsButtonTapped:" destination="-1" id="jxh-9e-ScB"/>
@@ -87,8 +87,8 @@
         </view>
     </objects>
     <resources>
-        <image name="camera_icon_back.png" width="18" height="22"/>
-        <image name="camera_icon_check.png" width="25" height="22"/>
-        <image name="camera_icon_setting.png" width="22" height="22"/>
+        <image name="Camera/Back" width="18" height="22"/>
+        <image name="Camera/Check" width="25" height="22"/>
+        <image name="Upload/Settings" width="22" height="22"/>
     </resources>
 </document>
