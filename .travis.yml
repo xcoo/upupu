@@ -1,0 +1,8 @@
+language: objective-c
+osx_image: xcode7.3
+install:
+  - gem install xcpretty
+  - pod install --repo-update
+script:
+  - set -o pipefail
+  - xcodebuild -workspace Upupu.xcworkspace -scheme 'Upupu' -sdk iphonesimulator -configuration Debug build | xcpretty -c
