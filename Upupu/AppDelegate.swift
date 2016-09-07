@@ -21,7 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         setupDefaults()
         Dropbox.setupWithAppKey(Constants.Dropbox.kDBAppKey)
-        self.window!.rootViewController = CameraController()
         return true
     }
 

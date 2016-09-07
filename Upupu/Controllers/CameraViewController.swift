@@ -9,6 +9,8 @@
 
 import UIKit
 
+import Cartography
+
 protocol CameraViewControllerDelegate: class {
 
     func cameraViewController(cameraViewController: CameraViewController,
@@ -28,39 +30,42 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
     private var shutterLayer: CALayer!
     private var inFocusProcess = false
 
-    @IBOutlet private weak var previewView: UIView!
-    @IBOutlet private weak var overlayView: UIView!
+    private var cameraView: CameraView!
 
-    @IBOutlet private weak var cameraButton: UIBarButtonItem!
-    @IBOutlet private weak var clipsButton: UIBarButtonItem!
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: nil, bundle: nil)
+    }
 
-    @IBOutlet private weak var switchButton: UIButton!
-    @IBOutlet private weak var torchButton: UIButton!
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
-    @IBOutlet private weak var toolBar: UIToolbar!
+    override func loadView() {
+        cameraView = CameraView()
+        view = cameraView
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        switchButton.hidden = !CameraHelper.frontCameraAvailable
-        torchButton.hidden = !CameraHelper.torchAvailable ||
-            !CameraHelper.sharedInstance.torchAvailable
+        cameraView.cameraButton.action = #selector(takePicture)
+        cameraView.clipsButton.action = #selector(clips)
 
-        switchButton.addTarget(self, action: #selector(switchCamera),
-                               forControlEvents: .TouchUpInside)
-        torchButton.addTarget(self, action: #selector(switchTorch),
-                              forControlEvents: .TouchUpInside)
+        cameraView.switchButton.addTarget(self, action: #selector(switchCamera),
+                                          forControlEvents: .TouchUpInside)
+        cameraView.torchButton.addTarget(self, action: #selector(switchTorch),
+                                         forControlEvents: .TouchUpInside)
 
         focusLayer = CALayer()
         let focusImage = UIImage(named: "Camera/Focus")
         focusLayer.contents = focusImage?.CGImage
-        overlayView.layer.addSublayer(focusLayer)
+        cameraView.overlayView.layer.addSublayer(focusLayer)
 
         shutterLayer = CALayer()
-        shutterLayer.frame = overlayView.frame
+        shutterLayer.frame = cameraView.overlayView.frame
         shutterLayer.backgroundColor = UIColor.whiteColor().CGColor
         shutterLayer.opacity = 0
-        overlayView.layer.addSublayer(shutterLayer)
+        cameraView.overlayView.layer.addSublayer(shutterLayer)
     }
 
     override func didReceiveMemoryWarning() {
@@ -69,24 +74,21 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
 
     override func viewWillAppear(animated: Bool) {
         UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Fade)
-        view.frame = view.bounds
-        overlayView.frame = view.frame
-        shutterLayer.frame = overlayView.frame
 
         if CameraHelper.cameraAvailable {
-            previewView.hidden = true
-            for view in previewView.subviews {
+            cameraView.previewView.hidden = true
+            for view in cameraView.previewView.subviews {
                 view.removeFromSuperview()
             }
 
             var rect = UIScreen.mainScreen().applicationFrame
-            rect.size.height -= toolBar.frame.size.height
+            rect.size.height -= cameraView.toolbar.frame.size.height
             let preview = CameraHelper.sharedInstance.previewView(rect)
 
             CameraHelper.sharedInstance.startRunning()
 
-            previewView.addSubview(preview)
-            previewView.hidden = false
+            cameraView.previewView.addSubview(preview)
+            cameraView.previewView.hidden = false
             setup()
         } else {
             UIAlertController.showSimpleAlertIn(navigationController, title: "Error",
@@ -111,7 +113,7 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
 
     private func setup() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapPreview))
-        overlayView.addGestureRecognizer(tapGesture)
+        cameraView.overlayView.addGestureRecognizer(tapGesture)
 
         UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
         NSNotificationCenter.defaultCenter()
@@ -121,7 +123,7 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
 
     // MARK: - Action
 
-    @IBAction private func clips(sender: UIBarButtonItem) {
+    @objc private func clips(sender: UIBarButtonItem) {
         CameraHelper.sharedInstance.stopRunning()
 
         let imagePicker = UIImagePickerController()
@@ -134,7 +136,7 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
         presentViewController(imagePicker, animated: true, completion: nil)
     }
 
-    @IBAction private func takePicture(sender: UIBarButtonItem) {
+    @objc private func takePicture(sender: UIBarButtonItem) {
         CATransaction.begin()
 
         let opacityAnimation = CABasicAnimation(keyPath: "opacity")
@@ -180,17 +182,18 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
 
     @objc private func switchCamera(sender: UIButton) {
         CameraHelper.sharedInstance.switchCamera()
-        torchButton.hidden = !CameraHelper.sharedInstance.torchAvailable
+        cameraView.torchButton.hidden = !CameraHelper.sharedInstance.torchAvailable
     }
 
     @objc private func switchTorch(sender: UIButton) {
         let cameraHelper = CameraHelper.sharedInstance
         if cameraHelper.torch {
             cameraHelper.torch = false
-            torchButton.setImage(UIImage(named: "Camera/TorchOff.png"), forState: .Normal)
+            cameraView.torchButton.setImage(UIImage(named: "Camera/TorchOff.png"),
+                                            forState: .Normal)
         } else {
             cameraHelper.torch = true
-            torchButton.setImage(UIImage(named: "Camera/TorchOn.png"), forState: .Normal)
+            cameraView.torchButton.setImage(UIImage(named: "Camera/TorchOn.png"), forState: .Normal)
         }
     }
 
@@ -201,17 +204,23 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
             if let orientation = self?.orientation {
                 switch orientation {
                 case .Portrait:
-                    self?.switchButton.transform = CGAffineTransformMakeRotation(0)
-                    self?.torchButton.transform = CGAffineTransformMakeRotation(0)
+                    self?.cameraView.switchButton.transform = CGAffineTransformMakeRotation(0)
+                    self?.cameraView.torchButton.transform = CGAffineTransformMakeRotation(0)
                 case .PortraitUpsideDown:
-                    self?.switchButton.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
-                    self?.torchButton.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
+                    self?.cameraView.switchButton.transform =
+                        CGAffineTransformMakeRotation(CGFloat(M_PI))
+                    self?.cameraView.torchButton.transform =
+                        CGAffineTransformMakeRotation(CGFloat(M_PI))
                 case .LandscapeLeft:
-                    self?.switchButton.transform = CGAffineTransformMakeRotation(CGFloat(M_PI) / 2)
-                    self?.torchButton.transform = CGAffineTransformMakeRotation(CGFloat(M_PI) / 2)
+                    self?.cameraView.switchButton.transform =
+                        CGAffineTransformMakeRotation(CGFloat(M_PI) / 2)
+                    self?.cameraView.torchButton.transform =
+                        CGAffineTransformMakeRotation(CGFloat(M_PI) / 2)
                 case .LandscapeRight:
-                    self?.switchButton.transform = CGAffineTransformMakeRotation(-CGFloat(M_PI) / 2)
-                    self?.torchButton.transform = CGAffineTransformMakeRotation(-CGFloat(M_PI) / 2)
+                    self?.cameraView.switchButton.transform =
+                        CGAffineTransformMakeRotation(-CGFloat(M_PI) / 2)
+                    self?.cameraView.torchButton.transform =
+                        CGAffineTransformMakeRotation(-CGFloat(M_PI) / 2)
                 default:
                     break
                 }
@@ -232,8 +241,8 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
 
         inFocusProcess = true
 
-        let p = sender.locationInView(previewView)
-        let viewSize = previewView.frame.size
+        let p = sender.locationInView(cameraView.previewView)
+        let viewSize = cameraView.previewView.frame.size
         let focusPoint = CGPoint.init(x: 1 - p.x / viewSize.width, y: p.y / viewSize.height)
 
         CameraHelper.sharedInstance.focus = focusPoint
