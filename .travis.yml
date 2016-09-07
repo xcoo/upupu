@@ -6,3 +6,6 @@ install:
 script:
   - set -o pipefail
   - xcodebuild -workspace Upupu.xcworkspace -scheme 'Upupu' -sdk iphonesimulator -configuration Debug build | xcpretty -c
+branches:
+  only:
+    - master
