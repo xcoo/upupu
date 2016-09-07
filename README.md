@@ -1,5 +1,7 @@
 # Upupu
 
+[![Build Status](https://travis-ci.org/xcoo/upupu.svg?branch=master)](https://travis-ci.org/xcoo/upupu)
+
 Simple camera application that backups pictures on WebDAV server.
 
 ![Upupu Screenshots](https://raw.githubusercontent.com/xcoo/upupu/master/Screenshots/screenshots.jpg)
