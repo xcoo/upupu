@@ -1,6 +1,7 @@
 # Upupu
 
 [![Build Status](https://travis-ci.org/xcoo/upupu.svg?branch=master)](https://travis-ci.org/xcoo/upupu)
+[![Dependency Status](https://www.versioneye.com/user/projects/57d115eec07f2e0044bd36af/badge.svg)](https://www.versioneye.com/user/projects/57d115eec07f2e0044bd36af)
 ![Supported iOS](https://img.shields.io/badge/iOS-8.0%2B-brightgreen.svg)
 
 Simple camera application that backups pictures on WebDAV server.
