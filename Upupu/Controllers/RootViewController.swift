@@ -36,7 +36,7 @@ UploadViewControllerDelegate, IASKSettingsDelegate {
         cameraViewController = CameraViewController()
         cameraViewController.delegate = self
 
-        uploadViewController = UploadViewController(nibName: "UploadViewController", bundle: nil)
+        uploadViewController = UploadViewController()
         uploadViewController.delegate = self
 
         navigationBar.barStyle = UIBarStyle.BlackOpaque

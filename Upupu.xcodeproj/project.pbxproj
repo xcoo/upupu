@@ -10,7 +10,6 @@
 		163A159F1500F1EA0058FBB2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163A159E1500F1EA0058FBB2 /* AVFoundation.framework */; };
 		163A15A51500F2540058FBB2 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163A15A41500F2540058FBB2 /* ImageIO.framework */; };
 		166778AF150218AB00A37A8D /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 166778AE150218AB00A37A8D /* CoreMedia.framework */; };
-		16A96FFF14850AEB00BD25E3 /* UploadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16A96FFE14850AEB00BD25E3 /* UploadViewController.xib */; };
 		3D891527147CC6380012580A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D891526147CC6380012580A /* UIKit.framework */; };
 		3D891529147CC6380012580A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D891528147CC6380012580A /* Foundation.framework */; };
 		3D89152B147CC6380012580A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D89152A147CC6380012580A /* CoreGraphics.framework */; };
@@ -34,6 +33,7 @@
 		8FBDBA3D1D76E158004DB68A /* UIImage+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBDBA3C1D76E158004DB68A /* UIImage+Utils.swift */; };
 		8FBDBA3F1D76EB1B004DB68A /* CameraHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBDBA3E1D76EB1B004DB68A /* CameraHelper.swift */; };
 		8FF66B471D800F9F0032F765 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF66B461D800F9F0032F765 /* CameraView.swift */; };
+		8FF66B491D8014E60032F765 /* UploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF66B481D8014E60032F765 /* UploadView.swift */; };
 		8FF74BBE1D7424D300437DE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF74BBD1D7424D300437DE6 /* AppDelegate.swift */; };
 		8FFD7F881D744E9700517B38 /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFD7F871D744E9700517B38 /* UploadViewController.swift */; };
 		8FFE1B2A1D743A8E00CCEE67 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FFE1B291D743A8E00CCEE67 /* RootViewController.swift */; };
@@ -45,7 +45,6 @@
 		163A159E1500F1EA0058FBB2 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		163A15A41500F2540058FBB2 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		166778AE150218AB00A37A8D /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
-		16A96FFE14850AEB00BD25E3 /* UploadViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UploadViewController.xib; sourceTree = "<group>"; };
 		16CE722F14FE2A82005A37F6 /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DropboxSDK.framework; path = lib/DropboxSDK.framework; sourceTree = "<group>"; };
 		3D891522147CC6380012580A /* Upupu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Upupu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D891526147CC6380012580A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -71,6 +70,7 @@
 		8FBDBA3C1D76E158004DB68A /* UIImage+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIImage+Utils.swift"; path = "Commons/UIImage+Utils.swift"; sourceTree = "<group>"; };
 		8FBDBA3E1D76EB1B004DB68A /* CameraHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraHelper.swift; path = Commons/CameraHelper.swift; sourceTree = "<group>"; };
 		8FF66B461D800F9F0032F765 /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraView.swift; path = Views/CameraView.swift; sourceTree = "<group>"; };
+		8FF66B481D8014E60032F765 /* UploadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UploadView.swift; path = Views/UploadView.swift; sourceTree = "<group>"; };
 		8FF74BBD1D7424D300437DE6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8FFD7F871D744E9700517B38 /* UploadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UploadViewController.swift; path = Controllers/UploadViewController.swift; sourceTree = "<group>"; };
 		8FFE1B291D743A8E00CCEE67 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RootViewController.swift; path = Controllers/RootViewController.swift; sourceTree = "<group>"; };
@@ -111,7 +111,6 @@
 				8FA55E0E1D75525700ECB21E /* Uploaders */,
 				8F0ADA141D76961A00C58D0B /* Views */,
 				8F3B20271D7D31D8003A8E49 /* WebDAV */,
-				16A96FE71484F8B500BD25E3 /* xib */,
 				8F8D8A2E1ACA750D00B8EF07 /* Images.xcassets */,
 				16A96FE51484F86200BD25E3 /* Supporting Files */,
 			);
@@ -125,14 +124,6 @@
 				1601F9D3147F9A1000E3A13C /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		16A96FE71484F8B500BD25E3 /* xib */ = {
-			isa = PBXGroup;
-			children = (
-				16A96FFE14850AEB00BD25E3 /* UploadViewController.xib */,
-			);
-			path = xib;
 			sourceTree = "<group>";
 		};
 		17E5EA9ACEB15158E3F94DED /* Pods */ = {
@@ -186,6 +177,7 @@
 			children = (
 				8F0ADA151D76964A00C58D0B /* BlackToolBar.swift */,
 				8FF66B461D800F9F0032F765 /* CameraView.swift */,
+				8FF66B481D8014E60032F765 /* UploadView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -288,7 +280,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F8D8A2F1ACA750D00B8EF07 /* Images.xcassets in Resources */,
-				16A96FFF14850AEB00BD25E3 /* UploadViewController.xib in Resources */,
 				8F2065111D7EE35A0092B180 /* Main.storyboard in Resources */,
 				8F624F0B14CDF05700CBBD6A /* Settings.bundle in Resources */,
 			);
@@ -389,6 +380,7 @@
 				8FF74BBE1D7424D300437DE6 /* AppDelegate.swift in Sources */,
 				8FFE1B2A1D743A8E00CCEE67 /* RootViewController.swift in Sources */,
 				8F2DC01B1D79438C00DB8362 /* Uploader.swift in Sources */,
+				8FF66B491D8014E60032F765 /* UploadView.swift in Sources */,
 				8F0ADA181D76A36400C58D0B /* CameraViewController.swift in Sources */,
 				8FF66B471D800F9F0032F765 /* CameraView.swift in Sources */,
 			);
