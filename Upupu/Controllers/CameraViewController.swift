@@ -9,8 +9,6 @@
 
 import UIKit
 
-import Cartography
-
 protocol CameraViewControllerDelegate: class {
 
     func cameraViewController(cameraViewController: CameraViewController,
@@ -48,6 +46,10 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        cameraView.switchButton.hidden = !CameraHelper.frontCameraAvailable
+        cameraView.torchButton.hidden =
+            !CameraHelper.torchAvailable || !CameraHelper.sharedInstance.torchAvailable
+
         cameraView.cameraButton.action = #selector(takePicture)
         cameraView.clipsButton.action = #selector(clips)
 
@@ -66,10 +68,6 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
         shutterLayer.backgroundColor = UIColor.whiteColor().CGColor
         shutterLayer.opacity = 0
         cameraView.overlayView.layer.addSublayer(shutterLayer)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
 
     override func viewWillAppear(animated: Bool) {

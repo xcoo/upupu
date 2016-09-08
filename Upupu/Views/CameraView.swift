@@ -48,15 +48,19 @@ class CameraView: UIView {
 
     let toolbar = BlackToolBar()
 
+    override class func requiresConstraintBasedLayout() -> Bool {
+        return true
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        self.backgroundColor = UIColor.blackColor()
+        backgroundColor = UIColor.blackColor()
 
-        self.addSubview(previewView)
-        self.addSubview(overlayView)
-        self.addSubview(torchButton)
-        self.addSubview(switchButton)
+        addSubview(previewView)
+        addSubview(overlayView)
+        addSubview(torchButton)
+        addSubview(switchButton)
 
         toolbar.items = [clipsButton,
                          UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil,
@@ -64,11 +68,7 @@ class CameraView: UIView {
                          cameraButton,
                          UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil,
                             action: nil)]
-        self.addSubview(toolbar)
-
-        switchButton.hidden = !CameraHelper.frontCameraAvailable
-        torchButton.hidden = !CameraHelper.torchAvailable ||
-            !CameraHelper.sharedInstance.torchAvailable
+        addSubview(toolbar)
     }
 
     convenience init() {
@@ -80,51 +80,41 @@ class CameraView: UIView {
     }
 
     override func updateConstraints() {
-        constrain(previewView) { previewView in
-            previewView.top == previewView.superview!.top
-            previewView.right == previewView.superview!.right
-            previewView.bottom == previewView.superview!.bottom
-            previewView.left == previewView.superview!.left
+        constrain(previewView) { view in
+            view.top == view.superview!.top
+            view.right == view.superview!.right
+            view.bottom == view.superview!.bottom
+            view.left == view.superview!.left
         }
 
-        constrain(overlayView) { overlayView in
-            overlayView.top == overlayView.superview!.top
-            overlayView.bottom == overlayView.superview!.bottom
-            overlayView.left == overlayView.superview!.left
-            overlayView.right == overlayView.superview!.right
+        constrain(overlayView) { view in
+            view.top == view.superview!.top
+            view.bottom == view.superview!.bottom
+            view.left == view.superview!.left
+            view.right == view.superview!.right
         }
 
         constrain(torchButton) { button in
             button.width == 50
             button.height == 35
-            if let superview = button.superview {
-                button.top == superview.top + 10
-                button.left == superview.left + 10
-            }
+            button.top == button.superview!.top + 10
+            button.left == button.superview!.left + 10
         }
 
         constrain(switchButton) { button in
             button.width == 50
             button.height == 35
-            if let superview = button.superview {
-                button.top == superview.top + 10
-                button.right == superview.right - 10
-            }
+            button.top == button.superview!.top + 10
+            button.right == button.superview!.right - 10
         }
 
         constrain(toolbar) { toolbar in
-            if let superview = toolbar.superview {
-                toolbar.bottom == superview.bottom
-                toolbar.left == superview.left
-                toolbar.right == superview.right
-            }
+            toolbar.bottom == toolbar.superview!.bottom
+            toolbar.left == toolbar.superview!.left
+            toolbar.right == toolbar.superview!.right
         }
 
         super.updateConstraints()
-    }
-
-    override class func requiresConstraintBasedLayout() -> Bool {
-        return true
     }
 
 }

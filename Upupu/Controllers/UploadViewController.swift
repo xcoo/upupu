@@ -51,10 +51,6 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
         uploadView.nameTextField.delegate = self
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-
     override func viewWillAppear(animated: Bool) {
         let application = UIApplication.sharedApplication()
         application.setStatusBarHidden(false, withAnimation: .Fade)
