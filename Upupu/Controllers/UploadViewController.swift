@@ -23,21 +23,32 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
 
     weak var delegate: UploadViewControllerDelegate?
 
-    @IBOutlet private weak var nameField: UITextField!
-    @IBOutlet private weak var imageView: UIImageView!
-    @IBOutlet private weak var retakeButton: UIBarItem!
-    @IBOutlet private weak var uploadButton: UIBarItem!
-    @IBOutlet private weak var settingsButton: UIBarItem!
+    private var uploadView: UploadView!
 
     var image: UIImage?
     var shouldSavePhotoAlbum = true
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: nil, bundle: nil)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func loadView() {
+        uploadView = UploadView()
+        view = uploadView
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        uploadView.retakeButton.action = #selector(retakeButtonTapped)
+        uploadView.uploadButton.action = #selector(uploadButtonTapped)
+        uploadView.settingsButton.action = #selector(settingsButtonTapped)
+
+        uploadView.nameTextField.delegate = self
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -45,17 +56,17 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
         application.setStatusBarHidden(false, withAnimation: .Fade)
         application.setStatusBarStyle(.LightContent, animated: true)
 
-        imageView.image = image
+        uploadView.imageView.image = image
 
-        nameField.enabled = image != nil
-        uploadButton.enabled = image != nil
+        uploadView.nameTextField.enabled = image != nil
+        uploadView.uploadButton.enabled = image != nil
 
-        if let text = nameField.text {
+        if let text = uploadView.nameTextField.text {
             if text.isEmpty {
-                nameField.text = makeFilename()
+                uploadView.nameTextField.text = makeFilename()
             }
         } else {
-            nameField.text = makeFilename()
+            uploadView.nameTextField.text = makeFilename()
         }
 
         super.viewWillAppear(animated)
@@ -74,12 +85,12 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
 
     // MARK: - Action
 
-    @IBAction private func retakeButtonTapped(sender: UIBarItem) {
-        nameField.text = ""
+    @objc private func retakeButtonTapped(sender: UIBarItem) {
+        uploadView.nameTextField.text = ""
         delegate?.uploadViewControllerDidReturn(self)
     }
 
-    @IBAction private func uploadButtonTapped(sender: UIBarItem) {
+    @objc private func uploadButtonTapped(sender: UIBarItem) {
         if !Settings.webDAVEnabled && !Settings.dropboxEnabled {
             UIAlertController.showSimpleAlertIn(navigationController, title: "Error",
                                             message: "Setup server configuration before uploading")
@@ -99,7 +110,7 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
         }
     }
 
-    @IBAction private func settingsButtonTapped(sender: UIBarItem) {
+    @objc private func settingsButtonTapped(sender: UIBarItem) {
         delegate?.uploadViewControllerDidSetup(self)
     }
 
@@ -158,7 +169,7 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
                 let time = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
                 dispatch_after(time, dispatch_get_main_queue()) {[weak self] in
                     hud?.hideAnimated(true)
-                    self?.nameField.text = ""
+                    self?.uploadView.nameTextField.text = ""
                     if let self_ = self {
                         self_.delegate?.uploadViewControllerDidFinished(self_)
                     }
@@ -189,7 +200,7 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
 
         // Upload to ...
         if let imageData = imageData(image) {
-            let filename = nameField.text
+            let filename = uploadView.nameTextField.text
 
             // WebDAV
             if Settings.webDAVEnabled {

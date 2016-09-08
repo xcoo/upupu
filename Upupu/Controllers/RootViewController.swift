@@ -1,5 +1,5 @@
 //
-//  CameraController.swift
+//  RootViewController.swift
 //  Upupu
 //
 //  Created by Toshiki Takeuchi on 8/29/16.
@@ -12,7 +12,7 @@ import UIKit
 import InAppSettingsKit
 import SwiftyDropbox
 
-class CameraController: UINavigationController, CameraViewControllerDelegate,
+class RootViewController: UINavigationController, CameraViewControllerDelegate,
 UploadViewControllerDelegate, IASKSettingsDelegate {
 
     private var cameraViewController: CameraViewController!
@@ -33,10 +33,10 @@ UploadViewControllerDelegate, IASKSettingsDelegate {
     }
 
     private func initialize() {
-        cameraViewController = CameraViewController(nibName: "CameraViewController", bundle: nil)
+        cameraViewController = CameraViewController()
         cameraViewController.delegate = self
 
-        uploadViewController = UploadViewController(nibName: "UploadViewController", bundle: nil)
+        uploadViewController = UploadViewController()
         uploadViewController.delegate = self
 
         navigationBar.barStyle = UIBarStyle.BlackOpaque
