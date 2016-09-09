@@ -158,9 +158,9 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
         }
     }
 
-    private func execUpload<T: Uploadable>(uploader: T, filename: String?, imageData: NSData,
+    private func execUpload<T: Uploadable>(uploader: T, filename: String, imageData: NSData,
                             hud: MBProgressHUD?) {
-        uploader.upload(filename, imageData: imageData) { (error) in
+        uploader.upload(filename, data: imageData) { (error) in
             if error == nil {
                 dispatch_async(dispatch_get_main_queue()) {[weak self] in
                     self?.showSucceeded(hud)
@@ -200,7 +200,13 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
 
         // Upload to ...
         if let imageData = imageData(image) {
-            let filename = uploadView.nameTextField.text
+            let fileStem = uploadView.nameTextField.text
+            let filename: String
+            if fileStem == nil || fileStem!.isEmpty {
+                filename = "\(Uploader.fileStem()).jpg"
+            } else {
+                filename = "\(fileStem!).jpg"
+            }
 
             // WebDAV
             if Settings.webDAVEnabled {

@@ -11,7 +11,7 @@ import Foundation
 
 class WebDAVUploader: Uploader, Uploadable {
 
-    func upload(fileStem: String!, imageData: NSData, completion: ((error: Any?) -> Void)?) {
+    func upload(filename: String, data: NSData, completion: ((error: Any?) -> Void)?) {
 
         let baseURL: String
 
@@ -37,16 +37,10 @@ class WebDAVUploader: Uploader, Uploadable {
         let dirName = directoryName(now)
         let dirURL = "\(baseURL)\(dirName)/"
 
-        // Filename
-        let filename_: String
-        if fileStem == nil || fileStem.isEmpty {
-            filename_ = filename(now)
-        } else {
-            filename_ = "\(fileStem).jpg"
-        }
-        let putURL = "\(baseURL)\(dirName)/\(filename_)"
+        // File path
+        let putURL = "\(baseURL)\(dirName)/\(filename)"
 
-        let data = NSData(data: imageData)
+        let data = NSData(data: data)
 
         let request = WebDAVClient.createDirectory(dirURL)
         if let user = Settings.webDAVUser, password = Settings.webDAVPassword {
