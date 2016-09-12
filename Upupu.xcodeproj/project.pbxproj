@@ -26,6 +26,7 @@
 		8F8D8A2F1ACA750D00B8EF07 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F8D8A2E1ACA750D00B8EF07 /* Images.xcassets */; };
 		8F9EC21A14CE06B0000BDCE1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F9EC21914CE06B0000BDCE1 /* Security.framework */; };
 		8FA55E101D75528600ECB21E /* DropboxUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA55E0F1D75528600ECB21E /* DropboxUploader.swift */; };
+		8FA6565B1D86A828002C30AE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8FA6565A1D86A828002C30AE /* LaunchScreen.storyboard */; };
 		8FA7173B14D1523700129A84 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FA7173A14D1523700129A84 /* QuartzCore.framework */; };
 		8FA7174014D15D4400129A84 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FA7173F14D15D4400129A84 /* AssetsLibrary.framework */; };
 		8FBDBA381D76CE5D004DB68A /* UIAlertController+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBDBA371D76CE5D004DB68A /* UIAlertController+Utils.swift */; };
@@ -63,6 +64,7 @@
 		8F8D8A2E1ACA750D00B8EF07 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8F9EC21914CE06B0000BDCE1 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		8FA55E0F1D75528600ECB21E /* DropboxUploader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DropboxUploader.swift; path = Uploaders/DropboxUploader.swift; sourceTree = "<group>"; };
+		8FA6565A1D86A828002C30AE /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8FA7173A14D1523700129A84 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8FA7173F14D15D4400129A84 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		8FBDBA371D76CE5D004DB68A /* UIAlertController+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIAlertController+Utils.swift"; path = "Commons/UIAlertController+Utils.swift"; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				8FF74BBD1D7424D300437DE6 /* AppDelegate.swift */,
+				8FA6565A1D86A828002C30AE /* LaunchScreen.storyboard */,
 				8F2065101D7EE35A0092B180 /* Main.storyboard */,
 				8F57987D1D7593FD004ED144 /* Commons */,
 				8FFE1B281D743A5800CCEE67 /* Controllers */,
@@ -280,6 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F8D8A2F1ACA750D00B8EF07 /* Images.xcassets in Resources */,
+				8FA6565B1D86A828002C30AE /* LaunchScreen.storyboard in Resources */,
 				8F2065111D7EE35A0092B180 /* Main.storyboard in Resources */,
 				8F624F0B14CDF05700CBBD6A /* Settings.bundle in Resources */,
 			);
@@ -433,7 +437,6 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -467,7 +470,6 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
