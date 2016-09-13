@@ -13,8 +13,8 @@ import Cartography
 
 class UploadView: UIView {
 
-    private let topToolbar = BlackToolBar()
-    private let bottomToolbar = BlackToolBar()
+    private let topToolbar = BlackToolBar(bottomBorderEnabled: true)
+    private let bottomToolbar = BlackToolBar(topBorderEnabled: true)
 
     let nameTextField: UITextField = {
         let textField = UITextField()
@@ -98,6 +98,7 @@ class UploadView: UIView {
         }
 
         constrain(bottomToolbar) { toolbar in
+            toolbar.height == 80
             toolbar.bottom == toolbar.superview!.bottom
             toolbar.left == toolbar.superview!.left
             toolbar.right == toolbar.superview!.right

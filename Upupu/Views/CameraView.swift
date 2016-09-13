@@ -109,6 +109,7 @@ class CameraView: UIView {
         }
 
         constrain(toolbar) { toolbar in
+            toolbar.height == 80
             toolbar.bottom == toolbar.superview!.bottom
             toolbar.left == toolbar.superview!.left
             toolbar.right == toolbar.superview!.right
