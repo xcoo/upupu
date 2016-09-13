@@ -4,38 +4,54 @@
 [![Dependency Status](https://www.versioneye.com/user/projects/57d115eec07f2e0044bd36af/badge.svg)](https://www.versioneye.com/user/projects/57d115eec07f2e0044bd36af)
 ![Supported iOS](https://img.shields.io/badge/iOS-8.0%2B-brightgreen.svg)
 
-Simple camera application that backups pictures on WebDAV server.
+Simple camera application for iOS that uploads pictures to WebDAV server or Dropbox quickly. Also available on the [AppStore](https://itunes.apple.com/app/upupu/id508401854).
 
 ![Upupu Screenshots](https://raw.githubusercontent.com/xcoo/upupu/master/Screenshots/screenshots.jpg)
+
+## Features
+
+* Easy and fast uploading. Only two taps!
+* Now WebDAV and Dropbox supported.
+* Photo size and quality are selectable.
 
 ## Prerequisites
 
 - Xcode 7
-- CocoaPods
+- CocoaPods 1.0.0+
 
-## Usage
+## Installation
 
 ### 1. Download source code
 
-    $ git clone https://github.com/xcoo/upupu.git
+Clone this repository,
+
+```console
+$ git clone https://github.com/xcoo/upupu.git
+```
 
 or download from [here](https://github.com/xcoo/upupu/archive/master.zip) and extract it.
 
 ### 2. Install dependencies
 
-    $ pod install
+Install dependencies using CocoaPods.
 
-Open **Upupu.xcworkspace** with Xcode.
+```console
+$ pod install
+```
 
-### 3. Use Dropbox
+Open using Xcode.
+
+```console
+$ open Upupu.xcworkspace
+```
+
+### 3. Dropbox setup (optional)
 
 You have to register Dropbox App keys if you want to use Dropbox.
-Go to [Dropbox Developers page](https://www.dropbox.com/developers/apps) and click "Create an app."
+Go to [App Console](https://www.dropbox.com/developers/apps) and click "Create app."
 Write your app information and specify "Full Dropbox" in Access level section.
 
-Next, you need to change source code.
-
-Modify Constants.swift.
+Open "Constants.swift" and replace `YOUR_DROPBOX_APP_KEY` with your actual key.
 
 ```swift
 struct Dropbox {
@@ -45,9 +61,11 @@ struct Dropbox {
 }
 ```
 
-Click Upupu -> info -> URL Types on Xcode and modify URL Scheme.
+Click **Upupu** -> **Info** tab -> **URL Types** section on Xcode and replace **URL Schemes** in the same way.
 
-    URL Schemes: db-YOUR_DROPBOX_APP_KEY
+```
+URL Schemes: db-YOUR_DROPBOX_APP_KEY
+```
 
 ### 4. Run
 
@@ -56,8 +74,6 @@ Let's Upupu!
 
 ## License
 
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+Copyright © 2012-2016 [Xcoo, Inc.](https://xcoo.jp/)
 
-You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+Distributed under the [Apache License, Version 2.0](./LICENSE).
