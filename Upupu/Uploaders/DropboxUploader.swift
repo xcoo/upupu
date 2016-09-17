@@ -13,14 +13,14 @@ import SwiftyDropbox
 
 class DropboxUploader: Uploader, Uploadable {
 
-    func upload(filename: String, data: NSData, completion: ((error: Any?) -> Void)?) {
+    func upload(filename: String, data: NSData, completion: ((error: UPError?) -> Void)?) {
         guard let client = Dropbox.authorizedClient else {
-            completion?(error: "Dropbox account is unauthorized")
+            completion?(error: .DropboxUnauthorized)
             return
         }
 
         guard let dropboxLocation = Settings.dropboxLocation else {
-            completion?(error: "Invalid Dropbox location")
+            completion?(error: .DropboxInvalidLocation)
             return
         }
 
@@ -35,7 +35,7 @@ class DropboxUploader: Uploader, Uploadable {
                 print("Uploaded file revision: \(metadata.rev)")
                 completion?(error: nil)
             } else {
-                completion?(error: error!)
+                completion?(error: .DropboxUploadFailure)
             }
         }
     }

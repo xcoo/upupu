@@ -11,7 +11,7 @@ import Foundation
 
 protocol Uploadable {
 
-    func upload(filename: String, data: NSData, completion: ((error: Any?) -> Void)?)
+    func upload(filename: String, data: NSData, completion: ((error: UPError?) -> Void)?)
 
 }
 
