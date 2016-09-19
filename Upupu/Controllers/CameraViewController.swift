@@ -50,6 +50,8 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
         cameraView.torchButton.hidden =
             !CameraHelper.torchAvailable || !CameraHelper.sharedInstance.torchAvailable
 
+        cameraView.cameraButton.enabled = CameraHelper.cameraAvailable
+
         cameraView.cameraButton.action = #selector(takePicture)
         cameraView.clipsButton.action = #selector(clips)
 
