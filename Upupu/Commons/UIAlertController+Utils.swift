@@ -19,4 +19,22 @@ extension UIAlertController {
         viewController?.presentViewController(alertController, animated: true, completion: nil)
     }
 
+    class func showSettingsAlertIn(viewController: UIViewController?, title: String?,
+                                   message: String?) {
+        let alertController = UIAlertController(title: title, message: message,
+                                                preferredStyle: .Alert)
+        alertController.addAction(UIAlertAction(title: "Settings", style: .Default,
+            handler: { action in
+                if let url = NSURL(string: UIApplicationOpenSettingsURLString) {
+                    UIApplication.sharedApplication().openURL(url)
+                }
+        }))
+        let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        alertController.addAction(okAction)
+        if #available(iOS 9.0, *) {
+            alertController.preferredAction = okAction
+        }
+        viewController?.presentViewController(alertController, animated: true, completion: nil)
+    }
+
 }

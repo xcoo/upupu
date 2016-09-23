@@ -40,6 +40,14 @@ class CameraHelper {
         return false
     }
 
+    static var authorizationStatus: AVAuthorizationStatus {
+        return AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo)
+    }
+
+    static func requestAccess(completion: ((Bool) -> Void)!) {
+        AVCaptureDevice.requestAccessForMediaType(AVMediaTypeVideo, completionHandler: completion)
+    }
+
     var cameraPosition: CameraPosition {
         guard let videoInput = videoInput else {
             return .Back

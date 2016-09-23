@@ -46,10 +46,6 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        cameraView.switchButton.hidden = !CameraHelper.frontCameraAvailable
-        cameraView.torchButton.hidden =
-            !CameraHelper.torchAvailable || !CameraHelper.sharedInstance.torchAvailable
-
         cameraView.cameraButton.action = #selector(takePicture)
         cameraView.clipsButton.action = #selector(clips)
 
@@ -71,34 +67,19 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
     }
 
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Fade)
-
-        if CameraHelper.cameraAvailable {
-            cameraView.previewView.hidden = true
-            for view in cameraView.previewView.subviews {
-                view.removeFromSuperview()
-            }
-
-            var rect = UIScreen.mainScreen().applicationFrame
-            rect.size.height -= cameraView.toolbar.frame.size.height
-            let preview = CameraHelper.sharedInstance.previewView(rect)
-
-            CameraHelper.sharedInstance.startRunning()
-
-            cameraView.previewView.addSubview(preview)
-            cameraView.previewView.hidden = false
-            setup()
-        } else {
-            UIAlertController.showSimpleAlertIn(navigationController, title: "Error",
-                                                message: "Camera is unavailable")
-            setup()
-        }
     }
 
     override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
         CameraHelper.sharedInstance.stopRunning()
-
         NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        prepareCamera()
     }
 
     override func shouldAutorotate() -> Bool {
@@ -117,6 +98,59 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
         NSNotificationCenter.defaultCenter()
             .addObserver(self, selector: #selector(deviceOrientationDidChange),
                          name: UIDeviceOrientationDidChangeNotification, object: nil)
+    }
+
+    private func prepareCamera() {
+        cameraView.switchButton.hidden = true
+        cameraView.torchButton.hidden = true
+        cameraView.cameraButton.enabled = false
+
+        if CameraHelper.cameraAvailable {
+            switch CameraHelper.authorizationStatus {
+            case .Authorized:
+                startCamera()
+            case .NotDetermined:
+                CameraHelper.requestAccess {[weak self] granted in
+                    if granted {
+                        self?.prepareCamera()
+                    }
+                }
+            case .Denied, .Restricted:
+                UIAlertController.showSettingsAlertIn(self, title: nil,
+                                                      message: "Allow access to Camera")
+            }
+        } else {
+            cameraView.messageLabel.text = "Camera is unavailable."
+            cameraView.messageLabel.hidden = false
+        }
+    }
+
+    private func startCamera() {
+        dispatch_async(dispatch_get_main_queue()) {[weak self] in
+            guard let self_ = self else {
+                return
+            }
+
+            self_.cameraView.switchButton.hidden = !CameraHelper.frontCameraAvailable
+            self_.cameraView.torchButton.hidden =
+                !CameraHelper.torchAvailable || !CameraHelper.sharedInstance.torchAvailable
+            self_.cameraView.cameraButton.enabled = true
+
+            self_.cameraView.previewView.hidden = true
+            for view in self_.cameraView.previewView.subviews {
+                view.removeFromSuperview()
+            }
+
+            var rect = UIScreen.mainScreen().applicationFrame
+            rect.size.height -= self_.cameraView.toolbar.frame.size.height
+            let preview = CameraHelper.sharedInstance.previewView(rect)
+
+            CameraHelper.sharedInstance.startRunning()
+
+            self_.cameraView.previewView.addSubview(preview)
+            self_.cameraView.previewView.hidden = false
+            self_.setup()
+        }
     }
 
     // MARK: - Action

@@ -48,6 +48,13 @@ class CameraView: UIView {
 
     let toolbar = BlackToolBar()
 
+    let messageLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.whiteColor()
+        label.hidden = true
+        return label
+    }()
+
     override class func requiresConstraintBasedLayout() -> Bool {
         return true
     }
@@ -69,6 +76,8 @@ class CameraView: UIView {
                          UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil,
                             action: nil)]
         addSubview(toolbar)
+
+        addSubview(messageLabel)
     }
 
     convenience init() {
@@ -113,6 +122,10 @@ class CameraView: UIView {
             toolbar.bottom == toolbar.superview!.bottom
             toolbar.left == toolbar.superview!.left
             toolbar.right == toolbar.superview!.right
+        }
+
+        constrain(messageLabel) { label in
+            label.center == label.superview!.center
         }
 
         super.updateConstraints()

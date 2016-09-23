@@ -140,12 +140,12 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
         return UIImageJPEGRepresentation(image, CGFloat(quality))
     }
 
-    private func showFailed(hud: MBProgressHUD?) {
+    private func showFailed(hud: MBProgressHUD?, message: String? = nil) {
         if let hud = hud {
             hud.customView = UIImageView(image: UIImage(named: "Upload/Failure"))
             hud.mode = .CustomView
             hud.label.text = "Failed"
-            hud.detailsLabel.text = ""
+            hud.detailsLabel.text = message
         }
     }
 
@@ -161,28 +161,29 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
     private func execUpload<T: Uploadable>(uploader: T, filename: String, imageData: NSData,
                             hud: MBProgressHUD?) {
         uploader.upload(filename, data: imageData) { (error) in
-            if error == nil {
+            guard error == nil else {
                 dispatch_async(dispatch_get_main_queue()) {[weak self] in
-                    self?.showSucceeded(hud)
+                    self?.showFailed(hud, message: error?.description)
                 }
 
-                let time = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
-                dispatch_after(time, dispatch_get_main_queue()) {[weak self] in
-                    hud?.hideAnimated(true)
-                    self?.uploadView.nameTextField.text = ""
-                    if let self_ = self {
-                        self_.delegate?.uploadViewControllerDidFinished(self_)
-                    }
-
-                }
-            } else {
-                dispatch_async(dispatch_get_main_queue()) {[weak self] in
-                    self?.showFailed(hud)
-                }
-
-                let time = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
+                let time = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
                 dispatch_after(time, dispatch_get_main_queue()) {
                     hud?.hideAnimated(true)
+                }
+
+                return
+            }
+
+            dispatch_async(dispatch_get_main_queue()) {[weak self] in
+                self?.showSucceeded(hud)
+            }
+
+            let time = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
+            dispatch_after(time, dispatch_get_main_queue()) {[weak self] in
+                hud?.hideAnimated(true)
+                self?.uploadView.nameTextField.text = ""
+                if let self_ = self {
+                    self_.delegate?.uploadViewControllerDidFinished(self_)
                 }
             }
         }

@@ -11,13 +11,13 @@ import Foundation
 
 class WebDAVUploader: Uploader, Uploadable {
 
-    func upload(filename: String, data: NSData, completion: ((error: Any?) -> Void)?) {
+    func upload(filename: String, data: NSData, completion: ((error: UPError?) -> Void)?) {
 
         let baseURL: String
 
         // Validate server path
         guard let settingsURL = Settings.webDAVURL else {
-            completion?(error: "Invalid WebDAV URL")
+            completion?(error: .WebDAVNoURL)
             return
         }
         if settingsURL[settingsURL.endIndex.advancedBy(-1)] != "/" {
@@ -28,7 +28,7 @@ class WebDAVUploader: Uploader, Uploadable {
 
         // Validate http scheme
         if !(baseURL.hasPrefix("http://") || baseURL.hasPrefix("https://")) {
-            completion?(error: "Invalid HTTP scheme")
+            completion?(error: .WebDAVInvalidScheme)
             return
         }
 
@@ -51,7 +51,7 @@ class WebDAVUploader: Uploader, Uploadable {
 
             guard error == nil || response?.statusCode == 405 else {
                 print(error)
-                completion?(error: error)
+                completion?(error: .WebDAVCreateDirectoryFailure)
                 return
             }
 
@@ -63,7 +63,7 @@ class WebDAVUploader: Uploader, Uploadable {
                 print(response)
                 if let error = error {
                     print(error)
-                    completion?(error: error)
+                    completion?(error: .WebDAVUploadFailure)
                 } else {
                     completion?(error: nil)
                 }
