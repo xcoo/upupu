@@ -104,14 +104,14 @@ class CameraView: UIView {
         }
 
         constrain(torchButton) { button in
-            button.width == 50
+            button.width == 35
             button.height == 35
             button.top == button.superview!.top + 10
             button.left == button.superview!.left + 10
         }
 
         constrain(switchButton) { button in
-            button.width == 50
+            button.width == 35
             button.height == 35
             button.top == button.superview!.top + 10
             button.right == button.superview!.right - 10
