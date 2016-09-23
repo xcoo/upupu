@@ -63,10 +63,10 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
 
         if let text = uploadView.nameTextField.text {
             if text.isEmpty {
-                uploadView.nameTextField.text = makeFilename()
+                uploadView.nameTextField.fileStem = makeFilename()
             }
         } else {
-            uploadView.nameTextField.text = makeFilename()
+            uploadView.nameTextField.fileStem = makeFilename()
         }
 
         super.viewWillAppear(animated)
@@ -201,7 +201,7 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
 
         // Upload to ...
         if let imageData = imageData(image) {
-            let fileStem = uploadView.nameTextField.text
+            let fileStem = uploadView.nameTextField.fileStem
             let filename: String
             if fileStem == nil || fileStem!.isEmpty {
                 filename = "\(Uploader.fileStem()).jpg"
@@ -229,7 +229,17 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
 
     // MARK: - TextFieldDelegate
 
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        if let filenameTextField = textField as? FilenameTextField {
+            filenameTextField.extentionHidden = true
+        }
+        return true
+    }
+
     func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if let filenameTextField = textField as? FilenameTextField {
+            filenameTextField.extentionHidden = false
+        }
         textField.resignFirstResponder()
         return true
     }

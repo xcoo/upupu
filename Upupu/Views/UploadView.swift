@@ -16,12 +16,15 @@ class UploadView: UIView {
     private let topToolbar = BlackToolBar(bottomBorderEnabled: true)
     private let bottomToolbar = BlackToolBar(topBorderEnabled: true)
 
-    let nameTextField: UITextField = {
-        let textField = UITextField()
+    let nameTextField: FilenameTextField = {
+        let textField = FilenameTextField(fileExtension: ".jpg")
         textField.borderStyle = .RoundedRect
         textField.textAlignment = .Center
         textField.font = UIFont.systemFontOfSize(13)
         textField.placeholder = "Input name"
+        textField.clearButtonMode = .WhileEditing
+        textField.returnKeyType = .Done
+        textField.keyboardType = .ASCIICapable
         return textField
     }()
 
