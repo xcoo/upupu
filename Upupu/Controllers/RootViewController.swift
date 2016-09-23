@@ -64,34 +64,18 @@ UploadViewControllerDelegate, IASKSettingsDelegate {
         uploadViewController.image = image
         uploadViewController.shouldSavePhotoAlbum = !cameraViewController.isSourcePhotoLibrary
 
-        let application = UIApplication.sharedApplication()
-        application.setStatusBarHidden(false, withAnimation: .Fade)
-        application.statusBarStyle = .LightContent
-
         pushViewController(uploadViewController, animated: true)
     }
 
     // MARK: - UploadViewControllerDelegate
 
     func uploadViewControllerDidReturn(uploadViewController: UploadViewController) {
-        dispatch_async(dispatch_get_main_queue()) {
-            let application = UIApplication.sharedApplication()
-            application.setStatusBarHidden(true, withAnimation: .Fade)
-            application.statusBarStyle = .Default
-        }
-
         cameraViewController.isSourcePhotoLibrary = false
 
         popViewControllerAnimated(true)
     }
 
     func uploadViewControllerDidFinished(uploadViewController: UploadViewController) {
-        dispatch_async(dispatch_get_main_queue()) {
-            let application = UIApplication.sharedApplication()
-            application.setStatusBarHidden(true, withAnimation: .Fade)
-            application.statusBarStyle = .Default
-        }
-
         popViewControllerAnimated(true)
     }
 
@@ -114,18 +98,12 @@ UploadViewControllerDelegate, IASKSettingsDelegate {
         let navigationContoller = UINavigationController(rootViewController: settingsViewController)
         navigationContoller.modalTransitionStyle = .CoverVertical
 
-        let application = UIApplication.sharedApplication()
-        application.setStatusBarHidden(false, withAnimation: .Fade)
-        application.setStatusBarStyle(.Default, animated: true)
         presentViewController(navigationContoller, animated: true, completion: nil)
     }
 
     // MARK: - IASKSettingsDelegate
 
     func settingsViewControllerDidEnd(sender: IASKAppSettingsViewController) {
-        let application = UIApplication.sharedApplication()
-        application.setStatusBarHidden(false, withAnimation: .Fade)
-        application.setStatusBarStyle(.LightContent, animated: true)
         sender.dismissViewControllerAnimated(true, completion: nil)
     }
 

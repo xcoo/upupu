@@ -71,7 +71,6 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
-        UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Fade)
         if isCameraInitialized {
             startCamera()
         }
@@ -97,6 +96,14 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
 
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         return .Portrait
+    }
+
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+
+    override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
+        return .Fade
     }
 
     private func setup() {
@@ -176,7 +183,6 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
         imagePicker.modalTransitionStyle = .FlipHorizontal
         imagePicker.allowsEditing = false
 
-        UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Fade)
         presentViewController(imagePicker, animated: true, completion: nil)
     }
 
@@ -336,16 +342,13 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
         if let origImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             isSourcePhotoLibrary = true
             picker.dismissViewControllerAnimated(true) {[weak self] in
-                UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Fade)
                 self?.afterTaken(origImage)
             }
         }
     }
 
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        picker.dismissViewControllerAnimated(true) {
-            UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Fade)
-        }
+        picker.dismissViewControllerAnimated(true, completion: nil)
     }
 
     // MARK: - Orientation

@@ -52,10 +52,6 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
     }
 
     override func viewWillAppear(animated: Bool) {
-        let application = UIApplication.sharedApplication()
-        application.setStatusBarHidden(false, withAnimation: .Fade)
-        application.setStatusBarStyle(.LightContent, animated: true)
-
         uploadView.imageView.image = image
 
         uploadView.nameTextField.enabled = image != nil
@@ -74,6 +70,14 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
 
     override func shouldAutorotate() -> Bool {
         return UIDevice.currentDevice().orientation == .Portrait
+    }
+
+    override func prefersStatusBarHidden() -> Bool {
+        return false
+    }
+
+    override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
+        return .Fade
     }
 
     private func makeFilename() -> String {
