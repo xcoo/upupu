@@ -99,7 +99,7 @@ UploadViewControllerDelegate, IASKSettingsDelegate {
         settingsViewController.showCreditsFooter = false
 
         let navigationContoller = UINavigationController(rootViewController: settingsViewController)
-        navigationContoller.modalTransitionStyle = .FlipHorizontal
+        navigationContoller.modalTransitionStyle = .CoverVertical
 
         let application = UIApplication.sharedApplication()
         application.setStatusBarHidden(false, withAnimation: .Fade)
