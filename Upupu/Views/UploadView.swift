@@ -23,6 +23,8 @@ class UploadView: UIView {
         textField.font = UIFont.systemFontOfSize(13)
         textField.placeholder = "Input name"
         textField.clearButtonMode = .WhileEditing
+        textField.returnKeyType = .Done
+        textField.keyboardType = .ASCIICapable
         return textField
     }()
 
