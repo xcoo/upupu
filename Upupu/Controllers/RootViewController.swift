@@ -100,6 +100,17 @@ UploadViewControllerDelegate, IASKSettingsDelegate {
         settingsViewController.delegate = self
         settingsViewController.showCreditsFooter = false
 
+        if Constants.Dropbox.kDBAppKey.isEmpty ||
+            Constants.Dropbox.kDBAppKey == "YOUR_DROPBOX_APP_KEY" {
+            let hiddenKeys = ["dropbox_group_pref",
+                              "dropbox_enabled_pref",
+                              "dropbox_link_pref",
+                              "dropbox_link_pref",
+                              "dropbox_account_pref",
+                              "dropbox_location_pref"]
+            settingsViewController.hiddenKeys = Set(hiddenKeys)
+        }
+
         let navigationContoller = UINavigationController(rootViewController: settingsViewController)
         navigationContoller.modalTransitionStyle = .CoverVertical
 

@@ -61,6 +61,8 @@
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
 			<string>Dropbox</string>
+			<key>Key</key>
+			<string>dropbox_group_pref</string>
 		</dict>
 		<dict>
 			<key>Type</key>
