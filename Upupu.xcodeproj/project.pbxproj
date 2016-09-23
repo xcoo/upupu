@@ -34,6 +34,7 @@
 		8FBDBA3A1D76D42F004DB68A /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBDBA391D76D42F004DB68A /* Settings.swift */; };
 		8FBDBA3D1D76E158004DB68A /* UIImage+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBDBA3C1D76E158004DB68A /* UIImage+Utils.swift */; };
 		8FBDBA3F1D76EB1B004DB68A /* CameraHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBDBA3E1D76EB1B004DB68A /* CameraHelper.swift */; };
+		8FBE49E91D94F87800D42D7A /* FilenameTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBE49E81D94F87800D42D7A /* FilenameTextField.swift */; };
 		8FF66B471D800F9F0032F765 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF66B461D800F9F0032F765 /* CameraView.swift */; };
 		8FF66B491D8014E60032F765 /* UploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF66B481D8014E60032F765 /* UploadView.swift */; };
 		8FF74BBE1D7424D300437DE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF74BBD1D7424D300437DE6 /* AppDelegate.swift */; };
@@ -73,6 +74,7 @@
 		8FBDBA391D76D42F004DB68A /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Settings.swift; path = Commons/Settings.swift; sourceTree = "<group>"; };
 		8FBDBA3C1D76E158004DB68A /* UIImage+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIImage+Utils.swift"; path = "Commons/UIImage+Utils.swift"; sourceTree = "<group>"; };
 		8FBDBA3E1D76EB1B004DB68A /* CameraHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraHelper.swift; path = Commons/CameraHelper.swift; sourceTree = "<group>"; };
+		8FBE49E81D94F87800D42D7A /* FilenameTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FilenameTextField.swift; path = Views/FilenameTextField.swift; sourceTree = "<group>"; };
 		8FF66B461D800F9F0032F765 /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraView.swift; path = Views/CameraView.swift; sourceTree = "<group>"; };
 		8FF66B481D8014E60032F765 /* UploadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UploadView.swift; path = Views/UploadView.swift; sourceTree = "<group>"; };
 		8FF74BBD1D7424D300437DE6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 			children = (
 				8F0ADA151D76964A00C58D0B /* BlackToolBar.swift */,
 				8FF66B461D800F9F0032F765 /* CameraView.swift */,
+				8FBE49E81D94F87800D42D7A /* FilenameTextField.swift */,
 				8FF66B481D8014E60032F765 /* UploadView.swift */,
 			);
 			name = Views;
@@ -384,6 +387,7 @@
 				8FFD7F881D744E9700517B38 /* UploadViewController.swift in Sources */,
 				8F0ADA161D76964A00C58D0B /* BlackToolBar.swift in Sources */,
 				8FBDBA3D1D76E158004DB68A /* UIImage+Utils.swift in Sources */,
+				8FBE49E91D94F87800D42D7A /* FilenameTextField.swift in Sources */,
 				8FA55E101D75528600ECB21E /* DropboxUploader.swift in Sources */,
 				8FF74BBE1D7424D300437DE6 /* AppDelegate.swift in Sources */,
 				8FFE1B2A1D743A8E00CCEE67 /* RootViewController.swift in Sources */,
