@@ -91,9 +91,8 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
             cameraView.previewView.hidden = false
             setup()
         } else {
-            UIAlertController.showSimpleAlertIn(navigationController, title: "Error",
-                                                message: "Camera is unavailable")
-            setup()
+            cameraView.messageLabel.text = "Camera is unavailable."
+            cameraView.messageLabel.hidden = false
         }
     }
 
