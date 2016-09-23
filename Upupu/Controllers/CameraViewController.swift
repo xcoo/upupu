@@ -30,6 +30,8 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
 
     private var cameraView: CameraView!
 
+    private var isCameraInitialized = false
+
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nil, bundle: nil)
     }
@@ -68,7 +70,11 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+
         UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Fade)
+        if isCameraInitialized {
+            startCamera()
+        }
     }
 
     override func viewWillDisappear(animated: Bool) {
@@ -79,7 +85,10 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        prepareCamera()
+
+        if !isSourcePhotoLibrary {
+            prepareCamera()
+        }
     }
 
     override func shouldAutorotate() -> Bool {
@@ -126,30 +135,33 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
     }
 
     private func startCamera() {
-        dispatch_async(dispatch_get_main_queue()) {[weak self] in
-            guard let self_ = self else {
-                return
-            }
+        cameraView.switchButton.hidden = !CameraHelper.frontCameraAvailable
+        cameraView.torchButton.hidden =
+            !CameraHelper.torchAvailable || !CameraHelper.sharedInstance.torchAvailable
+        cameraView.cameraButton.enabled = true
 
-            self_.cameraView.switchButton.hidden = !CameraHelper.frontCameraAvailable
-            self_.cameraView.torchButton.hidden =
-                !CameraHelper.torchAvailable || !CameraHelper.sharedInstance.torchAvailable
-            self_.cameraView.cameraButton.enabled = true
-
-            self_.cameraView.previewView.hidden = true
-            for view in self_.cameraView.previewView.subviews {
-                view.removeFromSuperview()
-            }
-
-            var rect = UIScreen.mainScreen().applicationFrame
-            rect.size.height -= self_.cameraView.toolbar.frame.size.height
-            let preview = CameraHelper.sharedInstance.previewView(rect)
-
+        if isCameraInitialized {
             CameraHelper.sharedInstance.startRunning()
+        } else {
+            dispatch_async(dispatch_get_main_queue()) {[weak self] in
+                guard let self_ = self else {
+                    return
+                }
 
-            self_.cameraView.previewView.addSubview(preview)
-            self_.cameraView.previewView.hidden = false
-            self_.setup()
+                self_.cameraView.previewView.hidden = true
+                for view in self_.cameraView.previewView.subviews {
+                    view.removeFromSuperview()
+                }
+
+                var rect = UIScreen.mainScreen().applicationFrame
+                rect.size.height -= self_.cameraView.toolbar.frame.size.height
+                let preview = CameraHelper.sharedInstance.previewView(rect)
+                CameraHelper.sharedInstance.startRunning()
+                self_.cameraView.previewView.addSubview(preview)
+                self_.cameraView.previewView.hidden = false
+                self_.setup()
+                self_.isCameraInitialized = true
+            }
         }
     }
 
@@ -207,8 +219,6 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
     }
 
     private func afterTaken(image: UIImage) {
-        CameraHelper.sharedInstance.stopRunning()
-
         delegate?.cameraViewController(self, didFinishedWithImage: image)
     }
 

@@ -80,6 +80,8 @@ UploadViewControllerDelegate, IASKSettingsDelegate {
             application.statusBarStyle = .Default
         }
 
+        cameraViewController.isSourcePhotoLibrary = false
+
         popViewControllerAnimated(true)
     }
 
