@@ -324,7 +324,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "VERSION=$(/usr/libexec/PlistBuddy -c \"Print CFBundleShortVersionString\" 'Upupu/Info.plist')\nBUILD=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" 'Upupu/Info.plist')\n/usr/libexec/PlistBuddy -c \"Set :PreferenceSpecifiers:10:DefaultValue '$VERSION ($BUILD)'\" 'Upupu/Settings.bundle/Root.plist'";
+			shellScript = "VERSION=$(/usr/libexec/PlistBuddy -c \"Print CFBundleShortVersionString\" 'Upupu/Info.plist')\nBUILD=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" 'Upupu/Info.plist')\n/usr/libexec/PlistBuddy -c \"Set :PreferenceSpecifiers:0:DefaultValue '$VERSION ($BUILD)'\" 'Upupu/Settings.bundle/Root.plist'";
 		};
 		8FFE1B271D7435FC00CCEE67 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
