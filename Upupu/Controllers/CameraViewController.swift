@@ -116,10 +116,21 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
                          name: UIDeviceOrientationDidChangeNotification, object: nil)
     }
 
-    private func prepareCamera() {
+    private func resetButtons() {
         cameraView.switchButton.hidden = true
         cameraView.torchButton.hidden = true
         cameraView.cameraButton.enabled = false
+    }
+
+    private func setupButtons() {
+        cameraView.switchButton.hidden = !CameraHelper.frontCameraAvailable
+        cameraView.torchButton.hidden =
+            !CameraHelper.torchAvailable || !CameraHelper.sharedInstance.torchAvailable
+        cameraView.cameraButton.enabled = true
+    }
+
+    private func prepareCamera() {
+        resetButtons()
 
         if CameraHelper.cameraAvailable {
             switch CameraHelper.authorizationStatus {
@@ -142,18 +153,16 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
     }
 
     private func startCamera() {
-        cameraView.switchButton.hidden = !CameraHelper.frontCameraAvailable
-        cameraView.torchButton.hidden =
-            !CameraHelper.torchAvailable || !CameraHelper.sharedInstance.torchAvailable
-        cameraView.cameraButton.enabled = true
-
         if isCameraInitialized {
+            setupButtons()
             CameraHelper.sharedInstance.startRunning()
         } else {
             dispatch_async(dispatch_get_main_queue()) {[weak self] in
                 guard let self_ = self else {
                     return
                 }
+
+                self_.setupButtons()
 
                 self_.cameraView.previewView.hidden = true
                 for view in self_.cameraView.previewView.subviews {
