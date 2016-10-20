@@ -11,7 +11,7 @@ import UIKit
 
 protocol CameraViewControllerDelegate: class {
 
-    func cameraViewController(cameraViewController: CameraViewController,
+    func cameraViewController(_ cameraViewController: CameraViewController,
                               didFinishedWithImage image: UIImage?)
 
 }
@@ -23,7 +23,7 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
 
     var isSourcePhotoLibrary = false
 
-    private var orientation: UIInterfaceOrientation = .Portrait
+    private var orientation: UIInterfaceOrientation = .portrait
     private var focusLayer: CALayer!
     private var shutterLayer: CALayer!
     private var inFocusProcess = false
@@ -32,7 +32,7 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
 
     private var isCameraInitialized = false
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -52,23 +52,23 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
         cameraView.clipsButton.action = #selector(clips)
 
         cameraView.switchButton.addTarget(self, action: #selector(switchCamera),
-                                          forControlEvents: .TouchUpInside)
+                                          for: .touchUpInside)
         cameraView.torchButton.addTarget(self, action: #selector(switchTorch),
-                                         forControlEvents: .TouchUpInside)
+                                         for: .touchUpInside)
 
         focusLayer = CALayer()
         let focusImage = UIImage(named: "Camera/Focus")
-        focusLayer.contents = focusImage?.CGImage
+        focusLayer.contents = focusImage?.cgImage
         cameraView.overlayView.layer.addSublayer(focusLayer)
 
         shutterLayer = CALayer()
         shutterLayer.frame = cameraView.overlayView.frame
-        shutterLayer.backgroundColor = UIColor.whiteColor().CGColor
+        shutterLayer.backgroundColor = UIColor.white.cgColor
         shutterLayer.opacity = 0
         cameraView.overlayView.layer.addSublayer(shutterLayer)
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         if isCameraInitialized {
@@ -76,13 +76,13 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
         }
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         CameraHelper.sharedInstance.stopRunning()
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         if !isSourcePhotoLibrary {
@@ -90,43 +90,43 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
         }
     }
 
-    override func shouldAutorotate() -> Bool {
-        return UIDevice.currentDevice().orientation == .Portrait
+    override var shouldAutorotate: Bool {
+        return UIDevice.current.orientation == .portrait
     }
 
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return .Portrait
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
     }
 
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden: Bool {
         return true
     }
 
-    override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
-        return .Fade
+    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+        return .fade
     }
 
     private func setup() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapPreview))
         cameraView.overlayView.addGestureRecognizer(tapGesture)
 
-        UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
-        NSNotificationCenter.defaultCenter()
+        UIDevice.current.beginGeneratingDeviceOrientationNotifications()
+        NotificationCenter.default
             .addObserver(self, selector: #selector(deviceOrientationDidChange),
-                         name: UIDeviceOrientationDidChangeNotification, object: nil)
+                         name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
     }
 
     private func resetButtons() {
-        cameraView.switchButton.hidden = true
-        cameraView.torchButton.hidden = true
-        cameraView.cameraButton.enabled = false
+        cameraView.switchButton.isHidden = true
+        cameraView.torchButton.isHidden = true
+        cameraView.cameraButton.isEnabled = false
     }
 
     private func setupButtons() {
-        cameraView.switchButton.hidden = !CameraHelper.frontCameraAvailable
-        cameraView.torchButton.hidden =
+        cameraView.switchButton.isHidden = !CameraHelper.frontCameraAvailable
+        cameraView.torchButton.isHidden =
             !CameraHelper.torchAvailable || !CameraHelper.sharedInstance.torchAvailable
-        cameraView.cameraButton.enabled = true
+        cameraView.cameraButton.isEnabled = true
     }
 
     private func prepareCamera() {
@@ -134,21 +134,21 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
 
         if CameraHelper.cameraAvailable {
             switch CameraHelper.authorizationStatus {
-            case .Authorized:
+            case .authorized:
                 startCamera()
-            case .NotDetermined:
+            case .notDetermined:
                 CameraHelper.requestAccess {[weak self] granted in
                     if granted {
                         self?.prepareCamera()
                     }
                 }
-            case .Denied, .Restricted:
+            case .denied, .restricted:
                 UIAlertController.showSettingsAlertIn(self, title: nil,
                                                       message: "Allow access to Camera")
             }
         } else {
             cameraView.messageLabel.text = "Camera is unavailable."
-            cameraView.messageLabel.hidden = false
+            cameraView.messageLabel.isHidden = false
         }
     }
 
@@ -157,24 +157,24 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
             setupButtons()
             CameraHelper.sharedInstance.startRunning()
         } else {
-            dispatch_async(dispatch_get_main_queue()) {[weak self] in
+            DispatchQueue.main.async {[weak self] in
                 guard let self_ = self else {
                     return
                 }
 
                 self_.setupButtons()
 
-                self_.cameraView.previewView.hidden = true
+                self_.cameraView.previewView.isHidden = true
                 for view in self_.cameraView.previewView.subviews {
                     view.removeFromSuperview()
                 }
 
-                var rect = UIScreen.mainScreen().applicationFrame
+                var rect = UIScreen.main.bounds
                 rect.size.height -= self_.cameraView.toolbar.frame.size.height
                 let preview = CameraHelper.sharedInstance.previewView(rect)
                 CameraHelper.sharedInstance.startRunning()
                 self_.cameraView.previewView.addSubview(preview)
-                self_.cameraView.previewView.hidden = false
+                self_.cameraView.previewView.isHidden = false
                 self_.setup()
                 self_.isCameraInitialized = true
             }
@@ -183,19 +183,19 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
 
     // MARK: - Action
 
-    @objc private func clips(sender: UIBarButtonItem) {
+    @objc private func clips(_ sender: UIBarButtonItem) {
         CameraHelper.sharedInstance.stopRunning()
 
         let imagePicker = UIImagePickerController()
-        imagePicker.sourceType = .PhotoLibrary
+        imagePicker.sourceType = .photoLibrary
         imagePicker.delegate = self
-        imagePicker.modalTransitionStyle = .FlipHorizontal
+        imagePicker.modalTransitionStyle = .flipHorizontal
         imagePicker.allowsEditing = false
 
-        presentViewController(imagePicker, animated: true, completion: nil)
+        present(imagePicker, animated: true, completion: nil)
     }
 
-    @objc private func takePicture(sender: UIBarButtonItem) {
+    @objc private func takePicture(_ sender: UIBarButtonItem) {
         CATransaction.begin()
 
         let opacityAnimation = CABasicAnimation(keyPath: "opacity")
@@ -203,7 +203,7 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
         opacityAnimation.repeatCount = 0
         opacityAnimation.fromValue = 1.0
         opacityAnimation.toValue = 0.0
-        shutterLayer.addAnimation(opacityAnimation, forKey: "opacity")
+        shutterLayer.add(opacityAnimation, forKey: "opacity")
 
         CATransaction.commit()
 
@@ -233,51 +233,50 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
         }
     }
 
-    private func afterTaken(image: UIImage) {
+    private func afterTaken(_ image: UIImage) {
         delegate?.cameraViewController(self, didFinishedWithImage: image)
     }
 
-    @objc private func switchCamera(sender: UIButton) {
+    @objc private func switchCamera(_ sender: UIButton) {
         CameraHelper.sharedInstance.switchCamera()
-        cameraView.torchButton.hidden = !CameraHelper.sharedInstance.torchAvailable
+        cameraView.torchButton.isHidden = !CameraHelper.sharedInstance.torchAvailable
     }
 
-    @objc private func switchTorch(sender: UIButton) {
+    @objc private func switchTorch(_ sender: UIButton) {
         let cameraHelper = CameraHelper.sharedInstance
         if cameraHelper.torch {
             cameraHelper.torch = false
-            cameraView.torchButton.setImage(UIImage(named: "Camera/TorchOff.png"),
-                                            forState: .Normal)
+            cameraView.torchButton.setImage(UIImage(named: "Camera/TorchOff.png"), for: [])
         } else {
             cameraHelper.torch = true
-            cameraView.torchButton.setImage(UIImage(named: "Camera/TorchOn.png"), forState: .Normal)
+            cameraView.torchButton.setImage(UIImage(named: "Camera/TorchOn.png"), for: [])
         }
     }
 
     // MARK: - Rotation
 
     @objc private func rotateView() {
-        UIView.animateWithDuration(0.5, animations: {[weak self] in
+        UIView.animate(withDuration: 0.5, animations: {[weak self] in
             if let orientation = self?.orientation {
                 switch orientation {
-                case .Portrait:
-                    self?.cameraView.switchButton.transform = CGAffineTransformMakeRotation(0)
-                    self?.cameraView.torchButton.transform = CGAffineTransformMakeRotation(0)
-                case .PortraitUpsideDown:
+                case .portrait:
+                    self?.cameraView.switchButton.transform = CGAffineTransform(rotationAngle: 0)
+                    self?.cameraView.torchButton.transform = CGAffineTransform(rotationAngle: 0)
+                case .portraitUpsideDown:
                     self?.cameraView.switchButton.transform =
-                        CGAffineTransformMakeRotation(CGFloat(M_PI))
+                        CGAffineTransform(rotationAngle: CGFloat(M_PI))
                     self?.cameraView.torchButton.transform =
-                        CGAffineTransformMakeRotation(CGFloat(M_PI))
-                case .LandscapeLeft:
+                        CGAffineTransform(rotationAngle: CGFloat(M_PI))
+                case .landscapeLeft:
                     self?.cameraView.switchButton.transform =
-                        CGAffineTransformMakeRotation(CGFloat(M_PI) / 2)
+                        CGAffineTransform(rotationAngle: CGFloat(M_PI) / 2)
                     self?.cameraView.torchButton.transform =
-                        CGAffineTransformMakeRotation(CGFloat(M_PI) / 2)
-                case .LandscapeRight:
+                        CGAffineTransform(rotationAngle: CGFloat(M_PI) / 2)
+                case .landscapeRight:
                     self?.cameraView.switchButton.transform =
-                        CGAffineTransformMakeRotation(-CGFloat(M_PI) / 2)
+                        CGAffineTransform(rotationAngle: -CGFloat(M_PI) / 2)
                     self?.cameraView.torchButton.transform =
-                        CGAffineTransformMakeRotation(-CGFloat(M_PI) / 2)
+                        CGAffineTransform(rotationAngle: -CGFloat(M_PI) / 2)
                 default:
                     break
                 }
@@ -291,14 +290,14 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
         inFocusProcess = false
     }
 
-    func tapPreview(sender: UITapGestureRecognizer) {
-        if sender.state != .Ended || inFocusProcess {
+    func tapPreview(_ sender: UITapGestureRecognizer) {
+        if sender.state != .ended || inFocusProcess {
             return
         }
 
         inFocusProcess = true
 
-        let p = sender.locationInView(cameraView.previewView)
+        let p = sender.location(in: cameraView.previewView)
         let viewSize = cameraView.previewView.frame.size
         let focusPoint = CGPoint.init(x: 1 - p.x / viewSize.width, y: p.y / viewSize.height)
 
@@ -321,62 +320,61 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
         opacityAnimation.values = opacityValues
         opacityAnimation.calculationMode = kCAAnimationCubic
         opacityAnimation.repeatCount = 0
-        focusLayer.addAnimation(opacityAnimation, forKey: "opacity")
+        focusLayer.add(opacityAnimation, forKey: "opacity")
 
         let scaleXAnimation = CABasicAnimation(keyPath: "transform.scale.x")
         scaleXAnimation.duration = 0.4
         scaleXAnimation.repeatCount = 0
         scaleXAnimation.fromValue = 3
         scaleXAnimation.toValue = 1
-        focusLayer.addAnimation(scaleXAnimation, forKey: "transform.scale.x")
+        focusLayer.add(scaleXAnimation, forKey: "transform.scale.x")
 
         let scaleYAnimation = CABasicAnimation(keyPath: "transform.scale.y")
         scaleYAnimation.duration = 0.4
         scaleYAnimation.repeatCount = 0
         scaleYAnimation.fromValue = 3
         scaleYAnimation.toValue = 1
-        focusLayer.addAnimation(scaleYAnimation, forKey: "transform.scale.y")
+        focusLayer.add(scaleYAnimation, forKey: "transform.scale.y")
 
         CATransaction.commit()
 
-        NSTimer.scheduledTimerWithTimeInterval(1, target: self,
-                                               selector: #selector(finishFocusProcess),
-                                               userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(finishFocusProcess),
+                             userInfo: nil, repeats: false)
     }
 
     // MARK: - UIImagePickerControllerDelegate
 
-    func imagePickerController(picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [String : Any]) {
         if let origImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             isSourcePhotoLibrary = true
-            picker.dismissViewControllerAnimated(true) {[weak self] in
+            picker.dismiss(animated: true) {[weak self] in
                 self?.afterTaken(origImage)
             }
         }
     }
 
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        picker.dismissViewControllerAnimated(true, completion: nil)
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
     }
 
     // MARK: - Orientation
 
     func deviceOrientationDidChange() {
-        switch UIDevice.currentDevice().orientation {
-        case .Portrait:
-            orientation = .Portrait
-        case .PortraitUpsideDown:
-            orientation = .PortraitUpsideDown
-        case .LandscapeLeft:
-            orientation = .LandscapeLeft
-        case .LandscapeRight:
-            orientation = .LandscapeRight
+        switch UIDevice.current.orientation {
+        case .portrait:
+            orientation = .portrait
+        case .portraitUpsideDown:
+            orientation = .portraitUpsideDown
+        case .landscapeLeft:
+            orientation = .landscapeLeft
+        case .landscapeRight:
+            orientation = .landscapeRight
         default:
             break
         }
 
-        performSelectorOnMainThread(#selector(rotateView), withObject: nil, waitUntilDone: true)
+        performSelector(onMainThread: #selector(rotateView), with: nil, waitUntilDone: true)
     }
 
 }

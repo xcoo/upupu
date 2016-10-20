@@ -11,30 +11,27 @@ import UIKit
 
 extension UIAlertController {
 
-    class func showSimpleAlertIn(viewController: UIViewController?, title: String?,
+    class func showSimpleAlertIn(_ viewController: UIViewController?, title: String?,
                                  message: String?) {
         let alertController = UIAlertController(title: title, message: message,
-                                                preferredStyle: .Alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
-        viewController?.presentViewController(alertController, animated: true, completion: nil)
+                                                preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        viewController?.present(alertController, animated: true, completion: nil)
     }
 
-    class func showSettingsAlertIn(viewController: UIViewController?, title: String?,
+    class func showSettingsAlertIn(_ viewController: UIViewController?, title: String?,
                                    message: String?) {
         let alertController = UIAlertController(title: title, message: message,
-                                                preferredStyle: .Alert)
-        alertController.addAction(UIAlertAction(title: "Settings", style: .Default,
-            handler: { action in
-                if let url = NSURL(string: UIApplicationOpenSettingsURLString) {
-                    UIApplication.sharedApplication().openURL(url)
-                }
+                                                preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Settings", style: .default, handler: { _ in
+            if let url = URL(string: UIApplicationOpenSettingsURLString) {
+                UIApplication.shared.openURL(url)
+            }
         }))
-        let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alertController.addAction(okAction)
-        if #available(iOS 9.0, *) {
-            alertController.preferredAction = okAction
-        }
-        viewController?.presentViewController(alertController, animated: true, completion: nil)
+        alertController.preferredAction = okAction
+        viewController?.present(alertController, animated: true, completion: nil)
     }
 
 }

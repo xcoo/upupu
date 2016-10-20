@@ -11,30 +11,30 @@ import Foundation
 
 enum UPError {
 
-    case WebDAVNoURL
-    case WebDAVInvalidScheme
-    case WebDAVCreateDirectoryFailure
-    case WebDAVUploadFailure
+    case webDAVNoURL
+    case webDAVInvalidScheme
+    case webDAVCreateDirectoryFailure
+    case webDAVUploadFailure
 
-    case DropboxUnauthorized
-    case DropboxInvalidLocation
-    case DropboxUploadFailure
+    case dropboxUnauthorized
+    case dropboxInvalidLocation
+    case dropboxUploadFailure
 
     var description: String? {
         switch self {
-        case .WebDAVNoURL:
+        case .webDAVNoURL:
             return "WebDAV URL is not set up"
-        case .WebDAVInvalidScheme:
+        case .webDAVInvalidScheme:
             return "WebDAV HTTP scheme is invalid"
-        case .WebDAVCreateDirectoryFailure:
+        case .webDAVCreateDirectoryFailure:
             return "Failed to create a directory on WebDAV"
-        case .WebDAVUploadFailure:
+        case .webDAVUploadFailure:
             return "Failed to upload the file to WebDAV"
-        case .DropboxUnauthorized:
+        case .dropboxUnauthorized:
             return "Dropbox account is unauthorized"
-        case .DropboxInvalidLocation:
+        case .dropboxInvalidLocation:
             return "Invalid Dropbox location"
-        case .DropboxUploadFailure:
+        case .dropboxUploadFailure:
             return "Failed to upload the file to Dropbox"
         }
     }

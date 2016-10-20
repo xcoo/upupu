@@ -13,9 +13,9 @@ import MBProgressHUD
 
 protocol UploadViewControllerDelegate: class {
 
-    func uploadViewControllerDidReturn(uploadViewController: UploadViewController)
-    func uploadViewControllerDidFinished(uploadViewController: UploadViewController)
-    func uploadViewControllerDidSetup(uploadViewController: UploadViewController)
+    func uploadViewControllerDidReturn(_ uploadViewController: UploadViewController)
+    func uploadViewControllerDidFinished(_ uploadViewController: UploadViewController)
+    func uploadViewControllerDidSetup(_ uploadViewController: UploadViewController)
 
 }
 
@@ -28,7 +28,7 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
     var image: UIImage?
     var shouldSavePhotoAlbum = true
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -51,11 +51,11 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
         uploadView.nameTextField.delegate = self
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         uploadView.imageView.image = image
 
-        uploadView.nameTextField.enabled = image != nil
-        uploadView.uploadButton.enabled = image != nil
+        uploadView.nameTextField.isEnabled = image != nil
+        uploadView.uploadButton.isEnabled = image != nil
 
         if let text = uploadView.nameTextField.text {
             if text.isEmpty {
@@ -68,36 +68,36 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
         super.viewWillAppear(animated)
     }
 
-    override func shouldAutorotate() -> Bool {
-        return UIDevice.currentDevice().orientation == .Portrait
+    override var shouldAutorotate: Bool {
+        return UIDevice.current.orientation == .portrait
     }
 
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden: Bool {
         return false
     }
 
-    override func preferredStatusBarUpdateAnimation() -> UIStatusBarAnimation {
-        return .Fade
+    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+        return .fade
     }
 
     private func makeFilename() -> String {
-        let date = NSDate()
-        let formatter = NSDateFormatter()
+        let date = Date()
+        let formatter = DateFormatter()
         formatter.dateFormat = "yyyyMMdd_HHmmss"
-        return formatter.stringFromDate(date)
+        return formatter.string(from: date)
     }
 
     // MARK: - Action
 
-    @objc private func retakeButtonTapped(sender: UIBarItem) {
+    @objc private func retakeButtonTapped(_ sender: UIBarItem) {
         uploadView.nameTextField.text = ""
         delegate?.uploadViewControllerDidReturn(self)
     }
 
-    @objc private func uploadButtonTapped(sender: UIBarItem) {
+    @objc private func uploadButtonTapped(_ sender: UIBarItem) {
         if !Settings.webDAVEnabled && !Settings.dropboxEnabled {
             UIAlertController.showSimpleAlertIn(navigationController, title: "Error",
-                                            message: "Setup server configuration before uploading")
+                                                message: "Setup server configuration before uploading")
             return
         }
 
@@ -108,83 +108,85 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
             return
         }
 
-        let hud = MBProgressHUD.showHUDAddedTo(view, animated: true)
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0)) {[weak self] in
+        let hud = MBProgressHUD.showAdded(to: view, animated: true)
+        DispatchQueue.global(qos: .background).async {[weak self] in
             self?.launchUpload(hud)
         }
     }
 
-    @objc private func settingsButtonTapped(sender: UIBarItem) {
+    @objc private func settingsButtonTapped(_ sender: UIBarItem) {
         delegate?.uploadViewControllerDidSetup(self)
     }
 
     // MARK: - Picture processing
 
-    private func scaleImage(image: UIImage?) -> UIImage? {
+    private func scaleImage(_ image: UIImage?) -> UIImage? {
         switch Settings.photoResolution {
-        case .Original:
+        case .original:
             return image
-        case .Medium:
+        case .medium:
             return image?.scaledImage(CGSize.init(width: 1600, height: 1200))
-        case .Small:
+        case .small:
             return image?.scaledImage(CGSize.init(width: 800, height: 600))
         }
     }
 
-    private func imageData(image: UIImage) -> NSData? {
+    private func imageData(_ image: UIImage) -> Data? {
         let quality: Float
         switch Settings.photoQuality {
-        case .High:
+        case .high:
             quality = 1.0
-        case .Medium:
+        case .medium:
             quality = 0.6
-        case .Low:
+        case .low:
             quality = 0.2
         }
         return UIImageJPEGRepresentation(image, CGFloat(quality))
     }
 
-    private func showFailed(hud: MBProgressHUD?, message: String? = nil) {
+    private func showFailed(_ hud: MBProgressHUD?, message: String? = nil) {
         if let hud = hud {
             hud.customView = UIImageView(image: UIImage(named: "Upload/Failure"))
-            hud.mode = .CustomView
+            hud.mode = .customView
             hud.label.text = "Failed"
             hud.detailsLabel.text = message
         }
     }
 
-    private func showSucceeded(hud: MBProgressHUD?) {
+    private func showSucceeded(_ hud: MBProgressHUD?) {
         if let hud = hud {
             hud.customView = UIImageView(image: UIImage(named: "Upload/Success"))
-            hud.mode = .CustomView
+            hud.mode = .customView
             hud.label.text = "Succeeded"
             hud.detailsLabel.text = ""
         }
     }
 
-    private func execUpload<T: Uploadable>(uploader: T, filename: String, imageData: NSData,
+    private func execUpload<T: Uploadable>(_ uploader: T, filename: String, imageData: Data,
                             hud: MBProgressHUD?) {
         uploader.upload(filename, data: imageData) { (error) in
             guard error == nil else {
-                dispatch_async(dispatch_get_main_queue()) {[weak self] in
+                DispatchQueue.main.async {[weak self] in
                     self?.showFailed(hud, message: error?.description)
                 }
 
-                let time = dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC)))
-                dispatch_after(time, dispatch_get_main_queue()) {
-                    hud?.hideAnimated(true)
+                let time = DispatchTime.now() +
+                    Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+                DispatchQueue.main.asyncAfter(deadline: time) {
+                    hud?.hide(animated: true)
                 }
 
                 return
             }
 
-            dispatch_async(dispatch_get_main_queue()) {[weak self] in
+            DispatchQueue.main.async {[weak self] in
                 self?.showSucceeded(hud)
             }
 
-            let time = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
-            dispatch_after(time, dispatch_get_main_queue()) {[weak self] in
-                hud?.hideAnimated(true)
+            let time = DispatchTime.now() +
+                Double(Int64(1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+            DispatchQueue.main.asyncAfter(deadline: time) {[weak self] in
+                hud?.hide(animated: true)
                 self?.uploadView.nameTextField.text = ""
                 if let self_ = self {
                     self_.delegate?.uploadViewControllerDidFinished(self_)
@@ -193,7 +195,7 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
         }
     }
 
-    private func launchUpload(hud: MBProgressHUD?) {
+    private func launchUpload(_ hud: MBProgressHUD?) {
         guard let image = scaleImage(self.image) else {
             return
         }
@@ -215,7 +217,7 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
 
             // WebDAV
             if Settings.webDAVEnabled {
-                dispatch_sync(dispatch_get_main_queue(), {
+                DispatchQueue.main.sync(execute: {
                     hud?.detailsLabel.text = "WebDAV"
                     })
                 execUpload(WebDAVUploader(), filename: filename, imageData: imageData, hud: hud)
@@ -223,7 +225,7 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
 
             // Dropbox
             if Settings.dropboxEnabled {
-                dispatch_sync(dispatch_get_main_queue(), {
+                DispatchQueue.main.sync(execute: {
                     hud?.detailsLabel.text = "Dropbox"
                     })
                 execUpload(DropboxUploader(), filename: filename, imageData: imageData, hud: hud)
@@ -233,14 +235,14 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
 
     // MARK: - TextFieldDelegate
 
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if let filenameTextField = textField as? FilenameTextField {
             filenameTextField.extentionHidden = true
         }
         return true
     }
 
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if let filenameTextField = textField as? FilenameTextField {
             filenameTextField.extentionHidden = false
         }

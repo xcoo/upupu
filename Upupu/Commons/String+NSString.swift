@@ -31,32 +31,32 @@ extension String {
         return asNS().pathExtension
     }
 
-    func stringByAppendingPathComponent(path: String) -> String {
-        return asNS().stringByAppendingPathComponent(path)
+    func stringByAppendingPathComponent(_ path: String) -> String {
+        return asNS().appendingPathComponent(path)
     }
 
-    func stringByAppendingPathExtension(ext: String) -> String? {
-        return asNS().stringByAppendingPathExtension(ext)
+    func stringByAppendingPathExtension(_ ext: String) -> String? {
+        return asNS().appendingPathExtension(ext)
     }
 
     var stringByDeletingLastPathComponent: String {
-        return asNS().stringByDeletingLastPathComponent
+        return asNS().deletingLastPathComponent
     }
 
     var stringByDeletingPathExtension: String {
-        return asNS().stringByDeletingPathExtension
+        return asNS().deletingPathExtension
     }
 
-    func substringFromIndex(index: Int) -> String {
-        return asNS().substringFromIndex(index)
+    func substringFromIndex(_ index: Int) -> String {
+        return asNS().substring(from: index)
     }
 
-    func substringToIndex(index: Int) -> String {
-        return asNS().substringToIndex(index)
+    func substringToIndex(_ index: Int) -> String {
+        return asNS().substring(to: index)
     }
 
-    func substringWithRange(range: NSRange) -> String {
-        return asNS().substringWithRange(range)
+    func substringWithRange(_ range: NSRange) -> String {
+        return asNS().substring(with: range)
     }
 
 }

@@ -18,57 +18,57 @@ class UploadView: UIView {
 
     let nameTextField: FilenameTextField = {
         let textField = FilenameTextField(fileExtension: ".jpg")
-        textField.borderStyle = .RoundedRect
-        textField.textAlignment = .Center
-        textField.font = UIFont.systemFontOfSize(13)
+        textField.borderStyle = .roundedRect
+        textField.textAlignment = .center
+        textField.font = UIFont.systemFont(ofSize: 13)
         textField.placeholder = "Input name"
-        textField.clearButtonMode = .WhileEditing
-        textField.returnKeyType = .Done
-        textField.keyboardType = .ASCIICapable
+        textField.clearButtonMode = .whileEditing
+        textField.returnKeyType = .done
+        textField.keyboardType = .asciiCapable
         return textField
     }()
 
     let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .ScaleAspectFit
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
 
     let retakeButton: UIBarButtonItem = {
         let button = UIBarButtonItem(image: UIImage(named: "Camera/Back"),
-                                     style: .Plain,
+                                     style: .plain,
                                      target: nil,
                                      action: nil)
-        button.tintColor = UIColor.whiteColor()
+        button.tintColor = UIColor.white
         return button
     }()
 
     let uploadButton: UIBarButtonItem = {
         let button = UIBarButtonItem(image: UIImage(named: "Camera/Check"),
-                                     style: .Plain,
+                                     style: .plain,
                                      target: nil,
                                      action: nil)
-        button.tintColor = UIColor.whiteColor()
+        button.tintColor = UIColor.white
         return button
     }()
 
     let settingsButton: UIBarButtonItem = {
         let button = UIBarButtonItem(image: UIImage(named: "Upload/Settings"),
-                                     style: .Plain,
+                                     style: .plain,
                                      target: nil,
                                      action: nil)
-        button.tintColor = UIColor.whiteColor()
+        button.tintColor = UIColor.white
         return button
     }()
 
-    override class func requiresConstraintBasedLayout() -> Bool {
+    override class var requiresConstraintBasedLayout: Bool {
         return true
     }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        backgroundColor = UIColor.blackColor()
+        backgroundColor = UIColor.black
 
         addSubview(imageView)
 
@@ -76,11 +76,11 @@ class UploadView: UIView {
         addSubview(topToolbar)
 
         bottomToolbar.items = [retakeButton,
-                               UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil,
-                                action: nil),
+                               UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil,
+                                               action: nil),
                                uploadButton,
-                               UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil,
-                                action: nil),
+                               UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil,
+                                               action: nil),
                                settingsButton]
         addSubview(bottomToolbar)
     }

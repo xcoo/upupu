@@ -12,8 +12,8 @@ import AVFoundation
 import ImageIO
 
 enum CameraPosition {
-    case Front
-    case Back
+    case front
+    case back
 }
 
 class CameraHelper {
@@ -21,19 +21,19 @@ class CameraHelper {
     static var sharedInstance = CameraHelper()
 
     static var cameraAvailable: Bool {
-        return UIImagePickerController.isSourceTypeAvailable(.Camera)
+        return UIImagePickerController.isSourceTypeAvailable(.camera)
     }
 
     static var frontCameraAvailable: Bool {
-        if let devices = AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo)
+        if let devices = AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo)
             as? [AVCaptureDevice] {
-            return !devices.map({ $0.position }).filter({ $0 == .Front }).isEmpty
+            return !devices.map({ $0.position }).filter({ $0 == .front }).isEmpty
         }
         return false
     }
 
     static var torchAvailable: Bool {
-        if let devices = AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo)
+        if let devices = AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo)
             as? [AVCaptureDevice] {
             return !devices.filter({ $0.hasTorch }).isEmpty
         }
@@ -41,16 +41,16 @@ class CameraHelper {
     }
 
     static var authorizationStatus: AVAuthorizationStatus {
-        return AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo)
+        return AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
     }
 
-    static func requestAccess(completion: ((Bool) -> Void)!) {
-        AVCaptureDevice.requestAccessForMediaType(AVMediaTypeVideo, completionHandler: completion)
+    static func requestAccess(_ completion: ((Bool) -> Void)!) {
+        AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo, completionHandler: completion)
     }
 
     var cameraPosition: CameraPosition {
         guard let videoInput = videoInput else {
-            return .Back
+            return .back
         }
         return sideWithCaptureDevice(videoInput)
     }
@@ -105,7 +105,7 @@ class CameraHelper {
     private var videoInput: AVCaptureDeviceInput?
     private var captureStillImageOutput: AVCaptureStillImageOutput!
 
-    private init () {
+    private init() {
         if CameraHelper.cameraAvailable {
             self.initialize()
         }
@@ -122,7 +122,7 @@ class CameraHelper {
             session_.sessionPreset = AVCaptureSessionPresetPhoto
         }
 
-        let videoDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
+        let videoDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
         if videoDevice == nil {
             session = nil
             print("Could not create video capture device")
@@ -143,23 +143,23 @@ class CameraHelper {
 
         session_.addOutput(captureStillImageOutput)
 
-        UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
-        NSNotificationCenter.defaultCenter()
+        UIDevice.current.beginGeneratingDeviceOrientationNotifications()
+        NotificationCenter.default
             .addObserver(self, selector: #selector(deviceOrientationDidChange),
-                         name: UIDeviceOrientationDidChangeNotification, object: nil)
+                         name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
     }
 
-    func previewView(bounds: CGRect) -> UIView {
+    func previewView(_ bounds: CGRect) -> UIView {
         return previewLayer(bounds, session: session)
     }
 
-    private func previewLayer(bounds: CGRect, session: AVCaptureSession?) -> UIView {
+    private func previewLayer(_ bounds: CGRect, session: AVCaptureSession?) -> UIView {
         let previewLayer = AVCaptureVideoPreviewLayer(session: session)
-        previewLayer.frame = bounds
-        previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
+        previewLayer?.frame = bounds
+        previewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
 
         let view = UIView(frame: bounds)
-        view.layer.addSublayer(previewLayer)
+        view.layer.addSublayer(previewLayer!)
 
         return view
     }
@@ -174,12 +174,12 @@ class CameraHelper {
         session?.stopRunning()
     }
 
-    func capture(completion: ((image: UIImage?, error: NSError?) -> Void)?) {
-        captureStillImageOutput.captureStillImageAsynchronouslyFromConnection(
-            captureStillImageOutput.connectionWithMediaType(AVMediaTypeVideo)) {
+    func capture(_ completion: ((_ image: UIImage?, _ error: NSError?) -> Void)?) {
+        captureStillImageOutput.captureStillImageAsynchronously(
+            from: captureStillImageOutput.connection(withMediaType: AVMediaTypeVideo)) {
                 (sampleBuffer, error) in
                 guard let sampleBuffer = sampleBuffer else {
-                    completion?(image: nil, error: error)
+                    completion?(nil, error as NSError?)
                     return
                 }
 
@@ -193,17 +193,17 @@ class CameraHelper {
 
                 let imageData =
                     AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(sampleBuffer)
-                let image = UIImage(data: imageData)
-                completion?(image: image, error: nil)
+                let image = UIImage(data: imageData!)
+                completion?(image, nil)
         }
     }
 
-    private func sideWithCaptureDevice(videoInput: AVCaptureDeviceInput) -> CameraPosition {
-        let isBackCamera = videoInput.device.position == .Back
-        return isBackCamera ? CameraPosition.Back : CameraPosition.Front
+    private func sideWithCaptureDevice(_ videoInput: AVCaptureDeviceInput) -> CameraPosition {
+        let isBackCamera = videoInput.device.position == .back
+        return isBackCamera ? CameraPosition.back : CameraPosition.front
     }
 
-    private func sideSwitchedInput(currentVideoInput: AVCaptureDeviceInput,
+    private func sideSwitchedInput(_ currentVideoInput: AVCaptureDeviceInput,
                                    captureSession session: AVCaptureSession)
         -> AVCaptureDeviceInput? {
             guard CameraHelper.frontCameraAvailable else {
@@ -215,12 +215,12 @@ class CameraHelper {
             session.stopRunning()
             session.removeInput(currentVideoInput)
 
-            if let devices = AVCaptureDevice.devicesWithMediaType(AVMediaTypeVideo)
+            if let devices = AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo)
                 as? [AVCaptureDevice] {
                 for device in devices {
                     if device.hasMediaType(AVMediaTypeVideo) {
-                        if currentVideoInput.device.position == .Back {
-                            if device.position == .Front {
+                        if currentVideoInput.device.position == .back {
+                            if device.position == .front {
                                 do {
                                     try newVideoInput = AVCaptureDeviceInput(device: device)
                                     break
@@ -229,7 +229,7 @@ class CameraHelper {
                                 }
                             }
                         } else {
-                            if device.position == .Back {
+                            if device.position == .back {
                                 do {
                                     try newVideoInput = AVCaptureDeviceInput(device: device)
                                     break
@@ -252,45 +252,45 @@ class CameraHelper {
         return newVideoInput
     }
 
-    private func torchWithCaptureDevice(device: AVCaptureDevice) -> Bool {
+    private func torchWithCaptureDevice(_ device: AVCaptureDevice) -> Bool {
         if device.hasTorch {
-            return device.torchMode == .On
+            return device.torchMode == .on
         }
         return false
     }
 
-    private func setTorch(enable: Bool, withCaptureDevice device: AVCaptureDevice) {
+    private func setTorch(_ enable: Bool, withCaptureDevice device: AVCaptureDevice) {
         do {
             try device.lockForConfiguration()
             if enable {
-                device.torchMode = .On
+                device.torchMode = .on
             } else {
-                device.torchMode = .Off
+                device.torchMode = .off
             }
             device.unlockForConfiguration()
         } catch {}
     }
 
-    private func focusWithCaptureDevice(device: AVCaptureDevice) -> CGPoint {
-        if device.focusPointOfInterestSupported {
+    private func focusWithCaptureDevice(_ device: AVCaptureDevice) -> CGPoint {
+        if device.isFocusPointOfInterestSupported {
             return device.focusPointOfInterest
         }
         return CGPoint.zero
     }
 
-    private func setFocus(pointOfInterest: CGPoint, withCaptureDevice device: AVCaptureDevice) {
-        if device.focusPointOfInterestSupported && device.isFocusModeSupported(.AutoFocus) {
+    private func setFocus(_ pointOfInterest: CGPoint, withCaptureDevice device: AVCaptureDevice) {
+        if device.isFocusPointOfInterestSupported && device.isFocusModeSupported(.autoFocus) {
             do {
                 try device.lockForConfiguration()
                 device.focusPointOfInterest = pointOfInterest
-                device.focusMode = .AutoFocus
+                device.focusMode = .autoFocus
                 device.unlockForConfiguration()
             } catch {}
         }
     }
 
     func switchCamera() {
-        guard let videoInput = videoInput, session = session else {
+        guard let videoInput = videoInput, let session = session else {
             return
         }
 
@@ -305,23 +305,23 @@ class CameraHelper {
         }
 
         let orientation: AVCaptureVideoOrientation
-        switch UIDevice.currentDevice().orientation {
-        case .Portrait:
-            orientation = .Portrait
-        case .PortraitUpsideDown:
-            orientation = .Portrait
-        case .LandscapeLeft:
-            orientation = .LandscapeRight
-        case .LandscapeRight:
-            orientation = .LandscapeLeft
+        switch UIDevice.current.orientation {
+        case .portrait:
+            orientation = .portrait
+        case .portraitUpsideDown:
+            orientation = .portrait
+        case .landscapeLeft:
+            orientation = .landscapeRight
+        case .landscapeRight:
+            orientation = .landscapeLeft
         default:
-            orientation = .Portrait
+            orientation = .portrait
         }
 
         session.beginConfiguration()
 
-        if let connection = captureStillImageOutput.connectionWithMediaType(AVMediaTypeVideo) {
-            if connection.supportsVideoOrientation {
+        if let connection = captureStillImageOutput.connection(withMediaType: AVMediaTypeVideo) {
+            if connection.isVideoOrientationSupported {
                 connection.videoOrientation = orientation
             }
         }
