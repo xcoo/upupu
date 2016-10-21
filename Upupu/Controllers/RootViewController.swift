@@ -83,6 +83,7 @@ UploadViewControllerDelegate, IASKSettingsDelegate {
         let settingsViewController = IASKAppSettingsViewController()
         settingsViewController.delegate = self
         settingsViewController.showCreditsFooter = false
+        settingsViewController.neverShowPrivacySettings = true
 
         if Constants.Dropbox.kDBAppKey.isEmpty ||
             Constants.Dropbox.kDBAppKey == "YOUR_DROPBOX_APP_KEY" {
