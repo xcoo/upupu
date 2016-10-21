@@ -1,12 +1,12 @@
-platform :ios, '8.0'
+platform :ios, '9.0'
 use_frameworks!
 
 target 'Upupu' do
-  pod 'Alamofire', '~> 3.3.1'
-  pod 'Cartography', '~> 0.6.0'
+  pod 'Alamofire', '~> 4.0.1'
+  pod 'Cartography', '~> 1.0.0'
   pod 'InAppSettingsKit', '~> 2.8'
   pod 'MBProgressHUD', '~> 1.0.0'
-  pod 'SwiftyDropbox', '~>3.2.0'
+  pod 'SwiftyDropbox', '~>4.1.0'
 end
 
 post_install do | installer |

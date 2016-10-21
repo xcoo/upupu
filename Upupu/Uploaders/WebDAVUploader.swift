@@ -11,16 +11,16 @@ import Foundation
 
 class WebDAVUploader: Uploader, Uploadable {
 
-    func upload(filename: String, data: NSData, completion: ((error: UPError?) -> Void)?) {
+    func upload(_ filename: String, data: Data, completion: ((_ error: UPError?) -> Void)?) {
 
         let baseURL: String
 
         // Validate server path
         guard let settingsURL = Settings.webDAVURL else {
-            completion?(error: .WebDAVNoURL)
+            completion?(.webDAVNoURL)
             return
         }
-        if settingsURL[settingsURL.endIndex.advancedBy(-1)] != "/" {
+        if settingsURL[settingsURL.characters.index(settingsURL.endIndex, offsetBy: -1)] != "/" {
             baseURL = settingsURL + "/"
         } else {
             baseURL = settingsURL
@@ -28,44 +28,44 @@ class WebDAVUploader: Uploader, Uploadable {
 
         // Validate http scheme
         if !(baseURL.hasPrefix("http://") || baseURL.hasPrefix("https://")) {
-            completion?(error: .WebDAVInvalidScheme)
+            completion?(.webDAVInvalidScheme)
             return
         }
 
         // Directory name
-        let now = NSDate()
+        let now = Date()
         let dirName = directoryName(now)
         let dirURL = "\(baseURL)\(dirName)/"
 
         // File path
         let putURL = "\(baseURL)\(dirName)/\(filename)"
 
-        let data = NSData(data: data)
+        let data = NSData(data: data) as Data
 
         let request = WebDAVClient.createDirectory(dirURL)
-        if let user = Settings.webDAVUser, password = Settings.webDAVPassword {
-            request.authenticate(user: user, password: password)
+        if let user = Settings.webDAVUser, let password = Settings.webDAVPassword {
+            _ = request.authenticate(user: user, password: password)
         }
-        request.response { (response, error) in
+        _ = request.response { (response, error) in
             print(response)
 
             guard error == nil || response?.statusCode == 405 else {
                 print(error)
-                completion?(error: .WebDAVCreateDirectoryFailure)
+                completion?(.webDAVCreateDirectoryFailure)
                 return
             }
 
             let request = WebDAVClient.upload(putURL, data: data)
-            if let user = Settings.webDAVUser, password = Settings.webDAVPassword {
-                request.authenticate(user: user, password: password)
+            if let user = Settings.webDAVUser, let password = Settings.webDAVPassword {
+                _ = request.authenticate(user: user, password: password)
             }
-            request.response { (response, error) in
+            _ = request.response { (response, error) in
                 print(response)
                 if let error = error {
                     print(error)
-                    completion?(error: .WebDAVUploadFailure)
+                    completion?(.webDAVUploadFailure)
                 } else {
-                    completion?(error: nil)
+                    completion?(nil)
                 }
             }
         }

@@ -14,10 +14,10 @@ class FilenameTextField: UITextField {
     var fileStem: String? {
         get {
             if let fileExtension = fileExtension {
-                return text?.stringByReplacingOccurrencesOfString("(.*)\\\(fileExtension)$",
-                                                                  withString: "$1",
-                                                                  options: .RegularExpressionSearch,
-                                                                  range: nil)
+                return text?.replacingOccurrences(of: "(.*)\\\(fileExtension)$",
+                                                  with: "$1",
+                                                  options: .regularExpression,
+                                                  range: nil)
             } else {
                 return text
             }
@@ -37,8 +37,8 @@ class FilenameTextField: UITextField {
         didSet { formatFilename() }
     }
 
-    private let fileStemAttributes = [NSForegroundColorAttributeName: UIColor.blackColor()]
-    private let fileExtensionAttributes = [NSForegroundColorAttributeName: UIColor.grayColor()]
+    private let fileStemAttributes = [NSForegroundColorAttributeName: UIColor.black]
+    private let fileExtensionAttributes = [NSForegroundColorAttributeName: UIColor.gray]
 
     init(fileExtension: String?) {
         super.init(frame: CGRect.zero)
@@ -50,23 +50,23 @@ class FilenameTextField: UITextField {
     }
 
     private func formatFilename() {
-        guard let stem = fileStem where !stem.isEmpty else {
+        guard let stem = fileStem, !stem.isEmpty else {
             return
         }
 
-        guard let extension_ = fileExtension where !extension_.isEmpty else {
+        guard let extension_ = fileExtension, !extension_.isEmpty else {
             return
         }
 
         if extentionHidden {
             attributedText = NSAttributedString(string: stem, attributes: fileStemAttributes)
         } else {
-            if let text = text where !text.isEmpty {
+            if let text = text, !text.isEmpty {
                 let mainStr = NSMutableAttributedString(string: text,
                                                         attributes: fileStemAttributes)
                 let extensionStr = NSAttributedString(string: extension_,
                                                       attributes: fileExtensionAttributes)
-                mainStr.appendAttributedString(extensionStr)
+                mainStr.append(extensionStr)
                 attributedText = mainStr
             }
         }

@@ -24,22 +24,22 @@ class BlackToolBar: UIToolbar {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()
 
-        CGContextSetFillColorWithColor(context, UIColor.blackColor().CGColor)
-        CGContextFillRect(context, bounds)
+        context?.setFillColor(UIColor.black.cgColor)
+        context?.fill(bounds)
 
-        CGContextSetFillColorWithColor(context, UIColor(white: 0.2, alpha: 1.0).CGColor)
+        context?.setFillColor(UIColor(white: 0.2, alpha: 1.0).cgColor)
 
         if topBorderEnabled {
-            CGContextFillRect(context, CGRect.init(x: 0.0, y: 0.0,
-                width: bounds.size.width, height: 1.0))
+            context?.fill(CGRect.init(x: 0.0, y: 0.0,
+                                      width: bounds.size.width, height: 1.0))
         }
 
         if bottomBorderEnabled {
-            CGContextFillRect(context, CGRect.init(x: 0.0, y: bounds.size.height - 2.0,
-                width: bounds.size.width, height: 1.0))
+            context?.fill(CGRect.init(x: 0.0, y: bounds.size.height - 2.0,
+                                      width: bounds.size.width, height: 1.0))
         }
     }
 

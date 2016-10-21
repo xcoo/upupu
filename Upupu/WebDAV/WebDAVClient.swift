@@ -11,71 +11,85 @@ import Foundation
 
 import Alamofire
 
-class WebDAVClient {
+extension URLRequest {
 
-    static func createDirectory(urlString: String) -> WebDAVRequest {
-        let alamofireRequest = request("MKCOL", urlString)
-        alamofireRequest.validate()
-        return WebDAVRequest(alamofireRequest: alamofireRequest)
-    }
+    public init(url: URLConvertible, method: String, headers: HTTPHeaders? = nil) throws {
+        let url = try url.asURL()
 
-    static func upload(urlString: String, data: NSData) -> WebDAVRequest {
-        let alamofireRequest = Alamofire.upload(.PUT, urlString, data: data)
-        alamofireRequest.validate()
-        return WebDAVRequest(alamofireRequest: alamofireRequest)
-    }
+        self.init(url: url)
 
-    private static func request(method: String, _ URLString: URLStringConvertible,
-                                parameters: [String: AnyObject]? = nil,
-                                encoding: ParameterEncoding = .URL,
-                                headers: [String: String]? = nil) -> Alamofire.Request {
-        let mutableURLRequest = URLRequest(method, URLString, headers: headers)
-        let encodedURLRequest = encoding.encode(mutableURLRequest, parameters: parameters).0
-        return Manager.sharedInstance.request(encodedURLRequest)
-    }
-
-    private static func URLRequest(method: String, _ URLString: URLStringConvertible,
-                                   headers: [String: String]? = nil) -> NSMutableURLRequest {
-        let mutableURLRequest: NSMutableURLRequest
-
-        if let request = URLString as? NSMutableURLRequest {
-            mutableURLRequest = request
-        } else if let request = URLString as? NSURLRequest {
-            mutableURLRequest = request.URLRequest
-        } else {
-            mutableURLRequest = NSMutableURLRequest(URL: NSURL(string: URLString.URLString)!)
-        }
-
-        mutableURLRequest.HTTPMethod = method
+        httpMethod = method
 
         if let headers = headers {
             for (headerField, headerValue) in headers {
-                mutableURLRequest.setValue(headerValue, forHTTPHeaderField: headerField)
+                setValue(headerValue, forHTTPHeaderField: headerField)
             }
         }
+    }
 
-        return mutableURLRequest
+}
+
+class WebDAVClient {
+
+    static func createDirectory(_ url: URLConvertible) -> WebDAVRequest {
+        do {
+            let alamofireRequest = try request(url, method: "MKCOL")
+            alamofireRequest.validate()
+            return WebDAVRequest(alamofireRequest: alamofireRequest)
+        } catch {
+            return WebDAVRequest(error: error)
+        }
+    }
+
+    static func upload(_ url: URLConvertible, data: Data) -> WebDAVRequest {
+        let alamofireRequest = Alamofire.upload(data, to: url, method: .put)
+        alamofireRequest.validate()
+        return WebDAVRequest(alamofireRequest: alamofireRequest)
+    }
+
+    private static func request(_ url: URLConvertible,
+                                method: String,
+                                parameters: [String: AnyObject]? = nil,
+                                encoding: ParameterEncoding = URLEncoding.default,
+                                headers: [String: String]? = nil) throws -> DataRequest {
+        let urlRequest = try URLRequest(url: url, method: method, headers: headers)
+        let encodedURLRequest = try encoding.encode(urlRequest, with: parameters)
+        return SessionManager.default.request(encodedURLRequest)
     }
 }
 
 class WebDAVRequest {
 
-    private let alamofireRequest: Alamofire.Request
+    private let alamofireRequest: DataRequest?
 
-    init(alamofireRequest: Alamofire.Request) {
+    private let error: Error?
+
+    init(alamofireRequest: DataRequest) {
         self.alamofireRequest = alamofireRequest
+        error = nil
     }
 
-    func authenticate(user user: String, password: String,
-                             persistence: NSURLCredentialPersistence = .ForSession) -> Self {
-        alamofireRequest.authenticate(user: user, password: password)
+    init(error: Error) {
+        alamofireRequest = nil
+        self.error = error
+    }
+
+    func authenticate(user: String, password: String,
+                      persistence: URLCredential.Persistence = .forSession) -> Self {
+        alamofireRequest?.authenticate(user: user, password: password)
         return self
     }
 
-    func response(completionHandler: (NSHTTPURLResponse?, NSError?) -> Void) -> Self {
-        alamofireRequest.response { (_, response, _, error) in
-            completionHandler(response, error)
+    func response(_ completionHandler: @escaping (HTTPURLResponse?, Error?) -> Void) -> Self {
+        guard let alamofireRequest = alamofireRequest else {
+            completionHandler(nil, error)
+            return self
         }
+
+        alamofireRequest.response { dataResponse in
+            completionHandler(dataResponse.response, dataResponse.error)
+        }
+
         return self
     }
 

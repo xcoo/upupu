@@ -11,22 +11,22 @@ import Foundation
 
 protocol Uploadable {
 
-    func upload(filename: String, data: NSData, completion: ((error: UPError?) -> Void)?)
+    func upload(_ filename: String, data: Data, completion: ((_ error: UPError?) -> Void)?)
 
 }
 
 class Uploader {
 
-    func directoryName(date: NSDate = NSDate()) -> String {
-        let formatter = NSDateFormatter()
+    func directoryName(_ date: Date = Date()) -> String {
+        let formatter = DateFormatter()
         formatter.dateFormat = "yyyyMMdd"
-        return formatter.stringFromDate(NSDate())
+        return formatter.string(from: Date())
     }
 
-    class func fileStem(date: NSDate = NSDate()) -> String {
-        let formatter = NSDateFormatter()
+    class func fileStem(_ date: Date = Date()) -> String {
+        let formatter = DateFormatter()
         formatter.dateFormat = "yyyyMMdd_HHmmss"
-        return formatter.stringFromDate(date)
+        return formatter.string(from: date)
     }
 
 }

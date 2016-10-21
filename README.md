@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/xcoo/upupu.svg?branch=master)](https://travis-ci.org/xcoo/upupu)
 [![Dependency Status](https://www.versioneye.com/user/projects/57d115eec07f2e0044bd36af/badge.svg)](https://www.versioneye.com/user/projects/57d115eec07f2e0044bd36af)
-![Supported iOS](https://img.shields.io/badge/iOS-8.0%2B-brightgreen.svg)
+![Supported iOS](https://img.shields.io/badge/iOS-9.0%2B-brightgreen.svg)
 
 Simple camera application for iOS that uploads pictures to WebDAV server or Dropbox quickly. Also available on the [AppStore](https://itunes.apple.com/app/upupu/id508401854).
 
@@ -16,8 +16,8 @@ Simple camera application for iOS that uploads pictures to WebDAV server or Drop
 
 ## Prerequisites
 
-- Xcode 7
-- CocoaPods 1.0.0+
+- Xcode 8
+- CocoaPods 1.1.0+
 
 ## Installation
 

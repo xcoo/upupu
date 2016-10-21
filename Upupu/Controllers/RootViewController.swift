@@ -23,7 +23,7 @@ UploadViewControllerDelegate, IASKSettingsDelegate {
         initialize()
     }
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nil, bundle: nil)
         initialize()
     }
@@ -39,8 +39,8 @@ UploadViewControllerDelegate, IASKSettingsDelegate {
         uploadViewController = UploadViewController()
         uploadViewController.delegate = self
 
-        navigationBar.barStyle = UIBarStyle.BlackOpaque
-        navigationBar.hidden = true
+        navigationBar.barStyle = UIBarStyle.blackOpaque
+        navigationBar.isHidden = true
 
         pushViewController(cameraViewController, animated: false)
     }
@@ -53,13 +53,13 @@ UploadViewControllerDelegate, IASKSettingsDelegate {
         super.didReceiveMemoryWarning()
     }
 
-    override func shouldAutorotate() -> Bool {
-        return UIDevice.currentDevice().orientation == .Portrait
+    override var shouldAutorotate: Bool {
+        return UIDevice.current.orientation == .portrait
     }
 
     // MARK: - CameraViewControllerDelegate
 
-    func cameraViewController(cameraViewController: CameraViewController,
+    func cameraViewController(_ cameraViewController: CameraViewController,
                               didFinishedWithImage image: UIImage?) {
         uploadViewController.image = image
         uploadViewController.shouldSavePhotoAlbum = !cameraViewController.isSourcePhotoLibrary
@@ -69,20 +69,21 @@ UploadViewControllerDelegate, IASKSettingsDelegate {
 
     // MARK: - UploadViewControllerDelegate
 
-    func uploadViewControllerDidReturn(uploadViewController: UploadViewController) {
+    func uploadViewControllerDidReturn(_ uploadViewController: UploadViewController) {
         cameraViewController.isSourcePhotoLibrary = false
 
-        popViewControllerAnimated(true)
+        popViewController(animated: true)
     }
 
-    func uploadViewControllerDidFinished(uploadViewController: UploadViewController) {
-        popViewControllerAnimated(true)
+    func uploadViewControllerDidFinished(_ uploadViewController: UploadViewController) {
+        popViewController(animated: true)
     }
 
-    func uploadViewControllerDidSetup(uploadViewController: UploadViewController) {
+    func uploadViewControllerDidSetup(_ uploadViewController: UploadViewController) {
         let settingsViewController = IASKAppSettingsViewController()
         settingsViewController.delegate = self
         settingsViewController.showCreditsFooter = false
+        settingsViewController.neverShowPrivacySettings = true
 
         if Constants.Dropbox.kDBAppKey.isEmpty ||
             Constants.Dropbox.kDBAppKey == "YOUR_DROPBOX_APP_KEY" {
@@ -96,25 +97,29 @@ UploadViewControllerDelegate, IASKSettingsDelegate {
         }
 
         let navigationContoller = UINavigationController(rootViewController: settingsViewController)
-        navigationContoller.modalTransitionStyle = .CoverVertical
+        navigationContoller.modalTransitionStyle = .coverVertical
 
-        presentViewController(navigationContoller, animated: true, completion: nil)
+        present(navigationContoller, animated: true, completion: nil)
     }
 
     // MARK: - IASKSettingsDelegate
 
-    func settingsViewControllerDidEnd(sender: IASKAppSettingsViewController) {
-        sender.dismissViewControllerAnimated(true, completion: nil)
+    func settingsViewControllerDidEnd(_ sender: IASKAppSettingsViewController) {
+        sender.dismiss(animated: true, completion: nil)
     }
 
-    func settingsViewController(sender: IASKAppSettingsViewController,
-                                buttonTappedForSpecifier specifier: IASKSpecifier) {
+    func settingsViewController(_ sender: IASKAppSettingsViewController,
+                                buttonTappedFor specifier: IASKSpecifier) {
         if specifier.key() == "dropbox_link_pref" {
-            if Dropbox.authorizedClient == nil {
-                Dropbox.authorizeFromController(self)
-                sender.dismissViewControllerAnimated(true, completion: nil)
+            if DropboxClientsManager.authorizedClient == nil {
+                DropboxClientsManager.authorizeFromController(UIApplication.shared,
+                                                              controller: self,
+                                                              openURL: { url in
+                                                                UIApplication.shared.openURL(url)
+                })
+                sender.dismiss(animated: true, completion: nil)
             } else {
-                Dropbox.unlinkClient()
+                DropboxClientsManager.unlinkClients()
                 Settings.dropboxEnabled = false
                 Settings.dropboxLinkButtonTitle = "Connect to Dropbox"
                 Settings.dropboxAccount = ""

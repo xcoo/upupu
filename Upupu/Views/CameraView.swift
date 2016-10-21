@@ -18,31 +18,31 @@ class CameraView: UIView {
 
     let cameraButton: UIBarButtonItem = {
         let button = UIBarButtonItem(image: UIImage(named: "Camera/Circle"),
-                                     style: .Plain,
+                                     style: .plain,
                                      target: nil,
                                      action: nil)
-        button.tintColor = UIColor.whiteColor()
+        button.tintColor = UIColor.white
         return button
     }()
 
     let clipsButton: UIBarButtonItem = {
         let button = UIBarButtonItem(image: UIImage(named: "Camera/Album"),
-                                     style: .Plain,
+                                     style: .plain,
                                      target: nil,
                                      action: nil)
-        button.tintColor = UIColor.whiteColor()
+        button.tintColor = UIColor.white
         return button
     }()
 
     let switchButton: UIButton = {
-        let button = UIButton(type: .Custom)
-        button.setImage(UIImage(named: "Camera/Switch"), forState: .Normal)
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(named: "Camera/Switch"), for: [])
         return button
     }()
 
     let torchButton: UIButton = {
-        let button = UIButton(type: .Custom)
-        button.setImage(UIImage(named: "Camera/TorchOff"), forState: .Normal)
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(named: "Camera/TorchOff"), for: [])
         return button
     }()
 
@@ -50,19 +50,19 @@ class CameraView: UIView {
 
     let messageLabel: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor.whiteColor()
-        label.hidden = true
+        label.textColor = UIColor.white
+        label.isHidden = true
         return label
     }()
 
-    override class func requiresConstraintBasedLayout() -> Bool {
+    override class var requiresConstraintBasedLayout: Bool {
         return true
     }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        backgroundColor = UIColor.blackColor()
+        backgroundColor = UIColor.black
 
         addSubview(previewView)
         addSubview(overlayView)
@@ -70,11 +70,11 @@ class CameraView: UIView {
         addSubview(switchButton)
 
         toolbar.items = [clipsButton,
-                         UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil,
-                            action: nil),
+                         UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil,
+                                         action: nil),
                          cameraButton,
-                         UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil,
-                            action: nil)]
+                         UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil,
+                                         action: nil)]
         addSubview(toolbar)
 
         addSubview(messageLabel)

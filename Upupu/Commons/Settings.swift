@@ -10,97 +10,97 @@
 import Foundation
 
 enum PhotoQuality {
-    case High
-    case Medium
-    case Low
+    case high
+    case medium
+    case low
 }
 
 enum PhotoResolution {
-    case Original
-    case Medium
-    case Small
+    case original
+    case medium
+    case small
 }
 
 final class Settings {
 
     static var webDAVEnabled: Bool {
-        return NSUserDefaults.standardUserDefaults().boolForKey("webdav_enabled_pref")
+        return UserDefaults.standard.bool(forKey: "webdav_enabled_pref")
     }
 
     static var webDAVURL: String? {
-        return NSUserDefaults.standardUserDefaults().stringForKey("webdav_url_pref")
+        return UserDefaults.standard.string(forKey: "webdav_url_pref")
     }
 
     static var webDAVUser: String? {
-        return NSUserDefaults.standardUserDefaults().stringForKey("webdav_user_pref")
+        return UserDefaults.standard.string(forKey: "webdav_user_pref")
     }
 
     static var webDAVPassword: String? {
-        return NSUserDefaults.standardUserDefaults().stringForKey("webdav_pass_pref")
+        return UserDefaults.standard.string(forKey: "webdav_pass_pref")
     }
 
     static var dropboxEnabled: Bool {
         get {
-            return NSUserDefaults.standardUserDefaults().boolForKey("dropbox_enabled_pref")
+            return UserDefaults.standard.bool(forKey: "dropbox_enabled_pref")
         }
 
         set(enabled) {
-            NSUserDefaults.standardUserDefaults().setBool(enabled, forKey: "dropbox_enabled_pref")
+            UserDefaults.standard.set(enabled, forKey: "dropbox_enabled_pref")
         }
     }
 
     static var dropboxAccount: String? {
         get {
-            return NSUserDefaults.standardUserDefaults().stringForKey("dropbox_account_pref")
+            return UserDefaults.standard.string(forKey: "dropbox_account_pref")
         }
 
         set(account) {
-            NSUserDefaults.standardUserDefaults().setObject(account, forKey: "dropbox_account_pref")
+            UserDefaults.standard.set(account, forKey: "dropbox_account_pref")
         }
     }
 
     static var dropboxLinkButtonTitle: String? {
         get {
-            return NSUserDefaults.standardUserDefaults().stringForKey("dropbox_link_pref")
+            return UserDefaults.standard.string(forKey: "dropbox_link_pref")
         }
 
         set(title) {
-            NSUserDefaults.standardUserDefaults().setObject(title, forKey: "dropbox_link_pref")
+            UserDefaults.standard.set(title, forKey: "dropbox_link_pref")
         }
     }
 
     static var dropboxLocation: String? {
-        return NSUserDefaults.standardUserDefaults().stringForKey("dropbox_location_pref")
+        return UserDefaults.standard.string(forKey: "dropbox_location_pref")
     }
 
     static var photoQuality: PhotoQuality {
-        switch NSUserDefaults.standardUserDefaults().integerForKey("photo_quality_pref") {
+        switch UserDefaults.standard.integer(forKey: "photo_quality_pref") {
         case 0:
-            return .High
+            return .high
         case 1:
-            return .Medium
+            return .medium
         case 2:
-            return .Low
+            return .low
         default:
-            return .High
+            return .high
         }
     }
 
     static var photoResolution: PhotoResolution {
-        switch NSUserDefaults.standardUserDefaults().integerForKey("photo_resolution_pref") {
+        switch UserDefaults.standard.integer(forKey: "photo_resolution_pref") {
         case 0:
-            return .Original
+            return .original
         case 1:
-            return .Medium
+            return .medium
         case 2:
-            return .Small
+            return .small
         default:
-            return .Original
+            return .original
         }
     }
 
     static var shouldSavePhoto: Bool {
-        return NSUserDefaults.standardUserDefaults().boolForKey("photo_save_album_pref")
+        return UserDefaults.standard.bool(forKey: "photo_save_album_pref")
     }
 
 }
