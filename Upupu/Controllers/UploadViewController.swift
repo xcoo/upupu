@@ -101,13 +101,6 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
             return
         }
 
-        if Settings.webDAVEnabled &&
-            (Settings.webDAVURL == nil || Settings.webDAVURL!.isEmpty) {
-            UIAlertController.showSimpleAlertIn(navigationController, title: "Error",
-                                                message: "Invalid WebDAV server URL")
-            return
-        }
-
         let hud = MBProgressHUD.showAdded(to: view, animated: true)
         DispatchQueue.global(qos: .background).async {[weak self] in
             self?.launchUpload(hud)

@@ -11,25 +11,33 @@ import Foundation
 
 class WebDAVUploader: Uploader, Uploadable {
 
+    private func validatedURL(url: String!) throws -> String {
+        if url == nil || url.isEmpty {
+            throw UPError.webDAVNoURL
+        }
+
+        if !(url.hasPrefix("http://") || url.hasPrefix("https://")) {
+            throw UPError.webDAVInvalidScheme
+        }
+
+        return url
+    }
+
     func upload(_ filename: String, data: Data, completion: ((_ error: UPError?) -> Void)?) {
-
         let baseURL: String
+        let settingsURL: String
 
-        // Validate server path
-        guard let settingsURL = Settings.webDAVURL else {
-            completion?(.webDAVNoURL)
+        do {
+            settingsURL = try validatedURL(url: Settings.webDAVURL)
+        } catch {
+            completion?(error as? UPError)
             return
         }
+
         if settingsURL[settingsURL.characters.index(settingsURL.endIndex, offsetBy: -1)] != "/" {
             baseURL = settingsURL + "/"
         } else {
             baseURL = settingsURL
-        }
-
-        // Validate http scheme
-        if !(baseURL.hasPrefix("http://") || baseURL.hasPrefix("https://")) {
-            completion?(.webDAVInvalidScheme)
-            return
         }
 
         // Directory name

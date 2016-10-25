@@ -9,7 +9,7 @@
 
 import Foundation
 
-enum UPError {
+enum UPError: Error {
 
     case webDAVNoURL
     case webDAVInvalidScheme
