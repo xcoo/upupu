@@ -18,7 +18,7 @@ enum CameraPosition {
 
 class CameraHelper {
 
-    static var sharedInstance = CameraHelper()
+    static var shared = CameraHelper()
 
     static var cameraAvailable: Bool {
         return UIImagePickerController.isSourceTypeAvailable(.camera)

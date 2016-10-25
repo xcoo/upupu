@@ -170,9 +170,7 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
                     self?.showFailed(hud, message: error?.description)
                 }
 
-                let time = DispatchTime.now() +
-                    Double(Int64(2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
-                DispatchQueue.main.asyncAfter(deadline: time) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     hud?.hide(animated: true)
                 }
 
@@ -183,9 +181,7 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
                 self?.showSucceeded(hud)
             }
 
-            let time = DispatchTime.now() +
-                Double(Int64(1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
-            DispatchQueue.main.asyncAfter(deadline: time) {[weak self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {[weak self] in
                 hud?.hide(animated: true)
                 self?.uploadView.nameTextField.text = ""
                 if let self_ = self {
