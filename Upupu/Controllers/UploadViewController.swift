@@ -80,6 +80,11 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
         return .fade
     }
 
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        view.endEditing(true)
+    }
+
     private func makeFilename() -> String {
         let date = Date()
         let formatter = DateFormatter()
@@ -232,11 +237,14 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
         if let filenameTextField = textField as? FilenameTextField {
             filenameTextField.extentionHidden = false
         }
-        textField.resignFirstResponder()
-        return true
     }
 
 }
