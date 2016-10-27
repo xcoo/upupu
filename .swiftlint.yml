@@ -1,2 +1,8 @@
 included: Upupu
 excluded: Pods
+force_cast: warning
+force_try:
+  severity: warning
+type_body_length:
+  - 300 # warning
+  - 400 # error
