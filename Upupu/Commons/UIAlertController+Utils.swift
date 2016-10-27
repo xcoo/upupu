@@ -19,6 +19,13 @@ extension UIAlertController {
         viewController?.present(alertController, animated: true, completion: nil)
     }
 
+    class func showSimpleErrorAlertIn(_ viewController: UIViewController?, error: UPError) {
+        let alertController = UIAlertController(title: "Error", message: error.description,
+                                                preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        viewController?.present(alertController, animated: true, completion: nil)
+    }
+
     class func showSettingsAlertIn(_ viewController: UIViewController?, title: String?,
                                    message: String?) {
         let alertController = UIAlertController(title: title, message: message,

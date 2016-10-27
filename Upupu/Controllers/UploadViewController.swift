@@ -100,9 +100,9 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
     }
 
     @objc private func uploadButtonTapped(_ sender: UIBarItem) {
-        if !Settings.webDAVEnabled && !Settings.dropboxEnabled {
-            UIAlertController.showSimpleAlertIn(navigationController, title: "Error",
-                                                message: "Setup server configuration before uploading")
+        guard Settings.webDAVEnabled || Settings.dropboxEnabled else {
+            UIAlertController.showSimpleErrorAlertIn(navigationController,
+                                                     error: UPError.settingsNotSetUp)
             return
         }
 

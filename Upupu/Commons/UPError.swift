@@ -11,6 +11,8 @@ import Foundation
 
 enum UPError: Error {
 
+    case settingsNotSetUp
+
     case webDAVNoURL
     case webDAVInvalidScheme
     case webDAVCreateDirectoryFailure
@@ -22,6 +24,8 @@ enum UPError: Error {
 
     var description: String? {
         switch self {
+        case .settingsNotSetUp:
+            return "Server configuration is not set up"
         case .webDAVNoURL:
             return "WebDAV URL is not set up"
         case .webDAVInvalidScheme:
