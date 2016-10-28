@@ -11,6 +11,8 @@ import Foundation
 
 enum UPError: Error {
 
+    case networkUnreachable
+
     case settingsNotSetUp
 
     case webDAVNoURL
@@ -24,6 +26,8 @@ enum UPError: Error {
 
     var description: String? {
         switch self {
+        case .networkUnreachable:
+            return "No internet connection"
         case .settingsNotSetUp:
             return "Server configuration is not set up"
         case .webDAVNoURL:

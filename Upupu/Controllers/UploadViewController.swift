@@ -9,6 +9,7 @@
 
 import UIKit
 
+import Alamofire
 import MBProgressHUD
 
 protocol UploadViewControllerDelegate: class {
@@ -103,6 +104,21 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
         guard Settings.webDAVEnabled || Settings.dropboxEnabled else {
             UIAlertController.showSimpleErrorAlertIn(navigationController,
                                                      error: UPError.settingsNotSetUp)
+            return
+        }
+
+        // Checking network connection
+        guard let net = NetworkReachabilityManager() else {
+            UIAlertController.showSimpleErrorAlertIn(navigationController,
+                                                     error: .networkUnreachable)
+            return
+        }
+        net.startListening()
+        let isReachable = net.isReachable
+        net.stopListening()
+        guard isReachable else {
+            UIAlertController.showSimpleErrorAlertIn(navigationController,
+                                                     error: .networkUnreachable)
             return
         }
 
