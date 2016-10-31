@@ -55,10 +55,10 @@ class WebDAVUploader: Uploader, Uploadable {
             _ = request.authenticate(user: user, password: password)
         }
         _ = request.response { (response, error) in
-            print(response)
+            print(response as Any)
 
             guard error == nil || response?.statusCode == 405 else {
-                print(error)
+                print(error as Any)
                 completion?(.webDAVCreateDirectoryFailure)
                 return
             }
@@ -68,7 +68,7 @@ class WebDAVUploader: Uploader, Uploadable {
                 _ = request.authenticate(user: user, password: password)
             }
             _ = request.response { (response, error) in
-                print(response)
+                print(response as Any)
                 if let error = error {
                     print(error)
                     completion?(.webDAVUploadFailure)
