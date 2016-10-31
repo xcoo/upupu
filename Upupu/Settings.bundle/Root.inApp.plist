@@ -176,14 +176,14 @@
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
-        <dict>
-            <key>Type</key>
-            <string>IASKOpenURLSpecifier</string>
-            <key>Title</key>
-            <string>Source code</string>
-            <key>File</key>
-            <string>https://github.com/xcoo/upupu</string>
-        </dict>
+		<dict>
+			<key>Type</key>
+			<string>IASKOpenURLSpecifier</string>
+			<key>Title</key>
+			<string>Source code</string>
+			<key>File</key>
+			<string>https://github.com/xcoo/upupu</string>
+		</dict>
 		<dict>
 			<key>Type</key>
 			<string>IASKOpenURLSpecifier</string>

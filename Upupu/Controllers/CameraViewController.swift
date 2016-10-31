@@ -209,7 +209,7 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
 
         CameraHelper.shared.capture {[weak self] (image, error) in
             guard error == nil else {
-                print(error)
+                print(error!)
                 if let self_ = self {
                     UIAlertController.showSimpleAlertIn(self_.navigationController,
                         title: "Error",
