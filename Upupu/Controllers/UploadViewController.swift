@@ -87,10 +87,7 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
     }
 
     private func makeFilename() -> String {
-        let date = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyyMMdd_HHmmss"
-        return formatter.string(from: date)
+        return DateHelper.dateTimeString()
     }
 
     // MARK: - Action

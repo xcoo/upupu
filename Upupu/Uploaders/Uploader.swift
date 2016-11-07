@@ -18,15 +18,11 @@ protocol Uploadable {
 class Uploader {
 
     func directoryName(_ date: Date = Date()) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyyMMdd"
-        return formatter.string(from: Date())
+        return DateHelper.dateString(date)
     }
 
     class func fileStem(_ date: Date = Date()) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyyMMdd_HHmmss"
-        return formatter.string(from: date)
+        return DateHelper.dateTimeString(date)
     }
 
 }
