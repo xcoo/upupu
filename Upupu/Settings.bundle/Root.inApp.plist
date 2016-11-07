@@ -35,6 +35,8 @@
 			<string>URL</string>
 			<key>Type</key>
 			<string>PSTextFieldSpecifier</string>
+			<key>IASKPlaceholder</key>
+			<string>https://webdav.example.com/</string>
 		</dict>
 		<dict>
 			<key>Type</key>
@@ -45,6 +47,8 @@
 			<string>User</string>
 			<key>Key</key>
 			<string>webdav_user_pref</string>
+			<key>IASKPlaceholder</key>
+			<string>user</string>
 		</dict>
 		<dict>
 			<key>Type</key>
@@ -55,6 +59,8 @@
 			<string>webdav_pass_pref</string>
 			<key>IsSecure</key>
 			<true/>
+			<key>IASKPlaceholder</key>
+			<string>password</string>
 		</dict>
 		<dict>
 			<key>Type</key>
