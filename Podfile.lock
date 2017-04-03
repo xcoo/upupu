@@ -1,25 +1,25 @@
 PODS:
   - Alamofire (4.0.1)
-  - Cartography (1.0.1)
-  - InAppSettingsKit (2.8)
+  - Cartography (1.1.0)
+  - InAppSettingsKit (2.8.1)
   - MBProgressHUD (1.0.0)
-  - SwiftyDropbox (4.1.0):
-    - Alamofire (~> 4.0.0)
+  - SwiftyDropbox (4.1.1):
+    - Alamofire (~> 4.0.1)
 
 DEPENDENCIES:
   - Alamofire (~> 4.0.1)
-  - Cartography (~> 1.0.0)
+  - Cartography (~> 1.1.0)
   - InAppSettingsKit (~> 2.8)
   - MBProgressHUD (~> 1.0.0)
   - SwiftyDropbox (~> 4.1.0)
 
 SPEC CHECKSUMS:
   Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
-  Cartography: c1460e99395b824d9d75360b0382faeb0b33dcd7
-  InAppSettingsKit: fe3e73f8f9530cdd6270065cd7df7b3773f557e6
+  Cartography: '0538ccb4044acbbda2266335fc58cb4228794d90'
+  InAppSettingsKit: 94d2fba3ccd700fc4e32c6d09fabcc0af2426744
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
-  SwiftyDropbox: '0893e21982678ed69237c7c964a00c7a6f7079bb'
+  SwiftyDropbox: dfcd4d308d32d74729255b48833db61acdfb9c23
 
-PODFILE CHECKSUM: 2264245d54cf8ced6fbd65110a7ca722a18d8b91
+PODFILE CHECKSUM: 345474e89dc047aa24b1020e6eca2fadb9b5bd7b
 
 COCOAPODS: 1.2.0
