@@ -264,19 +264,19 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
                     self?.cameraView.torchButton.transform = CGAffineTransform(rotationAngle: 0)
                 case .portraitUpsideDown:
                     self?.cameraView.switchButton.transform =
-                        CGAffineTransform(rotationAngle: CGFloat(M_PI))
+                        CGAffineTransform(rotationAngle: .pi)
                     self?.cameraView.torchButton.transform =
-                        CGAffineTransform(rotationAngle: CGFloat(M_PI))
+                        CGAffineTransform(rotationAngle: .pi)
                 case .landscapeLeft:
                     self?.cameraView.switchButton.transform =
-                        CGAffineTransform(rotationAngle: CGFloat(M_PI) / 2)
+                        CGAffineTransform(rotationAngle: .pi / 2)
                     self?.cameraView.torchButton.transform =
-                        CGAffineTransform(rotationAngle: CGFloat(M_PI) / 2)
+                        CGAffineTransform(rotationAngle: .pi / 2)
                 case .landscapeRight:
                     self?.cameraView.switchButton.transform =
-                        CGAffineTransform(rotationAngle: -CGFloat(M_PI) / 2)
+                        CGAffineTransform(rotationAngle: -.pi / 2)
                     self?.cameraView.torchButton.transform =
-                        CGAffineTransform(rotationAngle: -CGFloat(M_PI) / 2)
+                        CGAffineTransform(rotationAngle: -.pi / 2)
                 default:
                     break
                 }

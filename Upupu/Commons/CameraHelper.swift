@@ -186,7 +186,7 @@ class CameraHelper {
                 let exifAttachment =
                     CMGetAttachment(sampleBuffer, kCGImagePropertyExifDictionary, nil)
                 if exifAttachment != nil {
-                    print("Attachment: \(exifAttachment)")
+                    print("Attachment: \(String(describing: exifAttachment))")
                 } else {
                     print("No attachment")
                 }
