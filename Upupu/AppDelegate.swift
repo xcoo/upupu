@@ -116,7 +116,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Settings.dropboxEnabled = true
         Settings.dropboxLinkButtonTitle = "Unlink Dropbox"
         if let client = DropboxClientsManager.authorizedClient {
-            client.users.getCurrentAccount().response { (response, error) in
+            client.users.getCurrentAccount().response { (response, _) in
                 if let account = response {
                     Settings.dropboxAccount = account.name.displayName
                 }

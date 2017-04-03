@@ -176,8 +176,7 @@ class CameraHelper {
 
     func capture(_ completion: ((_ image: UIImage?, _ error: NSError?) -> Void)?) {
         captureStillImageOutput.captureStillImageAsynchronously(
-            from: captureStillImageOutput.connection(withMediaType: AVMediaTypeVideo)) {
-                (sampleBuffer, error) in
+            from: captureStillImageOutput.connection(withMediaType: AVMediaTypeVideo)) { (sampleBuffer, error) in
                 guard let sampleBuffer = sampleBuffer else {
                     completion?(nil, error as NSError?)
                     return

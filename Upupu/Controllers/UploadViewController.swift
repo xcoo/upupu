@@ -174,7 +174,7 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
     }
 
     private func execUpload<T: Uploadable>(_ uploader: T, filename: String, imageData: Data,
-                            hud: MBProgressHUD?) {
+                                           hud: MBProgressHUD?) {
         uploader.upload(filename, data: imageData) { (error) in
             guard error == nil else {
                 DispatchQueue.main.async {[weak self] in
