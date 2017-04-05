@@ -21,23 +21,23 @@ extension UIImage {
                     .scaledBy(x: -1.0, y: 1.0)
             case .down:
                 return CGAffineTransform(translationX: size.width, y: size.height)
-                    .rotated(by: CGFloat(M_PI))
+                    .rotated(by: .pi)
             case .downMirrored:
                 return CGAffineTransform(translationX: 0, y: size.height)
                     .scaledBy(x: 1.0, y: -1.0)
             case .leftMirrored:
                 return CGAffineTransform(translationX: size.height, y: size.width)
                     .scaledBy(x: -1.0, y: 1.0)
-                    .rotated(by: 3.0 * CGFloat(M_PI) / 2.0)
+                    .rotated(by: 3.0 * .pi / 2.0)
             case .left:
                 return CGAffineTransform(translationX: 0, y: size.width)
-                    .rotated(by: 3.0 * CGFloat(M_PI) / 2.0)
+                    .rotated(by: 3.0 * .pi / 2.0)
             case .rightMirrored:
                 return CGAffineTransform(scaleX: -1.0, y: 1.0)
-                    .rotated(by: CGFloat(M_PI) / 2.0)
+                    .rotated(by: .pi / 2.0)
             case .right:
                 return CGAffineTransform(translationX: size.height, y: 0)
-                    .rotated(by: CGFloat(M_PI) / 2.0)
+                    .rotated(by: .pi / 2.0)
             }
     }
 

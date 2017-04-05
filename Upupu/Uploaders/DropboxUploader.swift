@@ -29,7 +29,7 @@ class DropboxUploader: Uploader, Uploadable {
 
         let savePath = dirPath.stringByAppendingPathComponent(filename)
 
-        client.files.upload(path: savePath, input: data).response { (response, error) in
+        client.files.upload(path: savePath, input: data).response { (response, _) in
             if let metadata = response {
                 print("Uploaded file name: \(metadata.name)")
                 print("Uploaded file revision: \(metadata.rev)")
