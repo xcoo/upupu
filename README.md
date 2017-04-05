@@ -16,8 +16,8 @@ Simple camera application for iOS that uploads pictures to WebDAV server or Drop
 
 ## Prerequisites
 
-- Xcode 8
-- CocoaPods 1.1.0+
+- Xcode 8.3
+- CocoaPods 1.2.0+
 
 ## Installation
 
@@ -74,6 +74,6 @@ Let's Upupu!
 
 ## License
 
-Copyright © 2012-2016 [Xcoo, Inc.](https://xcoo.jp/)
+Copyright © 2012-2017 [Xcoo, Inc.](https://xcoo.jp/)
 
 Distributed under the [Apache License, Version 2.0](./LICENSE).
