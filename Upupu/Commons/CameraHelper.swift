@@ -308,7 +308,7 @@ class CameraHelper {
         case .portrait:
             orientation = .portrait
         case .portraitUpsideDown:
-            orientation = .portrait
+            orientation = .portraitUpsideDown
         case .landscapeLeft:
             orientation = .landscapeRight
         case .landscapeRight:
