@@ -40,6 +40,14 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
         fatalError("init(coder:) has not been implemented")
     }
 
+    deinit {
+        if let gestureRecognizers = cameraView.overlayView.gestureRecognizers {
+            for gesture in gestureRecognizers {
+                cameraView.overlayView.removeGestureRecognizer(gesture)
+            }
+        }
+    }
+
     override func loadView() {
         cameraView = CameraView()
         view = cameraView
@@ -109,6 +117,9 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
     private func setup() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapPreview))
         cameraView.overlayView.addGestureRecognizer(tapGesture)
+
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(overlayViewPinched))
+        cameraView.overlayView.addGestureRecognizer(pinchGesture)
 
         UIDevice.current.beginGeneratingDeviceOrientationNotifications()
         NotificationCenter.default
@@ -340,6 +351,17 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
 
         Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(finishFocusProcess),
                              userInfo: nil, repeats: false)
+    }
+
+    // MARK: - Zoom
+
+    private var baseScale: CGFloat = 1
+
+    func overlayViewPinched(_ gesture: UIPinchGestureRecognizer) {
+        if gesture.state == .began {
+            baseScale = CameraHelper.shared.zoomFactor
+        }
+        CameraHelper.shared.zoomFactor = baseScale * gesture.scale
     }
 
     // MARK: - UIImagePickerControllerDelegate

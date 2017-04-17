@@ -101,6 +101,41 @@ class CameraHelper {
         }
     }
 
+    private let defaultMaxZoomFactor: CGFloat = 4.15
+
+    var zoomFactor: CGFloat {
+        get {
+            guard let device = videoInput?.device else {
+                return 1
+            }
+
+            guard cameraPosition == .back else {
+                return 1
+            }
+
+            return device.videoZoomFactor
+        }
+
+        set(newZoomFactor) {
+            guard let device = videoInput?.device else {
+                return
+            }
+
+            guard cameraPosition == .back else {
+                return
+            }
+
+            do {
+                try device.lockForConfiguration()
+                let maxZoomFactor = min(defaultMaxZoomFactor, device.activeFormat.videoMaxZoomFactor)
+                device.videoZoomFactor = min(max(newZoomFactor, 1), maxZoomFactor)
+                device.unlockForConfiguration()
+            } catch _ {
+                print("Cannot zoom")
+            }
+        }
+    }
+
     private var session: AVCaptureSession?
     private var videoInput: AVCaptureDeviceInput?
     private var captureStillImageOutput: AVCaptureStillImageOutput!
