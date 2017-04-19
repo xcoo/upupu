@@ -26,7 +26,11 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
 
     private var uploadView: UploadView!
 
-    var image: UIImage?
+    var image: UIImage? {
+        didSet {
+            uploadView?.reset()
+        }
+    }
     var shouldSavePhotoAlbum = true
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -44,6 +48,8 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        automaticallyAdjustsScrollViewInsets = false
 
         uploadView.retakeButton.action = #selector(retakeButtonTapped)
         uploadView.uploadButton.action = #selector(uploadButtonTapped)
@@ -67,6 +73,11 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
         }
 
         super.viewWillAppear(animated)
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        uploadView.updateImageViewSize()
     }
 
     override var shouldAutorotate: Bool {
@@ -93,7 +104,6 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
     // MARK: - Action
 
     @objc private func retakeButtonTapped(_ sender: UIBarItem) {
-        uploadView.nameTextField.text = ""
         delegate?.uploadViewControllerDidReturn(self)
     }
 
@@ -194,7 +204,6 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {[weak self] in
                 hud?.hide(animated: true)
-                self?.uploadView.nameTextField.text = ""
                 if let self_ = self {
                     self_.delegate?.uploadViewControllerDidFinished(self_)
                 }

@@ -11,7 +11,7 @@ import UIKit
 
 import Cartography
 
-class UploadView: UIView {
+class UploadView: UIView, UIScrollViewDelegate {
 
     private let topToolbar = BlackToolBar(bottomBorderEnabled: true)
     private let bottomToolbar = BlackToolBar(topBorderEnabled: true)
@@ -26,6 +26,15 @@ class UploadView: UIView {
         textField.returnKeyType = .done
         textField.keyboardType = .asciiCapable
         return textField
+    }()
+
+    let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        scrollView.contentMode = .scaleAspectFit
+        scrollView.maximumZoomScale = 5
+        scrollView.minimumZoomScale = 1
+        return scrollView
     }()
 
     let imageView: UIImageView = {
@@ -61,6 +70,9 @@ class UploadView: UIView {
         return button
     }()
 
+    private var imageViewSizeConstraint = ConstraintGroup()
+    private var imageViewOriginConstraint = ConstraintGroup()
+
     override class var requiresConstraintBasedLayout: Bool {
         return true
     }
@@ -70,7 +82,9 @@ class UploadView: UIView {
 
         backgroundColor = UIColor.black
 
-        addSubview(imageView)
+        scrollView.addSubview(imageView)
+        addSubview(scrollView)
+        scrollView.delegate = self
 
         topToolbar.items = [UIBarButtonItem(customView: nameTextField)]
         addSubview(topToolbar)
@@ -107,11 +121,15 @@ class UploadView: UIView {
             toolbar.right == toolbar.superview!.right
         }
 
-        constrain(imageView, topToolbar, bottomToolbar) { imageView, topToolbar, bottomToolbar in
-            imageView.top == topToolbar.bottom
-            imageView.bottom == bottomToolbar.top
-            imageView.left == imageView.superview!.left
-            imageView.right == imageView.superview!.right
+        constrain(imageView, replace: imageViewOriginConstraint) { imageView in
+            imageView.center == imageView.superview!.center
+        }
+
+        constrain(scrollView, topToolbar, bottomToolbar) { scrollView, topToolbar, bottomToolbar in
+            scrollView.top == topToolbar.bottom
+            scrollView.bottom == bottomToolbar.top
+            scrollView.left == scrollView.superview!.left
+            scrollView.right == scrollView.superview!.right
         }
 
         constrain(nameTextField, topToolbar) { textField, toolbar in
@@ -122,6 +140,49 @@ class UploadView: UIView {
         }
 
         super.updateConstraints()
+    }
+
+    func updateImageViewSize() {
+        if let image = imageView.image {
+            let imageRatio = image.size.width / image.size.height
+            let scrollViewRatio = scrollView.bounds.width / scrollView.bounds.height
+            if imageRatio > scrollViewRatio {
+                constrain(imageView, replace: imageViewSizeConstraint) { imageView in
+                    imageView.width == scrollView.bounds.width
+                    imageView.height == scrollView.bounds.width / imageRatio
+                }
+            } else {
+                constrain(imageView, replace: imageViewSizeConstraint) { imageView in
+                    imageView.width == scrollView.bounds.height * imageRatio
+                    imageView.height == scrollView.bounds.height
+                }
+            }
+        }
+    }
+
+    func reset() {
+        nameTextField.text = ""
+        scrollView.zoomScale = 1
+        constrain(imageView, replace: imageViewOriginConstraint) { imageView in
+            imageView.center == imageView.superview!.center
+        }
+    }
+
+    // MARK: - UIScrollViewDelegate
+
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return imageView
+    }
+
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        let offsetX = scrollView.contentSize.width < scrollView.bounds.width ?
+            (scrollView.bounds.width - scrollView.contentSize.width) / 2 : 0
+        let offsetY = scrollView.contentSize.height < scrollView.bounds.height ?
+            (scrollView.bounds.height - scrollView.contentSize.height) / 2 : 0
+        constrain(imageView, replace: imageViewOriginConstraint) { imageView in
+            imageView.left == imageView.superview!.left + offsetX
+            imageView.top == imageView.superview!.top + offsetY
+        }
     }
 
 }
