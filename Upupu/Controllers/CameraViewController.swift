@@ -41,6 +41,8 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
     }
 
     deinit {
+        NotificationCenter.default.removeObserver(self, name: .UIDeviceOrientationDidChange, object: nil)
+
         if let gestureRecognizers = cameraView.overlayView.gestureRecognizers {
             for gesture in gestureRecognizers {
                 cameraView.overlayView.removeGestureRecognizer(gesture)
@@ -87,7 +89,6 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         CameraHelper.shared.stopRunning()
-        NotificationCenter.default.removeObserver(self, name: .UIDeviceOrientationDidChange, object: nil)
     }
 
     override func viewDidAppear(_ animated: Bool) {
