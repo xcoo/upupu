@@ -108,16 +108,13 @@ UploadViewControllerDelegate, IASKSettingsDelegate {
         sender.dismiss(animated: true, completion: nil)
     }
 
-    func settingsViewController(_ sender: IASKAppSettingsViewController,
-                                buttonTappedFor specifier: IASKSpecifier) {
+    func settingsViewController(_ sender: IASKAppSettingsViewController, buttonTappedFor specifier: IASKSpecifier) {
         if specifier.key() == "dropbox_link_pref" {
             if DropboxClientsManager.authorizedClient == nil {
-                DropboxClientsManager.authorizeFromController(UIApplication.shared,
-                                                              controller: self,
-                                                              openURL: { url in
-                                                                UIApplication.shared.openURL(url)
-                })
-                sender.dismiss(animated: true, completion: nil)
+                sender.dismiss(animated: true) {[weak self] in
+                    DropboxClientsManager.authorizeFromController(UIApplication.shared,
+                                                                  controller: self,
+                                                                  openURL: { UIApplication.shared.openURL($0) })}
             } else {
                 DropboxClientsManager.unlinkClients()
                 Settings.dropboxEnabled = false
