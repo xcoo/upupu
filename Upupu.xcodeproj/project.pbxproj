@@ -10,6 +10,8 @@
 		163A159F1500F1EA0058FBB2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163A159E1500F1EA0058FBB2 /* AVFoundation.framework */; };
 		163A15A51500F2540058FBB2 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 163A15A41500F2540058FBB2 /* ImageIO.framework */; };
 		166778AF150218AB00A37A8D /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 166778AE150218AB00A37A8D /* CoreMedia.framework */; };
+		39A555311EE7E8D10042F048 /* AccelerometerOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A5552F1EE7E8D10042F048 /* AccelerometerOrientation.swift */; };
+		39A555321EE7E8D10042F048 /* CameraHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39A555301EE7E8D10042F048 /* CameraHelper.swift */; };
 		3D891527147CC6380012580A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D891526147CC6380012580A /* UIKit.framework */; };
 		3D891529147CC6380012580A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D891528147CC6380012580A /* Foundation.framework */; };
 		3D89152B147CC6380012580A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D89152A147CC6380012580A /* CoreGraphics.framework */; };
@@ -33,7 +35,6 @@
 		8FBDBA381D76CE5D004DB68A /* UIAlertController+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBDBA371D76CE5D004DB68A /* UIAlertController+Utils.swift */; };
 		8FBDBA3A1D76D42F004DB68A /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBDBA391D76D42F004DB68A /* Settings.swift */; };
 		8FBDBA3D1D76E158004DB68A /* UIImage+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBDBA3C1D76E158004DB68A /* UIImage+Utils.swift */; };
-		8FBDBA3F1D76EB1B004DB68A /* CameraHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBDBA3E1D76EB1B004DB68A /* CameraHelper.swift */; };
 		8FBE49E91D94F87800D42D7A /* FilenameTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FBE49E81D94F87800D42D7A /* FilenameTextField.swift */; };
 		8FCFA4431DD0571F00756016 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCFA4421DD0571F00756016 /* DateHelper.swift */; };
 		8FF66B471D800F9F0032F765 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF66B461D800F9F0032F765 /* CameraView.swift */; };
@@ -50,6 +51,8 @@
 		163A15A41500F2540058FBB2 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		166778AE150218AB00A37A8D /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		16CE722F14FE2A82005A37F6 /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DropboxSDK.framework; path = lib/DropboxSDK.framework; sourceTree = "<group>"; };
+		39A5552F1EE7E8D10042F048 /* AccelerometerOrientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccelerometerOrientation.swift; path = Camera/AccelerometerOrientation.swift; sourceTree = "<group>"; };
+		39A555301EE7E8D10042F048 /* CameraHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraHelper.swift; path = Camera/CameraHelper.swift; sourceTree = "<group>"; };
 		3D891522147CC6380012580A /* Upupu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Upupu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D891526147CC6380012580A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3D891528147CC6380012580A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -74,7 +77,6 @@
 		8FBDBA371D76CE5D004DB68A /* UIAlertController+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIAlertController+Utils.swift"; path = "Commons/UIAlertController+Utils.swift"; sourceTree = "<group>"; };
 		8FBDBA391D76D42F004DB68A /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Settings.swift; path = Commons/Settings.swift; sourceTree = "<group>"; };
 		8FBDBA3C1D76E158004DB68A /* UIImage+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIImage+Utils.swift"; path = "Commons/UIImage+Utils.swift"; sourceTree = "<group>"; };
-		8FBDBA3E1D76EB1B004DB68A /* CameraHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraHelper.swift; path = Commons/CameraHelper.swift; sourceTree = "<group>"; };
 		8FBE49E81D94F87800D42D7A /* FilenameTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FilenameTextField.swift; path = Views/FilenameTextField.swift; sourceTree = "<group>"; };
 		8FCFA4421DD0571F00756016 /* DateHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DateHelper.swift; path = Commons/DateHelper.swift; sourceTree = "<group>"; };
 		8FF66B461D800F9F0032F765 /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraView.swift; path = Views/CameraView.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				8FF74BBD1D7424D300437DE6 /* AppDelegate.swift */,
 				8FA6565A1D86A828002C30AE /* LaunchScreen.storyboard */,
 				8F2065101D7EE35A0092B180 /* Main.storyboard */,
+				39A5552E1EE7E8990042F048 /* Camera */,
 				8F57987D1D7593FD004ED144 /* Commons */,
 				8FFE1B281D743A5800CCEE67 /* Controllers */,
 				8FA55E0E1D75525700ECB21E /* Uploaders */,
@@ -142,6 +145,15 @@
 				9BC233EFF7644B8ED95AFA21 /* Pods-Upupu.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		39A5552E1EE7E8990042F048 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				39A5552F1EE7E8D10042F048 /* AccelerometerOrientation.swift */,
+				39A555301EE7E8D10042F048 /* CameraHelper.swift */,
+			);
+			name = Camera;
 			sourceTree = "<group>";
 		};
 		3D891517147CC6380012580A = {
@@ -203,7 +215,6 @@
 		8F57987D1D7593FD004ED144 /* Commons */ = {
 			isa = PBXGroup;
 			children = (
-				8FBDBA3E1D76EB1B004DB68A /* CameraHelper.swift */,
 				8F57987B1D758608004ED144 /* Constants.swift */,
 				8FCFA4421DD0571F00756016 /* DateHelper.swift */,
 				8FBDBA391D76D42F004DB68A /* Settings.swift */,
@@ -386,11 +397,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F57987C1D758608004ED144 /* Constants.swift in Sources */,
-				8FBDBA3F1D76EB1B004DB68A /* CameraHelper.swift in Sources */,
 				8FBDBA381D76CE5D004DB68A /* UIAlertController+Utils.swift in Sources */,
 				8F093FD51D8D361800E7E59A /* UPError.swift in Sources */,
 				8F5798811D759859004ED144 /* WebDAVUploader.swift in Sources */,
 				8FCFA4431DD0571F00756016 /* DateHelper.swift in Sources */,
+				39A555321EE7E8D10042F048 /* CameraHelper.swift in Sources */,
 				8FBDBA3A1D76D42F004DB68A /* Settings.swift in Sources */,
 				8F3B20291D7D33CC003A8E49 /* WebDAVClient.swift in Sources */,
 				8F57987F1D7594A0004ED144 /* String+NSString.swift in Sources */,
@@ -402,6 +413,7 @@
 				8FF74BBE1D7424D300437DE6 /* AppDelegate.swift in Sources */,
 				8FFE1B2A1D743A8E00CCEE67 /* RootViewController.swift in Sources */,
 				8F2DC01B1D79438C00DB8362 /* Uploader.swift in Sources */,
+				39A555311EE7E8D10042F048 /* AccelerometerOrientation.swift in Sources */,
 				8FF66B491D8014E60032F765 /* UploadView.swift in Sources */,
 				8F0ADA181D76A36400C58D0B /* CameraViewController.swift in Sources */,
 				8FF66B471D800F9F0032F765 /* CameraView.swift in Sources */,

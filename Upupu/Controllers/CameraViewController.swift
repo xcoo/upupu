@@ -41,7 +41,8 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
     }
 
     deinit {
-        NotificationCenter.default.removeObserver(self, name: .UIDeviceOrientationDidChange, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .AccelerometerOrientationDidChange, object: nil)
+        AccelerometerOrientation.current.endGeneratingDeviceOrientationNotifications()
 
         if let gestureRecognizers = cameraView.overlayView.gestureRecognizers {
             for gesture in gestureRecognizers {
@@ -122,10 +123,11 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(overlayViewPinched))
         cameraView.overlayView.addGestureRecognizer(pinchGesture)
 
-        UIDevice.current.beginGeneratingDeviceOrientationNotifications()
-        NotificationCenter.default
-            .addObserver(self, selector: #selector(deviceOrientationDidChange),
-                         name: .UIDeviceOrientationDidChange, object: nil)
+        AccelerometerOrientation.current.beginGeneratingDeviceOrientationNotifications()
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(deviceOrientationDidChange),
+                                               name: .AccelerometerOrientationDidChange,
+                                               object: nil)
     }
 
     private func resetButtons() {
@@ -384,7 +386,7 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
     // MARK: - Orientation
 
     func deviceOrientationDidChange() {
-        switch UIDevice.current.orientation {
+        switch AccelerometerOrientation.current.orientation {
         case .portrait:
             orientation = .portrait
         case .portraitUpsideDown:

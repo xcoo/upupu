@@ -177,11 +177,6 @@ class CameraHelper {
         captureStillImageOutput.outputSettings = [AVVideoCodecKey: AVVideoCodecJPEG]
 
         session_.addOutput(captureStillImageOutput)
-
-        UIDevice.current.beginGeneratingDeviceOrientationNotifications()
-        NotificationCenter.default
-            .addObserver(self, selector: #selector(deviceOrientationDidChange),
-                         name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
     }
 
     func previewView(_ bounds: CGRect) -> UIView {
@@ -202,11 +197,28 @@ class CameraHelper {
     // MARK: - Control
 
     func startRunning() {
-        session?.startRunning()
+        guard let session = session else {
+            return
+        }
+
+        AccelerometerOrientation.current.beginGeneratingDeviceOrientationNotifications()
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(deviceOrientationDidChange),
+                                               name: .AccelerometerOrientationDidChange,
+                                               object: nil)
+
+        session.startRunning()
     }
 
     func stopRunning() {
-        session?.stopRunning()
+        guard let session = session else {
+            return
+        }
+
+        session.stopRunning()
+
+        NotificationCenter.default.removeObserver(self, name: .AccelerometerOrientationDidChange, object: nil)
+        AccelerometerOrientation.current.endGeneratingDeviceOrientationNotifications()
     }
 
     func capture(_ completion: ((_ image: UIImage?, _ error: NSError?) -> Void)?) {
@@ -339,7 +351,7 @@ class CameraHelper {
         }
 
         let orientation: AVCaptureVideoOrientation
-        switch UIDevice.current.orientation {
+        switch AccelerometerOrientation.current.orientation {
         case .portrait:
             orientation = .portrait
         case .portraitUpsideDown:
