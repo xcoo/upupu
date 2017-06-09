@@ -62,10 +62,8 @@ class FilenameTextField: UITextField {
             attributedText = NSAttributedString(string: stem, attributes: fileStemAttributes)
         } else {
             if let text = text, !text.isEmpty {
-                let mainStr = NSMutableAttributedString(string: text,
-                                                        attributes: fileStemAttributes)
-                let extensionStr = NSAttributedString(string: extension_,
-                                                      attributes: fileExtensionAttributes)
+                let mainStr = NSMutableAttributedString(string: text, attributes: fileStemAttributes)
+                let extensionStr = NSAttributedString(string: extension_, attributes: fileExtensionAttributes)
                 mainStr.append(extensionStr)
                 attributedText = mainStr
             }

@@ -90,11 +90,9 @@ class UploadView: UIView, UIScrollViewDelegate {
         addSubview(topToolbar)
 
         bottomToolbar.items = [retakeButton,
-                               UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil,
-                                               action: nil),
+                               UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
                                uploadButton,
-                               UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil,
-                                               action: nil),
+                               UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
                                settingsButton]
         addSubview(bottomToolbar)
     }

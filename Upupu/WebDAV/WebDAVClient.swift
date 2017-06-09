@@ -74,8 +74,7 @@ class WebDAVRequest {
         self.error = error
     }
 
-    func authenticate(user: String, password: String,
-                      persistence: URLCredential.Persistence = .forSession) -> Self {
+    func authenticate(user: String, password: String, persistence: URLCredential.Persistence = .forSession) -> Self {
         alamofireRequest?.authenticate(user: user, password: password)
         return self
     }

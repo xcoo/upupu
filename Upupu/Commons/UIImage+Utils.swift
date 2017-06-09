@@ -11,33 +11,26 @@ import UIKit
 
 extension UIImage {
 
-    private func calcTransform(_ size: CGSize, orientation: UIImageOrientation)
-        -> CGAffineTransform {
+    private func calcTransform(_ size: CGSize, orientation: UIImageOrientation) -> CGAffineTransform {
             switch orientation {
             case .up:
                 return CGAffineTransform.identity
             case .upMirrored:
-                return CGAffineTransform(translationX: size.width, y: 0)
-                    .scaledBy(x: -1.0, y: 1.0)
+                return CGAffineTransform(translationX: size.width, y: 0).scaledBy(x: -1.0, y: 1.0)
             case .down:
-                return CGAffineTransform(translationX: size.width, y: size.height)
-                    .rotated(by: .pi)
+                return CGAffineTransform(translationX: size.width, y: size.height).rotated(by: .pi)
             case .downMirrored:
-                return CGAffineTransform(translationX: 0, y: size.height)
-                    .scaledBy(x: 1.0, y: -1.0)
+                return CGAffineTransform(translationX: 0, y: size.height).scaledBy(x: 1.0, y: -1.0)
             case .leftMirrored:
                 return CGAffineTransform(translationX: size.height, y: size.width)
                     .scaledBy(x: -1.0, y: 1.0)
                     .rotated(by: 3.0 * .pi / 2.0)
             case .left:
-                return CGAffineTransform(translationX: 0, y: size.width)
-                    .rotated(by: 3.0 * .pi / 2.0)
+                return CGAffineTransform(translationX: 0, y: size.width).rotated(by: 3.0 * .pi / 2.0)
             case .rightMirrored:
-                return CGAffineTransform(scaleX: -1.0, y: 1.0)
-                    .rotated(by: .pi / 2.0)
+                return CGAffineTransform(scaleX: -1.0, y: 1.0).rotated(by: .pi / 2.0)
             case .right:
-                return CGAffineTransform(translationX: size.height, y: 0)
-                    .rotated(by: .pi / 2.0)
+                return CGAffineTransform(translationX: size.height, y: 0).rotated(by: .pi / 2.0)
             }
     }
 

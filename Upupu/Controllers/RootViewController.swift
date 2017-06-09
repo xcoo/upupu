@@ -12,8 +12,8 @@ import UIKit
 import InAppSettingsKit
 import SwiftyDropbox
 
-class RootViewController: UINavigationController, CameraViewControllerDelegate,
-UploadViewControllerDelegate, IASKSettingsDelegate {
+class RootViewController: UINavigationController, CameraViewControllerDelegate, UploadViewControllerDelegate,
+IASKSettingsDelegate {
 
     private var cameraViewController: CameraViewController!
     private var uploadViewController: UploadViewController!
@@ -59,8 +59,7 @@ UploadViewControllerDelegate, IASKSettingsDelegate {
 
     // MARK: - CameraViewControllerDelegate
 
-    func cameraViewController(_ cameraViewController: CameraViewController,
-                              didFinishedWithImage image: UIImage?) {
+    func cameraViewController(_ cameraViewController: CameraViewController, didFinishedWithImage image: UIImage?) {
         uploadViewController.image = image
         uploadViewController.shouldSavePhotoAlbum = !cameraViewController.isSourcePhotoLibrary
 
@@ -85,8 +84,7 @@ UploadViewControllerDelegate, IASKSettingsDelegate {
         settingsViewController.showCreditsFooter = false
         settingsViewController.neverShowPrivacySettings = true
 
-        if Constants.Dropbox.kDBAppKey.isEmpty ||
-            Constants.Dropbox.kDBAppKey == "YOUR_DROPBOX_APP_KEY" {
+        if Constants.Dropbox.kDBAppKey.isEmpty || Constants.Dropbox.kDBAppKey == "YOUR_DROPBOX_APP_KEY" {
             let hiddenKeys = ["dropbox_group_pref",
                               "dropbox_enabled_pref",
                               "dropbox_link_pref",

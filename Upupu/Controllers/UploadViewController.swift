@@ -109,23 +109,20 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
 
     @objc private func uploadButtonTapped(_ sender: UIBarItem) {
         guard Settings.webDAVEnabled || Settings.dropboxEnabled else {
-            UIAlertController.showSimpleErrorAlertIn(navigationController,
-                                                     error: UPError.settingsNotSetUp)
+            UIAlertController.showSimpleErrorAlertIn(navigationController, error: UPError.settingsNotSetUp)
             return
         }
 
         // Checking network connection
         guard let net = NetworkReachabilityManager() else {
-            UIAlertController.showSimpleErrorAlertIn(navigationController,
-                                                     error: .networkUnreachable)
+            UIAlertController.showSimpleErrorAlertIn(navigationController, error: .networkUnreachable)
             return
         }
         net.startListening()
         let isReachable = net.isReachable
         net.stopListening()
         guard isReachable else {
-            UIAlertController.showSimpleErrorAlertIn(navigationController,
-                                                     error: .networkUnreachable)
+            UIAlertController.showSimpleErrorAlertIn(navigationController, error: .networkUnreachable)
             return
         }
 
@@ -183,8 +180,7 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
         }
     }
 
-    private func execUpload<T: Uploadable>(_ uploader: T, filename: String, imageData: Data,
-                                           hud: MBProgressHUD?) {
+    private func execUpload<T: Uploadable>(_ uploader: T, filename: String, imageData: Data, hud: MBProgressHUD?) {
         uploader.upload(filename, data: imageData) { (error) in
             guard error == nil else {
                 DispatchQueue.main.async {[weak self] in

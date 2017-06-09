@@ -11,13 +11,12 @@ import UIKit
 
 protocol CameraViewControllerDelegate: class {
 
-    func cameraViewController(_ cameraViewController: CameraViewController,
-                              didFinishedWithImage image: UIImage?)
+    func cameraViewController(_ cameraViewController: CameraViewController, didFinishedWithImage image: UIImage?)
 
 }
 
-class CameraViewController: UIViewController, UINavigationControllerDelegate,
-UIImagePickerControllerDelegate, UIAccelerometerDelegate {
+class CameraViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate,
+UIAccelerometerDelegate {
 
     weak var delegate: CameraViewControllerDelegate?
 
@@ -62,10 +61,8 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
         cameraView.cameraButton.action = #selector(takePicture)
         cameraView.clipsButton.action = #selector(clips)
 
-        cameraView.switchButton.addTarget(self, action: #selector(switchCamera),
-                                          for: .touchUpInside)
-        cameraView.torchButton.addTarget(self, action: #selector(switchTorch),
-                                         for: .touchUpInside)
+        cameraView.switchButton.addTarget(self, action: #selector(switchCamera), for: .touchUpInside)
+        cameraView.torchButton.addTarget(self, action: #selector(switchTorch), for: .touchUpInside)
 
         focusLayer = CALayer()
         let focusImage = UIImage(named: "Camera/Focus")
@@ -157,8 +154,7 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
                     }
                 }
             case .denied, .restricted:
-                UIAlertController.showSettingsAlertIn(self, title: nil,
-                                                      message: "Allow access to Camera")
+                UIAlertController.showSettingsAlertIn(self, title: nil, message: "Allow access to Camera")
             }
         } else {
             cameraView.messageLabel.text = "Camera is unavailable."
@@ -226,8 +222,8 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
                 print(error!)
                 if let self_ = self {
                     UIAlertController.showSimpleAlertIn(self_.navigationController,
-                        title: "Error",
-                        message: "Failed to capture image")
+                                                        title: "Error",
+                                                        message: "Failed to capture image")
                 }
                 return
             }
@@ -236,8 +232,8 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
                 print("No image")
                 if let self_ = self {
                     UIAlertController.showSimpleAlertIn(self_.navigationController,
-                        title: "Error",
-                        message: "Failed to capture image")
+                                                        title: "Error",
+                                                        message: "Failed to capture image")
                 }
                 return
             }
@@ -277,20 +273,14 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
                     self?.cameraView.switchButton.transform = CGAffineTransform(rotationAngle: 0)
                     self?.cameraView.torchButton.transform = CGAffineTransform(rotationAngle: 0)
                 case .portraitUpsideDown:
-                    self?.cameraView.switchButton.transform =
-                        CGAffineTransform(rotationAngle: .pi)
-                    self?.cameraView.torchButton.transform =
-                        CGAffineTransform(rotationAngle: .pi)
+                    self?.cameraView.switchButton.transform = CGAffineTransform(rotationAngle: .pi)
+                    self?.cameraView.torchButton.transform = CGAffineTransform(rotationAngle: .pi)
                 case .landscapeLeft:
-                    self?.cameraView.switchButton.transform =
-                        CGAffineTransform(rotationAngle: .pi / 2)
-                    self?.cameraView.torchButton.transform =
-                        CGAffineTransform(rotationAngle: .pi / 2)
+                    self?.cameraView.switchButton.transform = CGAffineTransform(rotationAngle: .pi / 2)
+                    self?.cameraView.torchButton.transform = CGAffineTransform(rotationAngle: .pi / 2)
                 case .landscapeRight:
-                    self?.cameraView.switchButton.transform =
-                        CGAffineTransform(rotationAngle: -.pi / 2)
-                    self?.cameraView.torchButton.transform =
-                        CGAffineTransform(rotationAngle: -.pi / 2)
+                    self?.cameraView.switchButton.transform = CGAffineTransform(rotationAngle: -.pi / 2)
+                    self?.cameraView.torchButton.transform = CGAffineTransform(rotationAngle: -.pi / 2)
                 default:
                     break
                 }
@@ -352,8 +342,11 @@ UIImagePickerControllerDelegate, UIAccelerometerDelegate {
 
         CATransaction.commit()
 
-        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(finishFocusProcess),
-                             userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: 1,
+                             target: self,
+                             selector: #selector(finishFocusProcess),
+                             userInfo: nil,
+                             repeats: false)
     }
 
     // MARK: - Zoom

@@ -33,13 +33,11 @@ class BlackToolBar: UIToolbar {
         context?.setFillColor(UIColor(white: 0.2, alpha: 1.0).cgColor)
 
         if topBorderEnabled {
-            context?.fill(CGRect.init(x: 0.0, y: 0.0,
-                                      width: bounds.size.width, height: 1.0))
+            context?.fill(CGRect.init(x: 0.0, y: 0.0, width: bounds.size.width, height: 1.0))
         }
 
         if bottomBorderEnabled {
-            context?.fill(CGRect.init(x: 0.0, y: bounds.size.height - 2.0,
-                                      width: bounds.size.width, height: 1.0))
+            context?.fill(CGRect.init(x: 0.0, y: bounds.size.height - 2.0, width: bounds.size.width, height: 1.0))
         }
     }
 

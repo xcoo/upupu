@@ -25,16 +25,14 @@ class CameraHelper {
     }
 
     static var frontCameraAvailable: Bool {
-        if let devices = AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo)
-            as? [AVCaptureDevice] {
+        if let devices = AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo) as? [AVCaptureDevice] {
             return !devices.map({ $0.position }).filter({ $0 == .front }).isEmpty
         }
         return false
     }
 
     static var torchAvailable: Bool {
-        if let devices = AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo)
-            as? [AVCaptureDevice] {
+        if let devices = AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo) as? [AVCaptureDevice] {
             return !devices.filter({ $0.hasTorch }).isEmpty
         }
         return false
@@ -229,16 +227,14 @@ class CameraHelper {
                     return
                 }
 
-                let exifAttachment =
-                    CMGetAttachment(sampleBuffer, kCGImagePropertyExifDictionary, nil)
+                let exifAttachment = CMGetAttachment(sampleBuffer, kCGImagePropertyExifDictionary, nil)
                 if exifAttachment != nil {
                     print("Attachment: \(String(describing: exifAttachment))")
                 } else {
                     print("No attachment")
                 }
 
-                let imageData =
-                    AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(sampleBuffer)
+                let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(sampleBuffer)
                 let image = UIImage(data: imageData!)
                 completion?(image, nil)
         }
@@ -249,8 +245,7 @@ class CameraHelper {
         return isBackCamera ? CameraPosition.back : CameraPosition.front
     }
 
-    private func sideSwitchedInput(_ currentVideoInput: AVCaptureDeviceInput,
-                                   captureSession session: AVCaptureSession)
+    private func sideSwitchedInput(_ currentVideoInput: AVCaptureDeviceInput, captureSession session: AVCaptureSession)
         -> AVCaptureDeviceInput? {
             guard CameraHelper.frontCameraAvailable else {
                 return nil
