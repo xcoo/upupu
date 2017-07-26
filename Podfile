@@ -7,6 +7,13 @@ target 'Upupu' do
   pod 'InAppSettingsKit', '~> 2.8'
   pod 'MBProgressHUD', '~> 1.0.0'
   pod 'SwiftyDropbox', '~> 4.1.0'
+
+  target 'UpupuTests' do
+    inherit! :search_paths
+
+    pod 'Quick'
+    pod 'Nimble'
+  end
 end
 
 post_install do | installer |
