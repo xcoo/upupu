@@ -3,9 +3,10 @@ osx_image: xcode8.3
 install:
   - gem install xcpretty
   - pod install --repo-update
-script:
+before_script:
   - set -o pipefail
-  - xcodebuild -workspace Upupu.xcworkspace -scheme 'Upupu' -sdk iphonesimulator -configuration Debug build | xcpretty -c
+script:
+  - xcodebuild -workspace Upupu.xcworkspace -scheme 'Upupu' -sdk iphonesimulator -destination 'platform=iOS Simulator,OS=10.3.1,name=iPhone 7' -configuration Debug test | xcpretty -c
 branches:
   only:
     - master
