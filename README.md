@@ -17,7 +17,7 @@ Simple camera application for iOS that uploads pictures to WebDAV server or Drop
 ## Prerequisites
 
 - Xcode 8.3
-- CocoaPods 1.2.0+
+- CocoaPods 1.3.0+
 
 ## Installation
 
