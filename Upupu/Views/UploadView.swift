@@ -107,14 +107,14 @@ class UploadView: UIView, UIScrollViewDelegate {
 
     override func updateConstraints() {
         constrain(topToolbar) { toolbar in
-            toolbar.top == toolbar.superview!.top + 22
+            toolbar.top == toolbar.superview!.topMargin
             toolbar.left == toolbar.superview!.left
             toolbar.right == toolbar.superview!.right
         }
 
         constrain(bottomToolbar) { toolbar in
             toolbar.height == 80
-            toolbar.bottom == toolbar.superview!.bottom
+            toolbar.bottom == toolbar.superview!.bottomMargin
             toolbar.left == toolbar.superview!.left
             toolbar.right == toolbar.superview!.right
         }
