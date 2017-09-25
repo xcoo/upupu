@@ -13,8 +13,17 @@ import Cartography
 
 class UploadView: UIView, UIScrollViewDelegate {
 
-    private let topToolbar = BlackToolBar(bottomBorderEnabled: true)
-    private let bottomToolbar = BlackToolBar(topBorderEnabled: true)
+    private let topToolbar: BlackToolBar = {
+        let toolbar = BlackToolBar(bottomBorderEnabled: true)
+        toolbar.translatesAutoresizingMaskIntoConstraints = false
+        return toolbar
+    }()
+
+    private let bottomToolbar: BlackToolBar = {
+        let toolbar = BlackToolBar(topBorderEnabled: true)
+        toolbar.translatesAutoresizingMaskIntoConstraints = false
+        return toolbar
+    }()
 
     let nameTextField: FilenameTextField = {
         let textField = FilenameTextField(fileExtension: ".jpg")

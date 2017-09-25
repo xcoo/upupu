@@ -46,7 +46,11 @@ class CameraView: UIView {
         return button
     }()
 
-    let toolbar = BlackToolBar()
+    let toolbar: BlackToolBar = {
+        let toolbar = BlackToolBar()
+        toolbar.translatesAutoresizingMaskIntoConstraints = false
+        return toolbar
+    }()
 
     let messageLabel: UILabel = {
         let label = UILabel()
