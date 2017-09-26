@@ -76,7 +76,8 @@ class CameraView: UIView {
         toolbar.items = [clipsButton,
                          UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
                          cameraButton,
-                         UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)]
+                         UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
+                         UIBarButtonItem()]
         addSubview(toolbar)
 
         addSubview(messageLabel)
