@@ -115,8 +115,15 @@ class UploadView: UIView, UIScrollViewDelegate {
     }
 
     override func updateConstraints() {
+        let topOffset: CGFloat
+        if #available(iOS 11.0, *) {
+            topOffset = 0
+        } else {
+            topOffset = 22
+        }
+
         constrain(topToolbar) { toolbar in
-            toolbar.top == toolbar.superview!.topMargin
+            toolbar.top == toolbar.superview!.topMargin + topOffset
             toolbar.left == toolbar.superview!.left
             toolbar.right == toolbar.superview!.right
         }
