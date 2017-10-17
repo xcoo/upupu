@@ -363,7 +363,7 @@ UIAccelerometerDelegate {
     // MARK: - UIImagePickerControllerDelegate
 
     func imagePickerController(_ picker: UIImagePickerController,
-                               didFinishPickingMediaWithInfo info: [String : Any]) {
+                               didFinishPickingMediaWithInfo info: [String: Any]) {
         if let origImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             isSourcePhotoLibrary = true
             picker.dismiss(animated: true) {[weak self] in
