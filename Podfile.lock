@@ -5,7 +5,7 @@ PODS:
   - MBProgressHUD (1.0.0)
   - Nimble (7.0.2)
   - Quick (1.2.0)
-  - SwiftyDropbox (4.2.0):
+  - SwiftyDropbox (4.2.1):
     - Alamofire (~> 4.4.0)
 
 DEPENDENCIES:
@@ -24,7 +24,7 @@ SPEC CHECKSUMS:
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   Nimble: bfe1f814edabba69ff145cb1283e04ed636a67f2
   Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
-  SwiftyDropbox: 6e7ecc3f3d7bf7c664888b0319d4e818f864a758
+  SwiftyDropbox: ffd9fedec1a49ba58be57a882e82536f17faaee2
 
 PODFILE CHECKSUM: 5e276098f48a9f5f8e61b84262c8eee35c1a940e
 
