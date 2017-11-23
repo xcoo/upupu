@@ -20,7 +20,7 @@ extension String {
     }
 
     var length: Int {
-        return self.characters.count
+        return self.count
     }
 
     var pathComponents: [String] {

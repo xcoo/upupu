@@ -34,7 +34,7 @@ class WebDAVUploader: Uploader, Uploadable {
             return
         }
 
-        if settingsURL[settingsURL.characters.index(settingsURL.endIndex, offsetBy: -1)] != "/" {
+        if settingsURL[settingsURL.index(settingsURL.endIndex, offsetBy: -1)] != "/" {
             baseURL = settingsURL + "/"
         } else {
             baseURL = settingsURL
