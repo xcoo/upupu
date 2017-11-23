@@ -6,7 +6,7 @@ target 'Upupu' do
   pod 'Cartography', '~> 1.1.0'
   pod 'InAppSettingsKit', '~> 2.8'
   pod 'MBProgressHUD', '~> 1.0.0'
-  pod 'SwiftyDropbox', '~> 4.2.0'
+  pod 'SwiftyDropbox', '~> 4.3'
 
   target 'UpupuTests' do
     inherit! :search_paths
