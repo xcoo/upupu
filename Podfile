@@ -5,7 +5,7 @@ target 'Upupu' do
   pod 'Alamofire', '~> 4.0'
   pod 'Cartography', '~> 1.1.0'
   pod 'InAppSettingsKit', '~> 2.8'
-  pod 'MBProgressHUD', '~> 1.0.0'
+  pod 'MBProgressHUD', '~> 1.0'
   pod 'SwiftyDropbox', '~> 4.3'
 
   target 'UpupuTests' do
