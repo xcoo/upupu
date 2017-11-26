@@ -51,6 +51,8 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
 
         automaticallyAdjustsScrollViewInsets = false
 
+        view.addGestureRecognizer(UITapGestureRecognizer(target: view, action: #selector(view.endEditing(_:))))
+
         uploadView.retakeButton.action = #selector(retakeButtonTapped)
         uploadView.uploadButton.action = #selector(uploadButtonTapped)
         uploadView.settingsButton.action = #selector(settingsButtonTapped)
