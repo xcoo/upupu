@@ -128,9 +128,19 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
             return
         }
 
+        // Generating filename
+        let fileStem = uploadView.nameTextField.fileStem
+        let filename: String
+        if fileStem == nil || fileStem!.isEmpty {
+            filename = "\(Uploader.fileStem()).jpg"
+        } else {
+            filename = "\(fileStem!).jpg"
+        }
+
         let hud = MBProgressHUD.showAdded(to: view, animated: true)
+
         DispatchQueue.global(qos: .background).async {[weak self] in
-            self?.launchUpload(hud)
+            self?.launchUpload(filename: filename, hud: hud)
         }
     }
 
@@ -209,7 +219,7 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
         }
     }
 
-    private func launchUpload(_ hud: MBProgressHUD?) {
+    private func launchUpload(filename: String, hud: MBProgressHUD?) {
         guard let image = scaleImage(self.image) else {
             return
         }
@@ -221,14 +231,6 @@ class UploadViewController: UIViewController, MBProgressHUDDelegate, UITextField
 
         // Upload to ...
         if let imageData = imageData(image) {
-            let fileStem = uploadView.nameTextField.fileStem
-            let filename: String
-            if fileStem == nil || fileStem!.isEmpty {
-                filename = "\(Uploader.fileStem()).jpg"
-            } else {
-                filename = "\(fileStem!).jpg"
-            }
-
             // WebDAV
             if Settings.webDAVEnabled {
                 DispatchQueue.main.sync(execute: {
