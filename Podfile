@@ -3,7 +3,7 @@ use_frameworks!
 
 target 'Upupu' do
   pod 'Alamofire', '~> 4.0'
-  pod 'Cartography', '~> 1.1.0'
+  pod 'Cartography', '~> 3.0'
   pod 'InAppSettingsKit', '~> 2.8'
   pod 'MBProgressHUD', '~> 1.0'
   pod 'SwiftyDropbox', '~> 4.3'

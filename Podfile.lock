@@ -1,6 +1,6 @@
 PODS:
   - Alamofire (4.5.1)
-  - Cartography (1.1.0)
+  - Cartography (3.0.1)
   - InAppSettingsKit (2.9)
   - MBProgressHUD (1.1.0)
   - Nimble (7.0.3)
@@ -10,7 +10,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 4.0)
-  - Cartography (~> 1.1.0)
+  - Cartography (~> 3.0)
   - InAppSettingsKit (~> 2.8)
   - MBProgressHUD (~> 1.0)
   - Nimble
@@ -19,13 +19,13 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
-  Cartography: 0538ccb4044acbbda2266335fc58cb4228794d90
+  Cartography: f8c899bb0f5cf20758644a8eea59a75e98a03a5d
   InAppSettingsKit: fc3dea21846535b76b8289b119dbfdbe2505b2b2
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   Nimble: 7f5a9c447a33002645a071bddafbfb24ea70e0ac
   Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
   SwiftyDropbox: f70ff647c8ef4195e1314c8a894652f3ba3da526
 
-PODFILE CHECKSUM: 9a107af5adc85ccce5340ec0e56faefc75c54668
+PODFILE CHECKSUM: 4d40f5565b1af0cf110276ce79c95376990e00b6
 
 COCOAPODS: 1.4.0
