@@ -135,8 +135,7 @@ UIAccelerometerDelegate {
 
     private func setupButtons() {
         cameraView.switchButton.isHidden = !CameraHelper.frontCameraAvailable
-        cameraView.torchButton.isHidden =
-            !CameraHelper.torchAvailable || !CameraHelper.shared.torchAvailable
+        cameraView.torchButton.isHidden = !CameraHelper.torchAvailable || !CameraHelper.shared.torchAvailable
         cameraView.cameraButton.isEnabled = true
     }
 
@@ -294,7 +293,7 @@ UIAccelerometerDelegate {
         inFocusProcess = false
     }
 
-    func tapPreview(_ sender: UITapGestureRecognizer) {
+    @objc func tapPreview(_ sender: UITapGestureRecognizer) {
         if sender.state != .ended || inFocusProcess {
             return
         }
@@ -353,7 +352,7 @@ UIAccelerometerDelegate {
 
     private var baseScale: CGFloat = 1
 
-    func overlayViewPinched(_ gesture: UIPinchGestureRecognizer) {
+    @objc func overlayViewPinched(_ gesture: UIPinchGestureRecognizer) {
         if gesture.state == .began {
             baseScale = CameraHelper.shared.zoomFactor
         }
@@ -378,7 +377,7 @@ UIAccelerometerDelegate {
 
     // MARK: - Orientation
 
-    func deviceOrientationDidChange() {
+    @objc func deviceOrientationDidChange() {
         switch AccelerometerOrientation.current.orientation {
         case .portrait:
             orientation = .portrait

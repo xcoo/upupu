@@ -37,8 +37,8 @@ class FilenameTextField: UITextField {
         didSet { formatFilename() }
     }
 
-    private let fileStemAttributes = [NSForegroundColorAttributeName: UIColor.black]
-    private let fileExtensionAttributes = [NSForegroundColorAttributeName: UIColor.gray]
+    private let fileStemAttributes = [NSAttributedStringKey.foregroundColor: UIColor.black]
+    private let fileExtensionAttributes = [NSAttributedStringKey.foregroundColor: UIColor.gray]
 
     init(fileExtension: String?) {
         super.init(frame: CGRect.zero)
