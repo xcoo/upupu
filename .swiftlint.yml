@@ -6,3 +6,8 @@ force_try:
 type_body_length:
   - 300 # warning
   - 400 # error
+identifier_name:
+  min_length:
+    error: 0
+  allowed_symbols:
+    - _
