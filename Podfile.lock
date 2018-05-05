@@ -17,6 +17,16 @@ DEPENDENCIES:
   - Quick
   - SwiftyDropbox (~> 4.3)
 
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Alamofire
+    - Cartography
+    - InAppSettingsKit
+    - MBProgressHUD
+    - Nimble
+    - Quick
+    - SwiftyDropbox
+
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
   Cartography: f8c899bb0f5cf20758644a8eea59a75e98a03a5d
@@ -28,4 +38,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 4d40f5565b1af0cf110276ce79c95376990e00b6
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.0

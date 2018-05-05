@@ -298,7 +298,6 @@
 				3994BD5C1F2757BB0056B686 /* Frameworks */,
 				3994BD5D1F2757BB0056B686 /* Resources */,
 				3AC25AACCEFD74A1E69CD442 /* [CP] Embed Pods Frameworks */,
-				BC6143A296B402B0EC7189D1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -319,7 +318,6 @@
 				3D89151F147CC6380012580A /* Frameworks */,
 				3D891520147CC6380012580A /* Resources */,
 				DCC8EC27C80A2A2808295338 /* [CP] Embed Pods Frameworks */,
-				27688647D7886A81F9E8F55A /* [CP] Copy Pods Resources */,
 				8FFE1B271D7435FC00CCEE67 /* ShellScript */,
 				8F2064D31D7EBCE20092B180 /* ShellScript */,
 			);
@@ -393,21 +391,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		27688647D7886A81F9E8F55A /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Upupu/Pods-Upupu-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		3AC25AACCEFD74A1E69CD442 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -488,21 +471,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BC6143A296B402B0EC7189D1 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UpupuTests/Pods-UpupuTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DCC8EC27C80A2A2808295338 /* [CP] Embed Pods Frameworks */ = {
